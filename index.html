@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 48px;
+    }
+
+    .section {
+      margin-top: 80px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card {
+      border: 1px solid #222;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>We build modern websites</h1>
+
+  <div class="section">
+    <h2>What we do</h2>
+    <p>Websites, apps, email handling.</p>
+  </div>
+
+  <div class="section">
+    <h2>Projects</h2>
+    <div class="card">Restaurant website demo</div>
+    <div class="card">Agency landing page</div>
+  </div>
+
+  <div class="section">
+    <h2>Contact</h2>
+    <p>Email: your@email.com</p>
+    <p>Phone: +40...</p>
+  </div>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+
+  window.addEventListener('scroll', () => {
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < window.innerHeight - 50) {
+        sec.classList.add('visible');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
