@@ -3,133 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local Web Solutions</title>
+  <title>Local Web Solutions | Gotham Minimalist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* Base styles */
-    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
-    body { background: #f9f9f9; color: #111; line-height:1.7; font-size:18px; }
-    a { text-decoration:none; color:inherit; }
-    h1,h2,h3 { font-weight:bold; margin-bottom:1rem; }
-
-    /* Navbar */
-    nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1); position:sticky; top:0; z-index:10; }
-    .logo { font-size:1.6rem; font-weight:bold; color:#222; }
-    .nav-links { display:flex; gap:2rem; }
-    .nav-links a { color:#222; font-weight:500; }
-    .nav-links a:hover { color:#007BFF; }
-
-    /* Hero */
-    #hero { display:flex; flex-direction:column; justify-content:center; align-items:center; height:80vh; text-align:center; padding:0 1rem; background:#fff; }
-    #hero h1 { font-size:2.8rem; margin-bottom:1rem; color:#222; }
-    #hero p { font-size:1.2rem; margin-bottom:2rem; color:#555; }
-    .btn { padding:0.8rem 2rem; background:#007BFF; color:#fff; border-radius:6px; font-weight:bold; cursor:pointer; transition:0.3s; }
-    .btn:hover { background:#0056b3; }
-
-    /* Sections */
-    section { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
-    #about p, #services p { color:#555; }
-
-    /* Services */
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-top:2rem; }
-    .card { background:#fff; padding:1.5rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); text-align:center; }
-    .card h3 { margin-bottom:0.5rem; color:#222; }
-    .card p { color:#555; }
-
-    /* Portfolio */
-    #portfolio img { width:100%; border-radius:8px; margin-bottom:1rem; }
-
-    /* Contact */
-    form { display:flex; flex-direction:column; gap:1rem; }
-    input, textarea { padding:1rem; border:1px solid #ccc; border-radius:6px; width:100%; font-size:16px; }
-    button { width:150px; }
-
-    /* Footer */
-    footer { text-align:center; padding:2rem; color:#555; background:#f1f1f1; }
-
-    /* Responsive */
-    @media(max-width:768px){
-      .nav-links { flex-direction:column; gap:1rem; margin-top:1rem; }
-      #hero h1 { font-size:2rem; }
-      #hero p { font-size:1rem; }
-    }
-  </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <nav>
-    <div class="logo">LocalWeb</div>
+    <div class="logo">Local<span>Web</span></div>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
+      <a href="#about">The Mission</a>
+      <a href="#services">Capabilities</a>
+      <a href="#portfolio">Archives</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section id="hero">
-    <h1>We Build Websites That Work</h1>
-    <p>Helping local businesses get online, attract customers, and grow</p>
-    <a class="btn" href="#contact">Call / Email Us</a>
+    <h1>We Build Web Solutions</h1>
+    <p>Minimalist design. Maximum reliability. We help local businesses establish a commanding, trustworthy presence in the digital landscape.</p>
+    <a class="btn" href="#contact">Initiate Contact</a>
   </section>
 
   <!-- About Section -->
   <section id="about">
-    <h2>About Us</h2>
-    <p>We specialize in simple, professional websites designed to help local businesses connect with their customers. No complicated designs, just clear, fast, reliable results.</p>
+    <h2>Our Directive</h2>
+    <p>We operate with precision, crafting straightforward, battle-tested websites designed to help local ventures connect with their audience. True trust is built on clarity and performance—no superfluous elements, just unyielding reliability.</p>
   </section>
 
   <!-- Services Section -->
   <section id="services">
-    <h2>Our Services</h2>
+    <h2>Capabilities</h2>
     <div class="grid">
       <div class="card">
-        <h3>Web Development</h3>
-        <p>Fast, responsive, and easy-to-use websites.</p>
+        <h3>Digital Architectures</h3>
+        <p>Highly-responsive, minimalist website infrastructures tailored for modern displays and seamless user journeys.</p>
       </div>
       <div class="card">
-        <h3>SEO Optimization</h3>
-        <p>Help local customers find your business online.</p>
+        <h3>Search Optimization</h3>
+        <p>Tactical data structuring ensuring local audiences find your enterprise efficiently without unnecessary friction.</p>
       </div>
       <div class="card">
-        <h3>Email Handling</h3>
-        <p>Professional email setup and management for your business.</p>
+        <h3>Secure Communications</h3>
+        <p>Encrypted, professional email deployments designed to safeguard and legitimize your business communications.</p>
       </div>
     </div>
   </section>
 
   <!-- Portfolio Section -->
   <section id="portfolio">
-    <h2>Portfolio</h2>
+    <h2>The Archives</h2>
     <div class="grid">
-      <div class="card"><img src="https://via.placeholder.com/300x200" alt="Project 1"><h3>Project 1</h3></div>
-      <div class="card"><img src="https://via.placeholder.com/300x200" alt="Project 2"><h3>Project 2</h3></div>
-      <div class="card"><img src="https://via.placeholder.com/300x200" alt="Project 3"><h3>Project 3</h3></div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit=crop&q=80&w=800" alt="Project Alpha">
+        <div class="card-content">
+          <h3>Project Alpha</h3>
+          <p>E-commerce deployment</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" alt="Protocol Beta">
+        <div class="card-content">
+          <h3>Protocol Beta</h3>
+          <p>Local service portal</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&q=80&w=800" alt="Directive Gamma">
+        <div class="card-content">
+          <h3>Directive Gamma</h3>
+          <p>Corporate dark-theme redesign</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact">
-    <h2>Contact</h2>
-    <p>Call us: <strong>+40 123 456 789</strong> | Email: <strong>info@localweb.ro</strong></p>
+    <h2>Establish Contact</h2>
+    <div class="contact-info">
+      <p>TEL: +40 123 456 789 &nbsp; | &nbsp; EMAIL: INFO@LOCALWEB.RO</p>
+    </div>
     <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button class="btn" type="submit">Send Message</button>
+      <input type="text" name="name" placeholder="Name or Alias" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <textarea name="message" placeholder="Message Details" required></textarea>
+      <button class="btn" type="submit">Submit Inquiry</button>
     </form>
   </section>
 
   <!-- Footer -->
   <footer>
-    &copy; 2026 LocalWeb. All rights reserved.
+    <p>&copy; 2026 LocalWeb Solutions. Trust in Design.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="script.js"></script>
-
 </body>
 </html>
