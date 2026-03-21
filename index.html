@@ -1,16 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Agency offering web development, SEO, email handling. Bold, minimalist websites with animations.">
-  <meta name="keywords" content="web development, SEO, email marketing, demo sites, agency">
-  <title>YourAgency | Web Development</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Agency offering web development, SEO, email handling. Bold, minimalist websites with animations.">
+<meta name="keywords" content="web development, SEO, email marketing, demo sites, agency">
+<title>YourAgency | Web Development</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-  <!-- AOS animations -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<!-- Inline CSS for self-contained file -->
+<style>
+/* -------------------------- Body / Fonts / General -------------------------- */
+body {
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  color: #fff;
+  background: rgba(20, 20, 20, 0.85);
+  scroll-behavior: smooth;
+}
+
+/* -------------------------- Navbar -------------------------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  flex-wrap: nowrap;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #111;
+}
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.nav-links a:hover {
+  color: #00ffea;
+  transform: translateY(-2px);
+  text-shadow: 0 0 5px #00ffea;
+}
+
+/* -------------------------- Hero -------------------------- */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  filter: blur(0.5px);
+  opacity: 0.8;
+}
+#hero h1 {
+  font-size: 3rem;
+  margin: 0 0 10px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #111;
+}
+#hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.btn {
+  padding: 12px 28px;
+  background: rgba(0, 255, 234, 0.6);
+  color: #111;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(2px);
+}
+.btn:hover {
+  background: rgba(0, 255, 234, 1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 15px #00ffea;
+}
+
+/* -------------------------- Sections -------------------------- */
+section {
+  padding: 100px 40px;
+  min-height: 100vh;
+  opacity: 0.7;
+  transform: translateY(15px);
+  transition: all 1s ease-in-out;
+}
+section.aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -------------------------- Portfolio / Previews -------------------------- */
+.portfolio-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1 1 calc(50% - 20px);
+}
+.preview img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.5s ease;
+  opacity: 0.85;
+}
+.preview:hover img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: #00ffea;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.preview:hover .panel {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* -------------------------- Responsive -------------------------- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+  #hero h1 { font-size: 2rem; }
+  section { padding: 60px 20px; }
+  .portfolio-grid { flex-direction: column; }
+}
+</style>
 </head>
 <body>
 
@@ -29,20 +182,20 @@
 </header>
 
 <!-- Hero Section -->
-<section id="hero" data-aos="fade-up">
+<section id="hero">
   <h1>We Build Bold, Minimalist Websites</h1>
   <p>Web Development • SEO • Email Handling • Demo Sites</p>
   <a href="#contact" class="btn">Get in Touch</a>
 </section>
 
 <!-- About Section -->
-<section id="about" data-aos="fade-right">
+<section id="about">
   <h2>About Us</h2>
   <p>We are a creative digital agency crafting raw, bold, minimalist websites with cinematic grunge vibes. Using AI and custom workflows, we deliver polished demos that leave an impression.</p>
 </section>
 
 <!-- Portfolio / Demo Previews -->
-<section id="portfolio" data-aos="fade-left">
+<section id="portfolio">
   <h2>Portfolio</h2>
   <div class="portfolio-grid">
     <div class="preview">
@@ -65,7 +218,7 @@
 </section>
 
 <!-- Services Section -->
-<section id="services" data-aos="fade-up">
+<section id="services">
   <h2>Services</h2>
   <ul>
     <li>Web Development (custom & AI-enhanced)</li>
@@ -76,23 +229,52 @@
 </section>
 
 <!-- Work Section -->
-<section id="work" data-aos="fade-up">
+<section id="work">
   <h2>Recent Work</h2>
   <p>Check out live demos and client projects hosted on GitHub Pages. Each demo is fully interactive and showcases modern UI animations.</p>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" data-aos="fade-up">
+<section id="contact">
   <h2>Contact</h2>
   <p>Email: <a href="mailto:youragency@example.com">youragency@example.com</a></p>
   <p>Phone: +40 712 345 678</p>
 </section>
 
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="scripts.js"></script>
+<!-- Inline JS -->
 <script>
-  AOS.init({duration: 1000});
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// Fade-in sections on scroll
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('section').forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      section.classList.add('aos-animate');
+    }
+  });
+});
+
+// Demo preview click effect
+document.querySelectorAll('.panel a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const url = link.getAttribute('href');
+    document.body.style.transition = 'opacity 0.6s';
+    document.body.style.opacity = '0';
+    setTimeout(() => window.location.href = url, 600);
+  });
+});
 </script>
+
 </body>
 </html>
