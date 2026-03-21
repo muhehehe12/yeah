@@ -11,7 +11,7 @@ window.addEventListener('scroll', () => {
 
 // ── Mobile nav ──
 const navToggle = document.getElementById('nav-toggle');
-const navLinks  = document.getElementById('nav-links');
+const navLinks = document.getElementById('nav-links');
 
 navToggle.addEventListener('click', () => {
   const open = navLinks.classList.toggle('open');
@@ -47,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // ── Contact form ──
-const form    = document.getElementById('contact-form');
+const form = document.getElementById('contact-form');
 const success = document.getElementById('form-success');
 
 form.addEventListener('submit', e => {
@@ -79,27 +79,27 @@ form.addEventListener('submit', e => {
   let W, H, particles, animId;
 
   // Palette references
-  const C_AMBER   = 'rgba(230,145,56,';    // amber lines
+  const C_AMBER = 'rgba(230,145,56,';    // amber lines
   const C_CRIMSON = 'rgba(139,0,0,';       // crimson dots
-  const C_WHITE   = 'rgba(242,242,242,';   // white dots
+  const C_WHITE = 'rgba(242,242,242,';   // white dots
 
-  const COUNT     = 55;    // number of particles
-  const MAX_DIST  = 140;   // connection threshold
-  const SPEED     = 0.35;
+  const COUNT = 55;    // number of particles
+  const MAX_DIST = 140;   // connection threshold
+  const SPEED = 0.35;
 
   function resize() {
-    W = canvas.width  = canvas.offsetWidth;
+    W = canvas.width = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
 
   function createParticle() {
     const roll = Math.random();
     return {
-      x:  Math.random() * W,
-      y:  Math.random() * H,
+      x: Math.random() * W,
+      y: Math.random() * H,
       vx: (Math.random() - 0.5) * SPEED,
       vy: (Math.random() - 0.5) * SPEED,
-      r:  Math.random() * 1.4 + 0.6,
+      r: Math.random() * 1.4 + 0.6,
       // 10% crimson, 20% amber, rest white-dim
       color: roll < 0.10 ? C_CRIMSON : roll < 0.30 ? C_AMBER : C_WHITE,
       alpha: Math.random() * 0.45 + 0.15,
