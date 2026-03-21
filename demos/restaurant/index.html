@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gyros Thessaloniki — Authentic Greek Cuisine</title>
+  <meta name="description" content="Gyros Thessaloniki — Authentic Greek street food, locally sourced ingredients, expertly prepared. Book your table today." />
+  <meta name="keywords" content="gyros, thessaloniki, greek restaurant, authentic greek food, local restaurant, romania" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gyros Thessaloniki" />
+  <meta property="og:description" content="Authentic Greek cuisine. Locally sourced. Expertly prepared." />
+  <meta property="og:type" content="restaurant" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Gyros Thessaloniki",
+    "description": "Authentic Greek street food and cuisine",
+    "servesCuisine": "Greek",
+    "telephone": "+40 712 345 678",
+    "email": "hello@gyrosthessaloniki.ro",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Str. Eladei 14",
+      "addressLocality": "Bucharest",
+      "addressCountry": "RO"
+    },
+    "openingHours": "Mo-Su 10:00-23:00",
+    "priceRange": "$$"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PROMO BAR -->
+  <div class="promo-bar" id="promo-bar">
+    <div class="promo-inner">
+      <span class="promo-badge">LIMITED OFFER</span>
+      <span class="promo-text">
+        <span class="promo-hl">&minus;20% off</span> this month for online reservations &amp; orders &mdash;
+        <a href="#reservations" class="promo-link">Claim now &rarr;</a>
+      </span>
+    </div>
+    <button class="promo-close" id="promo-close" aria-label="Close">&#x2715;</button>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">&#9650;</span>
+        <span class="logo-text">Gyros <em>Thessaloniki</em></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="nav-links">
+        <a href="#hero" class="nav-a">Home</a>
+        <a href="#menu" class="nav-a">Menu</a>
+        <a href="#about" class="nav-a">About</a>
+        <a href="#gallery" class="nav-a">Gallery</a>
+        <a href="#reservations" class="nav-cta">Book a Table</a>
+      </nav>
+      <div class="lang-wrap" id="lang-wrap">
+        <button class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="lang-flag">&#127468;&#127463;</span>
+          <span id="lang-cur">EN</span>
+          <svg class="lang-chev" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="lang-drop" id="lang-drop" role="listbox">
+          <li role="option" data-lang="EN" data-flag="&#127468;&#127463;">English</li>
+          <li role="option" data-lang="RO" data-flag="&#127479;&#127476;">Română</li>
+          <li role="option" data-lang="DE" data-flag="&#127465;&#127466;">Deutsch</li>
+          <li role="option" data-lang="FR" data-flag="&#127467;&#127479;">Français</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-overlay"></div>
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <p class="hero-eyebrow fade-up">Authentic Greek Cuisine &mdash; Since 2012</p>
+        <h1 class="hero-headline fade-up d1">Experience the<br><em>Taste of Excellence</em></h1>
+        <p class="hero-sub fade-up d2">Locally sourced ingredients, expertly prepared.<br>Every dish tells a story from the streets of Thessaloniki.</p>
+        <div class="hero-actions fade-up d3">
+          <a href="#reservations" class="btn">Book a Table</a>
+          <a href="#menu" class="btn btn-ghost">View Menu</a>
+        </div>
+        <div class="hero-badges fade-up d4">
+          <div class="hb"><span>&#9733;</span> 4.9 Google Rating</div>
+          <div class="hb-div"></div>
+          <div class="hb"><span>&#128197;</span> Open Daily 10–23h</div>
+          <div class="hb-div"></div>
+          <div class="hb"><span>&#127974;</span> Str. Eladei 14, Bucharest</div>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section-pad" id="about">
+      <div class="section-bg-img" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80&auto=format&fit=crop')"></div>
+      <div class="section-bg-dark"></div>
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-left reveal">
+            <span class="section-tag">Our Story</span>
+            <h2 class="section-title">Born in Thessaloniki.<br><em>Brought to Your Table.</em></h2>
+            <p class="body-text">Since 2012, Gyros Thessaloniki has brought the soul of authentic Greek street food to Bucharest. Our recipes are rooted in the vibrant markets and family kitchens of northern Greece — unchanged, unapologetic, and full of character.</p>
+            <p class="body-text">We work exclusively with local and Greek producers to source the freshest ingredients. From hand-cut pita to slow-roasted lamb, every element on your plate is prepared in-house with care and intention.</p>
+            <a href="#reservations" class="btn" style="margin-top:8px">Reserve Your Table</a>
+          </div>
+          <div class="about-right reveal d1">
+            <div class="about-values">
+              <div class="av-item">
+                <div class="av-icon">&#127807;</div>
+                <div>
+                  <strong>Locally Sourced</strong>
+                  <p>Fresh produce from regional farms, delivered daily.</p>
+                </div>
+              </div>
+              <div class="av-item">
+                <div class="av-icon">&#128293;</div>
+                <div>
+                  <strong>Authentic Recipes</strong>
+                  <p>Traditional methods passed down through generations.</p>
+                </div>
+              </div>
+              <div class="av-item">
+                <div class="av-icon">&#127942;</div>
+                <div>
+                  <strong>Award-Winning Quality</strong>
+                  <p>Recognized by local guides and food critics since 2015.</p>
+                </div>
+              </div>
+              <div class="av-item">
+                <div class="av-icon">&#10084;</div>
+                <div>
+                  <strong>Family Atmosphere</strong>
+                  <p>Warm, welcoming service for every guest, every visit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu section-pad" id="menu">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Our Menu</span>
+          <h2 class="section-title">Featured <em>Dishes</em></h2>
+          <p class="section-sub">Handcrafted with the finest ingredients, inspired by the streets of Greece.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card reveal">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80&auto=format&fit=crop" alt="Classic Gyros" loading="lazy" />
+              <span class="menu-tag">Bestseller</span>
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Classic Gyros</h3>
+                <span class="menu-price">28 RON</span>
+              </div>
+              <p>Slow-roasted pork, hand-cut pita, tzatziki, tomato, and crispy fries wrapped in perfection.</p>
+            </div>
+          </article>
+          <article class="menu-card reveal d1">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=600&q=80&auto=format&fit=crop" alt="Chicken Souvlaki" loading="lazy" />
+              <span class="menu-tag">Chef's Pick</span>
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Chicken Souvlaki</h3>
+                <span class="menu-price">32 RON</span>
+              </div>
+              <p>Marinated grilled chicken skewers, garlic pita, fresh herbs, and house lemon dressing.</p>
+            </div>
+          </article>
+          <article class="menu-card reveal d2">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Greek Salad" loading="lazy" />
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Horiatiki Salad</h3>
+                <span class="menu-price">22 RON</span>
+              </div>
+              <p>Authentic Greek village salad with barrel feta, kalamata olives, cucumbers, and oregano.</p>
+            </div>
+          </article>
+          <article class="menu-card reveal d1">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=80&auto=format&fit=crop" alt="Lamb Platter" loading="lazy" />
+              <span class="menu-tag">Special</span>
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Lamb Platter</h3>
+                <span class="menu-price">54 RON</span>
+              </div>
+              <p>Slow-roasted lamb shoulder, pita, tzatziki, roasted vegetables, and spiced rice.</p>
+            </div>
+          </article>
+          <article class="menu-card reveal d2">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80&auto=format&fit=crop" alt="Grilled Calamari" loading="lazy" />
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Grilled Calamari</h3>
+                <span class="menu-price">38 RON</span>
+              </div>
+              <p>Tender calamari, lemon, capers, parsley oil, and warm flatbread on the side.</p>
+            </div>
+          </article>
+          <article class="menu-card reveal d3">
+            <div class="menu-img">
+              <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&q=80&auto=format&fit=crop" alt="Baklava" loading="lazy" />
+            </div>
+            <div class="menu-info">
+              <div class="menu-top">
+                <h3>Baklava</h3>
+                <span class="menu-price">18 RON</span>
+              </div>
+              <p>Crispy layers of phyllo, pistachios, and honey syrup — a classic Greek dessert.</p>
+            </div>
+          </article>
+        </div>
+        <p class="menu-note reveal">Full menu available in restaurant. Prices include VAT. Ask staff for daily specials.</p>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery section-pad" id="gallery">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Gallery</span>
+          <h2 class="section-title">A Glimpse of <em>Our World</em></h2>
+          <p class="section-sub">From our kitchen to your table — every detail crafted with passion.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal gi-tall">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop" alt="Restaurant interior" loading="lazy" />
+            <div class="gallery-overlay"><span>Our Interior</span></div>
+          </div>
+          <div class="gallery-item reveal d1">
+            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80&auto=format&fit=crop" alt="Classic Gyros" loading="lazy" />
+            <div class="gallery-overlay"><span>Classic Gyros</span></div>
+          </div>
+          <div class="gallery-item reveal d2">
+            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80&auto=format&fit=crop" alt="Fresh ingredients" loading="lazy" />
+            <div class="gallery-overlay"><span>Daily Fresh</span></div>
+          </div>
+          <div class="gallery-item reveal d1 gi-wide">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80&auto=format&fit=crop" alt="Kitchen" loading="lazy" />
+            <div class="gallery-overlay"><span>Our Kitchen</span></div>
+          </div>
+          <div class="gallery-item reveal d2">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&auto=format&fit=crop" alt="Plated dish" loading="lazy" />
+            <div class="gallery-overlay"><span>Plated Excellence</span></div>
+          </div>
+          <div class="gallery-item reveal d3">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&auto=format&fit=crop" alt="Outdoor terrace" loading="lazy" />
+            <div class="gallery-overlay"><span>Our Terrace</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVATIONS -->
+    <section class="reservations section-pad" id="reservations">
+      <div class="container res-grid">
+        <div class="res-info reveal">
+          <span class="section-tag">Reservations</span>
+          <h2 class="section-title">Book Your<br><em>Table Today</em></h2>
+          <p class="body-text">Reserve online and receive <strong style="color:var(--amber)">20% off</strong> your total bill this month. Available for groups of 2 to 30.</p>
+          <div class="res-contacts">
+            <a href="tel:+40712345678" class="res-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              +40 712 345 678
+            </a>
+            <a href="mailto:hello@gyrosthessaloniki.ro" class="res-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              hello@gyrosthessaloniki.ro
+            </a>
+            <div class="res-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Str. Eladei 14, Sector 1, Bucharest
+            </div>
+            <div class="res-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Monday – Sunday: 10:00 – 23:00
+            </div>
+          </div>
+        </div>
+        <form class="res-form reveal d1" id="res-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-name">Full Name</label>
+              <input type="text" id="res-name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="res-email">Email</label>
+              <input type="email" id="res-email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-date">Date</label>
+              <input type="date" id="res-date" required />
+            </div>
+            <div class="form-group">
+              <label for="res-guests">Guests</label>
+              <select id="res-guests" required>
+                <option value="">Select…</option>
+                <option>1 person</option>
+                <option>2 people</option>
+                <option>3 people</option>
+                <option>4 people</option>
+                <option>5–8 people</option>
+                <option>9–15 people</option>
+                <option>16–30 people</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="res-msg">Special Requests</label>
+            <textarea id="res-msg" rows="3" placeholder="Allergies, dietary needs, special occasions…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-full" id="res-submit">Reserve Now &rarr;</button>
+          <p class="form-success" id="res-success">
+            &#10003; Reservation received! We'll confirm within 2 hours.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="trust section-pad" id="trust">
+      <div class="container">
+        <div class="trust-inner reveal">
+          <div class="trust-shield">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="trust-title">Certified &amp; Compliant</h3>
+          <p class="trust-desc">Gyros Thessaloniki is a fully licensed and registered restaurant operating under Romanian health, hygiene, and fiscal regulations. We are inspected regularly and proud of our clean record.</p>
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>ANAF Registered</span>
+              <small>Fiscal Compliance</small>
+            </div>
+            <div class="trust-badge">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>HACCP Certified</span>
+              <small>Food Safety Standard</small>
+            </div>
+            <div class="trust-badge">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <span>4.9 &#9733; Rating</span>
+              <small>1,200+ Reviews</small>
+            </div>
+            <div class="trust-badge">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Family Business</span>
+              <small>Est. 2012</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">Gyros <em>Thessaloniki</em></span>
+        <span class="footer-copy">&copy; 2026. All rights reserved.</span>
+        <span class="footer-tagline">Authentic Greek Cuisine &mdash; Bucharest</span>
+      </div>
+      <div class="footer-right">
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://maps.google.com" aria-label="Google Maps" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:hello@gyrosthessaloniki.ro">hello@gyrosthessaloniki.ro</a>
+          <a href="tel:+40712345678">+40 712 345 678</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

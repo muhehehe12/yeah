@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Croitoru Fight Academy — Martial Arts & Combat Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--org:#f55e00;--org2:#ff8c00;--org3:#ffb347;--dark:#0a0a0a;--dark2:#111;--gray:#888;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;}
+    .bb{font-family:'Bebas Neue',Impact,sans-serif;}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+    .fu{animation:fadeUp .8s ease both;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,94,0,.4);}70%{box-shadow:0 0 0 14px rgba(245,94,0,0);}}
+    .pulse{animation:pulse 2.5s infinite;}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-32px);}to{opacity:1;transform:none;}}
+    @keyframes flame{0%,100%{transform:scaleY(1) rotate(-1deg);}50%{transform:scaleY(1.08) rotate(1deg);}}
+    /* Nav */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;transition:all .3s;}
+    #nav.sc{background:rgba(10,10,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,94,0,.2);}
+    .ni{max-width:1240px;margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between;}
+    .logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .logo-icon{width:38px;height:38px;background:var(--org);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:#fff;}
+    .nlinks{display:flex;align-items:center;gap:32px;}
+    .nlinks a{text-decoration:none;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:color .2s;}
+    .nlinks a:hover{color:var(--org);}
+    .btn-fire{background:linear-gradient(135deg,var(--org),var(--org2));color:#fff;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:11px 26px;border:none;cursor:pointer;text-decoration:none;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:filter .2s;}
+    .btn-fire:hover{filter:brightness(1.15);}
+    /* Hero */
+    #hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:70px;}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1800&q=85&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.35);}
+    .hero-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,94,0,.25) 0%,rgba(0,0,0,.6) 50%,rgba(0,0,0,.9) 100%);}
+    .dot-pattern{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;}
+    .hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:60px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;}
+    .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,94,0,.15);border:1px solid rgba(245,94,0,.3);color:var(--org3);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:6px 16px;margin-bottom:24px;}
+    .hero-h1{font-size:clamp(4rem,8vw,7rem);line-height:.95;color:#fff;margin-bottom:28px;text-shadow:0 0 60px rgba(245,94,0,.3);}
+    .hero-h1 span{color:var(--org);display:block;}
+    .hero-p{font-size:17px;line-height:1.7;color:rgba(255,255,255,.7);margin-bottom:40px;max-width:500px;}
+    .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:52px;}
+    .btn-ghost-org{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(245,94,0,.5);color:var(--org3);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;text-decoration:none;transition:all .25s;}
+    .btn-ghost-org:hover{border-color:var(--org);background:rgba(245,94,0,.1);}
+    .hero-stats{display:flex;gap:40px;}
+    .hs .n{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--org);}
+    .hs .l{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;font-weight:300;}
+    /* Hero right card */
+    .hero-card{background:rgba(255,255,255,.04);border:1px solid rgba(245,94,0,.2);padding:32px;backdrop-filter:blur(8px);}
+    .hero-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:.05em;margin-bottom:20px;}
+    .trial-feature{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .tf-dot{width:8px;height:8px;background:var(--org);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);}
+    .tf-text{font-size:14px;color:rgba(255,255,255,.8);}
+    /* Classes */
+    #classes{padding:96px 40px;background:var(--dark2);}
+    .section-inner{max-width:1240px;margin:0 auto;}
+    .s-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--org);margin-bottom:12px;font-weight:600;}
+    .s-h{font-size:clamp(2.5rem,5vw,4rem);line-height:1;color:#fff;margin-bottom:48px;}
+    .classes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+    .cls-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer;}
+    .cls-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+    .cls-card:hover img{transform:scale(1.08);}
+    .cls-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.3) 50%,transparent 100%);}
+    .cls-hot-bar{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--org),var(--org3));}
+    .cls-content{position:absolute;bottom:0;left:0;right:0;padding:28px;transition:transform .3s;}
+    .cls-card:hover .cls-content{transform:translateY(-8px);}
+    .cls-tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--org3);font-weight:700;margin-bottom:8px;}
+    .cls-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;letter-spacing:.04em;margin-bottom:8px;}
+    .cls-desc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:16px;}
+    .cls-btn{background:var(--org);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-block;text-decoration:none;opacity:0;transition:opacity .3s;}
+    .cls-card:hover .cls-btn{opacity:1;}
+    /* Schedule */
+    #schedule{padding:96px 40px;background:var(--dark);}
+    .schedule-table{width:100%;border-collapse:collapse;margin-top:48px;}
+    .schedule-table th{text-align:left;padding:12px 20px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--org);font-weight:600;border-bottom:2px solid rgba(245,94,0,.3);}
+    .schedule-table td{padding:16px 20px;font-size:14px;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.06);}
+    .schedule-table tr:hover td{background:rgba(245,94,0,.06);color:#fff;}
+    .badge-lvl{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;font-weight:600;}
+    .beg{background:rgba(34,197,94,.15);color:#4ade80;}
+    .int{background:rgba(245,94,0,.15);color:var(--org3);}
+    .adv{background:rgba(239,68,68,.15);color:#f87171;}
+    /* Coaches */
+    #coaches{padding:96px 40px;background:var(--dark2);}
+    .coaches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
+    .coach-card{position:relative;overflow:hidden;}
+    .coach-card img{width:100%;height:380px;object-fit:cover;transition:transform .4s;filter:grayscale(20%);}
+    .coach-card:hover img{transform:scale(1.04);filter:grayscale(0%);}
+    .coach-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);pointer-events:none;}
+    .coach-stripe{position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(to bottom,var(--org),transparent);}
+    .coach-info{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2;}
+    .coach-name{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:#fff;letter-spacing:.04em;line-height:1;}
+    .coach-role{font-size:12px;color:var(--org3);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-top:4px;}
+    .coach-spec{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;}
+    .coach-medals{position:absolute;top:16px;right:16px;display:flex;gap:4px;}
+    .medal{font-size:20px;}
+    /* Testimonials */
+    #testimonials{padding:96px 40px;background:#060606;position:relative;overflow:hidden;}
+    .testi-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(245,94,0,.08) 0%,transparent 60%);}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+    .testi-card{padding:28px;border:1px solid rgba(245,94,0,.15);position:relative;transition:border-color .25s;}
+    .testi-card:hover{border-color:rgba(245,94,0,.4);}
+    .testi-card::before{content:'"';font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--org);line-height:.7;position:absolute;top:16px;left:24px;opacity:.3;}
+    .testi-text{font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:20px;font-style:italic;padding-top:28px;}
+    .testi-author{font-weight:600;color:#fff;font-size:14px;}
+    .testi-sub{font-size:12px;color:var(--org);margin-top:2px;letter-spacing:.06em;}
+    /* Pricing */
+    #pricing{padding:96px 40px;background:var(--dark2);}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+    .plan{padding:40px 32px;border:1px solid rgba(255,255,255,.08);position:relative;transition:border-color .3s,transform .3s;}
+    .plan:hover{border-color:rgba(245,94,0,.4);transform:translateY(-6px);}
+    .plan.featured{border-color:var(--org);background:rgba(245,94,0,.04);}
+    .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--org);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 18px;white-space:nowrap;}
+    .plan-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.06em;color:#fff;margin-bottom:4px;}
+    .plan-price{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--org);line-height:1;margin-bottom:4px;}
+    .plan-per{font-size:13px;color:var(--gray);margin-bottom:28px;}
+    .plan-feat{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+    .pf{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.7);}
+    .pf-check{color:var(--org);font-size:16px;}
+    .pf-x{color:#555;font-size:16px;}
+    /* CTA */
+    #cta{padding:96px 40px;position:relative;overflow:hidden;text-align:center;}
+    #cta::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.2);}
+    .cta-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,94,0,.2),rgba(0,0,0,.7));}
+    .cta-inner{position:relative;z-index:2;}
+    /* Footer */
+    footer{background:#050505;padding:60px 40px 32px;border-top:1px solid rgba(245,94,0,.1);}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px;max-width:1240px;margin:0 auto 48px;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+    .footer-links a{text-decoration:none;font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+    .footer-links a:hover{color:var(--org);}
+    @media(max-width:1000px){.classes-grid,.coaches-grid,.pricing-grid{grid-template-columns:repeat(2,1fr) !important;}.hero-inner{grid-template-columns:1fr !important;}.testi-grid,.footer-grid{grid-template-columns:1fr 1fr !important;}}
+    @media(max-width:640px){.classes-grid,.pricing-grid,.testi-grid,.coaches-grid{grid-template-columns:1fr !important;}.hero-stats{gap:24px;}.nlinks .btn-fire{display:none;}.schedule-table{font-size:12px;}.schedule-table th,.schedule-table td{padding:10px 12px;}}
+  </style>
+</head>
+<body>
+
+<header id="nav">
+  <div class="ni">
+    <a href="#hero" class="logo-wrap">
+      <div class="logo-icon">CFA</div>
+      <span class="logo-text">Croitoru Fight Academy</span>
+    </a>
+    <nav class="nlinks">
+      <a href="#classes">Classes</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#coaches">Coaches</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#cta" class="btn-fire">Free Trial</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="dot-pattern"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag fu"><span class="pulse" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--org);"></span>Now Enrolling — Summer 2026</div>
+      <h1 class="bb hero-h1 fu" style="animation-delay:.1s;">Forge<br>Your<br><span>Champion</span><br>Within.</h1>
+      <p class="hero-p fu" style="animation-delay:.2s;">Bucharest's most dedicated martial arts and combat sports academy. Professional coaches, proven systems — every class forges a stronger version of you.</p>
+      <div class="hero-actions fu" style="animation-delay:.3s;">
+        <a href="#cta" class="btn-fire" style="font-size:14px;padding:14px 36px;clip-path:none;">Start Free Trial →</a>
+        <a href="#classes" class="btn-ghost-org">View Classes</a>
+      </div>
+      <div class="hero-stats fu" style="animation-delay:.4s;">
+        <div class="hs"><div class="n">500+</div><div class="l">Members</div></div>
+        <div class="hs"><div class="n">12</div><div class="l">Years Training</div></div>
+        <div class="hs"><div class="n">48</div><div class="l">Champions</div></div>
+        <div class="hs"><div class="n">6</div><div class="l">Disciplines</div></div>
+      </div>
+    </div>
+    <div class="hero-card fu" style="animation-delay:.25s;">
+      <h3>Claim Your Free Trial Class</h3>
+      <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">No experience necessary</div></div>
+      <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">All equipment provided</div></div>
+      <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">Expert 1-on-1 assessment</div></div>
+      <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">Zero commitment to join</div></div>
+      <form style="margin-top:24px;" id="trialForm" onsubmit="this.innerHTML='<p style=color:var(--org3);font-size:15px;text-align:center;padding:12px 0;>🥊 Slot reserved! We\'ll call you within 24h.</p>';return false;">
+        <input style="width:100%;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(245,94,0,.3);color:#fff;font-family:DM Sans,sans-serif;font-size:14px;outline:none;margin-bottom:10px;" placeholder="Your Name" required/>
+        <input style="width:100%;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(245,94,0,.3);color:#fff;font-family:DM Sans,sans-serif;font-size:14px;outline:none;margin-bottom:10px;" type="tel" placeholder="Phone Number" required/>
+        <select style="width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid rgba(245,94,0,.3);color:rgba(255,255,255,.7);font-family:DM Sans,sans-serif;font-size:14px;outline:none;margin-bottom:16px;"><option>Select a discipline…</option><option>Boxing</option><option>MMA</option><option>Muay Thai</option><option>BJJ / Grappling</option><option>Wrestling</option><option>Kickboxing</option></select>
+        <button type="submit" class="btn-fire" style="width:100%;font-size:13px;padding:13px;clip-path:none;">Book My Free Trial →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="section-inner">
+    <div class="reveal"><div class="s-tag">Training Programs</div><h2 class="bb s-h">Choose Your<br><span style="color:var(--org);">Weapon</span></h2></div>
+    <div class="classes-grid">
+      <div class="cls-card reveal">
+        <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=600&q=80&auto=format&fit=crop" alt="Boxing"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">🥊 Combat</div><div class="cls-name bb">Boxing</div><div class="cls-desc">Classic sweet science. Footwork, jab-cross-hook combinations, defence and ring generalship.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+      <div class="cls-card reveal" style="transition-delay:.1s;">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80&auto=format&fit=crop" alt="MMA"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">🔥 Full Contact</div><div class="cls-name bb">MMA</div><div class="cls-desc">Mixed Martial Arts — strikes, takedowns, clinch work and ground game combined into one complete system.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+      <div class="cls-card reveal" style="transition-delay:.2s;">
+        <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&q=80&auto=format&fit=crop" alt="Muay Thai"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">🦵 Striking</div><div class="cls-name bb">Muay Thai</div><div class="cls-desc">The art of 8 limbs — punches, elbows, knees and kicks trained with authentic Thai methodology.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+    </div>
+    <div class="classes-grid" style="margin-top:2px;">
+      <div class="cls-card reveal" style="transition-delay:.1s;">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&q=80&auto=format&fit=crop" alt="BJJ"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">🤼 Ground</div><div class="cls-name bb">BJJ / Grappling</div><div class="cls-desc">Brazilian Jiu-Jitsu and submission wrestling — dominate on the ground with leverage and technique.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+      <div class="cls-card reveal" style="transition-delay:.2s;">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80&auto=format&fit=crop" alt="Kickboxing"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">⚡ Fitness</div><div class="cls-name bb">Kickboxing</div><div class="cls-desc">High-energy full-body workout combining punches and kicks. Burn 800+ calories per session.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+      <div class="cls-card reveal" style="transition-delay:.3s;">
+        <img src="https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=600&q=80&auto=format&fit=crop" alt="Kids"/>
+        <div class="cls-overlay"></div><div class="cls-hot-bar"></div>
+        <div class="cls-content"><div class="cls-tag">⭐ Youth</div><div class="cls-name bb">Kids Program</div><div class="cls-desc">Ages 5–15. Build confidence, discipline and fitness. Safe, structured, fun — led by certified youth coaches.</div><a href="#cta" class="cls-btn">Join Class</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="section-inner">
+    <div class="reveal"><div class="s-tag">Weekly Schedule</div><h2 class="bb s-h">Training <span style="color:var(--org);">Timetable</span></h2></div>
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="schedule-table">
+        <thead><tr><th>Time</th><th>Monday</th><th>Wednesday</th><th>Friday</th><th>Saturday</th><th>Level</th></tr></thead>
+        <tbody>
+          <tr><td>06:30 – 08:00</td><td>Boxing</td><td>MMA</td><td>Boxing</td><td>—</td><td><span class="badge-lvl int">Intermediate</span></td></tr>
+          <tr><td>09:00 – 10:30</td><td>Kickboxing</td><td>Kickboxing</td><td>Kickboxing</td><td>Kickboxing</td><td><span class="badge-lvl beg">Beginner</span></td></tr>
+          <tr><td>10:30 – 12:00</td><td>Kids Program</td><td>Kids Program</td><td>Kids Program</td><td>Kids Program</td><td><span class="badge-lvl beg">Youth 5–15</span></td></tr>
+          <tr><td>12:00 – 13:30</td><td>BJJ Open Mat</td><td>Grappling</td><td>BJJ Open Mat</td><td>Wrestling</td><td><span class="badge-lvl int">Intermediate</span></td></tr>
+          <tr><td>17:00 – 18:30</td><td>Muay Thai</td><td>Boxing</td><td>Muay Thai</td><td>—</td><td><span class="badge-lvl beg">All Levels</span></td></tr>
+          <tr><td>18:30 – 20:00</td><td>MMA</td><td>Muay Thai</td><td>BJJ</td><td>—</td><td><span class="badge-lvl adv">Advanced</span></td></tr>
+          <tr><td>20:00 – 21:30</td><td>Boxing Sparring</td><td>MMA Sparring</td><td>Open Sparring</td><td>—</td><td><span class="badge-lvl adv">Advanced</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--gray);margin-top:16px;" class="reveal">* Schedule may vary during national competitions. Check our Instagram for real-time updates.</p>
+  </div>
+</section>
+
+<section id="coaches">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;"><div class="s-tag">Our Team</div><h2 class="bb s-h" style="text-align:center;">Coached by <span style="color:var(--org);">Champions</span></h2></div>
+    <div class="coaches-grid">
+      <div class="coach-card reveal">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80&auto=format&fit=crop" alt="Head Coach Croitoru"/>
+        <div class="coach-stripe"></div>
+        <div class="coach-medals"><span class="medal">🏆</span><span class="medal">🥇</span></div>
+        <div class="coach-info"><div class="coach-name bb">Dan Croitoru</div><div class="coach-role">Head Coach & Founder</div><div class="coach-spec">MMA · Boxing · 20 yrs</div></div>
+      </div>
+      <div class="coach-card reveal" style="transition-delay:.1s;">
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=500&q=80&auto=format&fit=crop" alt="Muay Thai Coach"/>
+        <div class="coach-stripe"></div>
+        <div class="coach-medals"><span class="medal">🥊</span><span class="medal">🥈</span></div>
+        <div class="coach-info"><div class="coach-name bb">Mihai Stan</div><div class="coach-role">Muay Thai Head Coach</div><div class="coach-spec">Muay Thai · Kickboxing · 15 yrs</div></div>
+      </div>
+      <div class="coach-card reveal" style="transition-delay:.2s;">
+        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=500&q=80&auto=format&fit=crop" alt="BJJ Coach"/>
+        <div class="coach-stripe"></div>
+        <div class="coach-medals"><span class="medal">🤼</span><span class="medal">🏅</span></div>
+        <div class="coach-info"><div class="coach-name bb">Radu Ionescu</div><div class="coach-role">BJJ Black Belt</div><div class="coach-spec">BJJ · Grappling · Wrestling · 12 yrs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="testi-bg"></div>
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <div class="reveal" style="text-align:center;"><div class="s-tag">Testimonials</div><h2 class="bb s-h" style="text-align:center;">What Our <span style="color:var(--org);">Warriors Say</span></h2></div>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><p class="testi-text">I walked in knowing nothing. Six months later I competed in my first amateur boxing tournament and won. Coach Dan's system works and he genuinely cares about every member.</p><div class="testi-author">Bogdan M.</div><div class="testi-sub">Boxing · 1 year member</div></div>
+      <div class="testi-card reveal" style="transition-delay:.1s;"><p class="testi-text">Best decision I've made for my health and confidence. The Muay Thai program is incredibly well structured. The gym has a real family atmosphere — everyone pushes each other.</p><div class="testi-author">Andreea V.</div><div class="testi-sub">Muay Thai · 8 months</div></div>
+      <div class="testi-card reveal" style="transition-delay:.2s;"><p class="testi-text">My 9-year-old son joined the kids program and his discipline and confidence have transformed completely. Coach Dan has a wonderful way with the younger ones. Highly recommend.</p><div class="testi-author">Cristina & Radu F.</div><div class="testi-sub">Kids Program · Parents</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;"><div class="s-tag">Membership Plans</div><h2 class="bb s-h" style="text-align:center;">Invest in Your <span style="color:var(--org);">Future</span></h2></div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <div class="plan-name bb">Starter</div>
+        <div class="plan-price">150</div><div class="plan-per">RON / month</div>
+        <div class="plan-feat">
+          <div class="pf"><span class="pf-check">▲</span>8 classes per month</div>
+          <div class="pf"><span class="pf-check">▲</span>1 discipline only</div>
+          <div class="pf"><span class="pf-check">▲</span>Locker room access</div>
+          <div class="pf"><span class="pf-x">—</span><span style="color:#555;">Sparring sessions</span></div>
+          <div class="pf"><span class="pf-x">—</span><span style="color:#555;">Competition coaching</span></div>
+        </div>
+        <a href="#cta" class="btn-ghost-org" style="width:100%;justify-content:center;font-size:12px;">Get Started</a>
+      </div>
+      <div class="plan featured reveal" style="transition-delay:.1s;">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name bb">Fighter</div>
+        <div class="plan-price">280</div><div class="plan-per">RON / month</div>
+        <div class="plan-feat">
+          <div class="pf"><span class="pf-check">▲</span>Unlimited classes</div>
+          <div class="pf"><span class="pf-check">▲</span>All disciplines</div>
+          <div class="pf"><span class="pf-check">▲</span>Sparring sessions</div>
+          <div class="pf"><span class="pf-check">▲</span>Open mat access</div>
+          <div class="pf"><span class="pf-x">—</span><span style="color:#555;">Competition coaching</span></div>
+        </div>
+        <a href="#cta" class="btn-fire" style="width:100%;justify-content:center;font-size:12px;padding:13px;clip-path:none;display:flex;align-items:center;text-decoration:none;">Join Now →</a>
+      </div>
+      <div class="plan reveal" style="transition-delay:.2s;">
+        <div class="plan-name bb">Champion</div>
+        <div class="plan-price">450</div><div class="plan-per">RON / month</div>
+        <div class="plan-feat">
+          <div class="pf"><span class="pf-check">▲</span>Everything in Fighter</div>
+          <div class="pf"><span class="pf-check">▲</span>Competition coaching</div>
+          <div class="pf"><span class="pf-check">▲</span>Private sessions (2/mo)</div>
+          <div class="pf"><span class="pf-check">▲</span>Nutrition guidance</div>
+          <div class="pf"><span class="pf-check">▲</span>Priority booking</div>
+        </div>
+        <a href="#cta" class="btn-ghost-org" style="width:100%;justify-content:center;font-size:12px;">Go Champion</a>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:14px;color:var(--gray);margin-top:28px;" class="reveal">All plans include a free 1-week trial. No contracts — cancel anytime.</p>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-grad"></div>
+  <div class="cta-inner">
+    <div class="reveal"><div class="s-tag" style="justify-content:center;display:flex;">Your Journey Starts Here</div></div>
+    <h2 class="bb reveal" style="font-size:clamp(3rem,7vw,6rem);line-height:1;margin-bottom:24px;transition-delay:.1s;">READY TO<br><span style="color:var(--org);">FIGHT FOR MORE?</span></h2>
+    <p class="reveal" style="font-size:17px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 44px;line-height:1.7;transition-delay:.15s;">Book your free trial class today. No experience required. We'll match you with the right coach and the right program from day one.</p>
+    <div class="reveal" style="transition-delay:.2s;">
+      <a href="tel:+40774016582" class="btn-fire" style="font-size:15px;padding:16px 48px;clip-path:none;display:inline-block;text-decoration:none;">📞 Call +40 774 016 582</a>
+    </div>
+    <p class="reveal" style="color:rgba(255,255,255,.4);font-size:13px;margin-top:20px;transition-delay:.25s;">📍 Str. Sportivilor 14, Bucharest · Open 6am – 10pm, 7 days</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo-wrap" style="margin-bottom:16px;"><div class="logo-icon">CFA</div><span class="logo-text">Croitoru Fight Academy</span></div>
+      <p style="font-size:14px;color:rgba(255,255,255,.4);max-width:280px;line-height:1.7;">Bucharest's premier combat sports academy. Training champions since 2014.</p>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <a href="https://www.instagram.com/honomalwaysnr1?igsh=d3dwYmZlaWVuNDdu" target="_blank" style="width:36px;height:36px;background:rgba(245,94,0,.15);display:flex;align-items:center;justify-content:center;color:var(--org);text-decoration:none;font-size:16px;transition:background .2s;" onmouseover="this.style.background='rgba(245,94,0,.35)'" onmouseout="this.style.background='rgba(245,94,0,.15)'">📷</a>
+      </div>
+    </div>
+    <div><h4 style="font-family:Bebas Neue,sans-serif;font-size:1rem;letter-spacing:.1em;color:#fff;margin-bottom:16px;">Programs</h4><ul class="footer-links"><li><a href="#classes">Boxing</a></li><li><a href="#classes">MMA</a></li><li><a href="#classes">Muay Thai</a></li><li><a href="#classes">BJJ</a></li><li><a href="#classes">Kids Program</a></li></ul></div>
+    <div><h4 style="font-family:Bebas Neue,sans-serif;font-size:1rem;letter-spacing:.1em;color:#fff;margin-bottom:16px;">Academy</h4><ul class="footer-links"><li><a href="#coaches">Our Coaches</a></li><li><a href="#schedule">Schedule</a></li><li><a href="#pricing">Membership</a></li><li><a href="#testimonials">Reviews</a></li></ul></div>
+    <div><h4 style="font-family:Bebas Neue,sans-serif;font-size:1rem;letter-spacing:.1em;color:#fff;margin-bottom:16px;">Contact</h4><ul class="footer-links"><li><a href="tel:+40774016582">+40 774 016 582</a></li><li><a href="#cta">Str. Sportivilor 14</a></li><li><a href="#cta">Bucharest, Romania</a></li><li style="color:rgba(255,255,255,.4);font-size:13px;">Mon–Sun: 06:00–22:00</a></li></ul></div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding-top:28px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <p style="font-size:12px;color:rgba(255,255,255,.25);">© 2026 Croitoru Fight Academy. All rights reserved.</p>
+    <p style="font-size:12px;color:rgba(255,255,255,.25);">Website by <a href="../../index.html" style="color:var(--org);text-decoration:none;">HONOM</a></p>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',window.scrollY>40),{passive:true});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

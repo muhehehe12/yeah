@@ -1,5 +1,5 @@
 /* =============================================
-   HONOM — script.js  v4
+   Gyros Thessaloniki — script.js
    ============================================= */
 
 // ── Promo bar dismiss ──
@@ -8,18 +8,15 @@ const promoClose = document.getElementById('promo-close');
 if (promoClose) {
   promoClose.addEventListener('click', () => {
     promoBar.classList.add('hidden');
-    // Optionally persist dismissal
     try { sessionStorage.setItem('promo-closed', '1'); } catch(e) {}
   });
-  try {
-    if (sessionStorage.getItem('promo-closed')) promoBar.classList.add('hidden');
-  } catch(e) {}
+  try { if (sessionStorage.getItem('promo-closed')) promoBar.classList.add('hidden'); } catch(e) {}
 }
 
 // ── Navbar scroll ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 10);
+  navbar.classList.toggle('scrolled', window.scrollY > 16);
 }, { passive: true });
 
 // ── Mobile nav toggle ──
@@ -30,56 +27,38 @@ navToggle.addEventListener('click', () => {
   navToggle.classList.toggle('open', open);
   navToggle.setAttribute('aria-expanded', open);
 });
-navLinks.querySelectorAll('a').forEach(a =>
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  })
-);
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}));
 
 // ── Language selector ──
-const langBtn      = document.getElementById('lang-btn');
-const langDropdown = document.getElementById('lang-dropdown');
-const langCurrent  = langBtn.querySelector('.lang-current');
-const langFlag     = langBtn.querySelector('.lang-flag');
+const langBtn  = document.getElementById('lang-btn');
+const langDrop = document.getElementById('lang-drop');
+const langCur  = document.getElementById('lang-cur');
+const langFlag = document.getElementById('lang-flag');
 
-langBtn.addEventListener('click', (e) => {
+langBtn.addEventListener('click', e => {
   e.stopPropagation();
-  const open = langDropdown.classList.toggle('open');
+  const open = langDrop.classList.toggle('open');
   langBtn.classList.toggle('open', open);
   langBtn.setAttribute('aria-expanded', open);
 });
 
-langDropdown.querySelectorAll('li').forEach(li => {
+langDrop.querySelectorAll('li').forEach(li => {
   li.addEventListener('click', () => {
-    langCurrent.textContent = li.dataset.lang.toUpperCase();
-    langFlag.textContent    = li.dataset.flag;
-    langDropdown.classList.remove('open');
+    langCur.textContent  = li.dataset.lang;
+    langFlag.innerHTML   = li.dataset.flag;
+    langDrop.classList.remove('open');
     langBtn.classList.remove('open');
     langBtn.setAttribute('aria-expanded', 'false');
-    
-    // Apply translations
-    const lang = li.dataset.lang;
-    const dict = typeof translations !== 'undefined' && translations[lang] ? translations[lang] : (typeof translations !== 'undefined' ? translations['en'] : null);
-    if (dict) {
-      for (const selector in dict) {
-        const el = document.querySelector(selector);
-        if (el) {
-          if (dict[selector].includes('<') || dict[selector].includes('&')) {
-            el.innerHTML = dict[selector];
-          } else {
-            el.textContent = dict[selector];
-          }
-        }
-      }
-    }
   });
 });
 
-document.addEventListener('click', (e) => {
-  if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
-    langDropdown.classList.remove('open');
+document.addEventListener('click', e => {
+  if (!langBtn.contains(e.target) && !langDrop.contains(e.target)) {
+    langDrop.classList.remove('open');
     langBtn.classList.remove('open');
     langBtn.setAttribute('aria-expanded', 'false');
   }
@@ -93,48 +72,63 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ── Smooth scroll with offset ──
+// ── Smooth scroll with navbar offset ──
+const navH = () => navbar.offsetHeight + (promoBar && !promoBar.classList.contains('hidden') ? promoBar.offsetHeight : 0) + 10;
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
-    const offset = navbar.offsetHeight + (promoBar && !promoBar.classList.contains('hidden') ? promoBar.offsetHeight : 0) + 10;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH(), behavior: 'smooth' });
   });
 });
 
-// ── Contact form ──
-const form    = document.getElementById('contact-form');
-const success = document.getElementById('form-success');
-form.addEventListener('submit', e => {
+// ── Reservation form ──
+const resForm    = document.getElementById('res-form');
+const resSuccess = document.getElementById('res-success');
+const resSubmit  = document.getElementById('res-submit');
+
+// Set min date to today
+const dateInput = document.getElementById('res-date');
+if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+resForm.addEventListener('submit', e => {
   e.preventDefault();
-  const name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim();
-  if (!name || !email || !msg) return;
-  const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…'; btn.disabled = true;
+  const name    = document.getElementById('res-name').value.trim();
+  const email   = document.getElementById('res-email').value.trim();
+  const date    = document.getElementById('res-date').value;
+  const guests  = document.getElementById('res-guests').value;
+  if (!name || !email || !date || !guests) return;
+
+  resSubmit.textContent = 'Sending…';
+  resSubmit.disabled = true;
+
+  // Simulate submission — replace with Formspree or real endpoint
   setTimeout(() => {
-    form.reset();
-    btn.textContent = 'Send Message →'; btn.disabled = false;
-    success.classList.add('visible');
-    setTimeout(() => success.classList.remove('visible'), 6000);
-  }, 900);
+    resForm.reset();
+    resSubmit.textContent = 'Reserve Now →';
+    resSubmit.disabled = false;
+    resSuccess.classList.add('visible');
+    setTimeout(() => resSuccess.classList.remove('visible'), 7000);
+  }, 1000);
 });
 
 // ══════════════════════════════════════════
-// HERO CANVAS — particle network
-// Runs ONLY in the hero section canvas.
+// HERO CANVAS — subtle floating particles
+// Only animates while hero is in viewport
 // ══════════════════════════════════════════
-(function initHeroCanvas() {
+(function initCanvas() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let W, H, particles, animId;
 
-  const CA = 'rgba(230,145,56,';
-  const CC = 'rgba(139,0,0,';
-  const CW = 'rgba(242,242,242,';
-  const COUNT = 60, DIST = 135, SPEED = 0.32;
+  const AMBER  = 'rgba(230,145,56,';
+  const CRIM   = 'rgba(139,0,0,';
+  const WHITE  = 'rgba(242,242,242,';
+  const COUNT  = 55;
+  const DIST   = 130;
+  const SPEED  = 0.28;
 
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
@@ -146,9 +140,9 @@ form.addEventListener('submit', e => {
     return {
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - .5) * SPEED, vy: (Math.random() - .5) * SPEED,
-      r: Math.random() * 1.4 + .6,
-      color: r < .1 ? CC : r < .28 ? CA : CW,
-      a: Math.random() * .4 + .12,
+      r: Math.random() * 1.3 + .5,
+      c: r < .08 ? CRIM : r < .25 ? AMBER : WHITE,
+      a: Math.random() * .35 + .08,
     };
   }
 
@@ -168,14 +162,14 @@ form.addEventListener('submit', e => {
         const d = Math.sqrt(dx*dx + dy*dy);
         if (d < DIST) {
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = CA + (1 - d/DIST) * .16 + ')';
-          ctx.lineWidth = .55; ctx.stroke();
+          ctx.strokeStyle = AMBER + (1 - d/DIST) * .12 + ')';
+          ctx.lineWidth = .5; ctx.stroke();
         }
       }
     }
     particles.forEach(p => {
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = p.color + p.a + ')'; ctx.fill();
+      ctx.fillStyle = p.c + p.a + ')'; ctx.fill();
     });
     animId = requestAnimationFrame(draw);
   }

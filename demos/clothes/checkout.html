@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — ENITA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .checkout-page { min-height: 100vh; padding: 60px 0 100px; }
+    .checkout-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: start; }
+    .checkout-form-section h2 { font-family: var(--fd); font-size: 2rem; font-weight: 400; color: var(--white); margin-bottom: 32px; }
+    .checkout-step { margin-bottom: 36px; }
+    .step-label { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: block; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(184,184,176,.5); }
+    .form-group input, .form-group select {
+      font-family: var(--fb); font-size: 14px; font-weight: 300; color: var(--white);
+      background: var(--obs-card); border: 1px solid var(--border-s); padding: 12px 14px;
+      outline: none; width: 100%; transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input::placeholder { color: rgba(184,184,176,.2); }
+    .form-group input:focus, .form-group select:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(230,145,56,.08); }
+    .form-group select { appearance: none; cursor: pointer; }
+    .separator { height: 1px; background: var(--border); margin: 28px 0; }
+    .payment-methods { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .pay-method {
+      display: flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border-s); padding: 10px 16px; cursor: pointer;
+      font-size: 12px; color: var(--white-mid); transition: border-color .2s, color .2s;
+    }
+    .pay-method input[type="radio"] { accent-color: var(--amber); }
+    .pay-method:has(input:checked) { border-color: var(--amber); color: var(--white); }
+    .card-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .checkout-submit { margin-top: 28px; }
+    .checkout-submit .btn { width: 100%; font-size: 12px; padding: 16px; }
+    .checkout-secure { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--white-mid); margin-top: 12px; justify-content: center; }
+    .checkout-secure svg { color: var(--amber); }
+
+    /* Order summary */
+    .order-summary { position: sticky; top: calc(var(--nav-h) + 20px); background: var(--obs-card); border: 1px solid var(--border-s); padding: 28px; }
+    .order-summary h3 { font-family: var(--fd); font-size: 1.3rem; font-weight: 400; color: var(--white); margin-bottom: 20px; }
+    .order-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; max-height: 320px; overflow-y: auto; }
+    .order-item { display: flex; gap: 12px; align-items: flex-start; }
+    .order-item-img { width: 60px; height: 76px; object-fit: cover; flex-shrink: 0; position: relative; }
+    .order-item-qty-badge {
+      position: absolute; top: -6px; right: -6px; background: var(--concrete);
+      color: var(--obs); font-size: 10px; font-weight: 600; width: 18px; height: 18px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .order-item-info { flex: 1; }
+    .order-item-name { font-size: 13px; color: var(--white); line-height: 1.3; margin-bottom: 3px; }
+    .order-item-meta { font-size: 11px; color: var(--white-mid); }
+    .order-item-price { font-size: 13px; color: var(--white); white-space: nowrap; }
+    .order-sep { height: 1px; background: var(--border); margin: 16px 0; }
+    .order-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--white); margin-bottom: 8px; }
+    .order-row.muted { color: var(--white-mid); font-weight: 300; }
+    .order-row.total { font-size: 15px; font-weight: 500; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .order-empty { font-size: 13px; color: var(--white-mid); text-align: center; padding: 24px 0; }
+    .promo-input-row { display: flex; gap: 0; margin-bottom: 16px; }
+    .promo-input-row input {
+      flex: 1; font-family: var(--fb); font-size: 13px; color: var(--white);
+      background: var(--obs); border: 1px solid var(--border-s); border-right: none;
+      padding: 10px 14px; outline: none; transition: border-color .2s;
+    }
+    .promo-input-row input:focus { border-color: var(--amber); }
+    .promo-input-row input::placeholder { color: rgba(184,184,176,.2); }
+    .promo-input-row button { background: var(--obs-card); border: 1px solid var(--border-s); color: var(--white-mid); font-family: var(--fb); font-size: 11px; letter-spacing: .1em; padding: 0 18px; cursor: pointer; transition: color .2s, border-color .2s; }
+    .promo-input-row button:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* Success screen */
+    .checkout-success { display: none; flex-direction: column; align-items: center; text-align: center; padding: 80px 0; gap: 20px; }
+    .checkout-success.show { display: flex; }
+    .success-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--amber-g); border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; }
+    .success-icon svg { color: var(--amber); }
+    .checkout-success h2 { font-family: var(--fd); font-size: 2.2rem; font-weight: 400; color: var(--white); }
+    .checkout-success p { font-size: 14px; font-weight: 300; color: var(--white-mid); max-width: 400px; line-height: 1.7; }
+    .checkout-success a { margin-top: 8px; }
+
+    @media (max-width: 860px) {
+      .checkout-layout { grid-template-columns: 1fr; }
+      .order-summary { position: static; }
+    }
+    @media (max-width: 580px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .card-fields { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="promo-bar" id="promo-bar">
+    <div class="promo-inner"><span class="promo-badge">DROP 002</span><span class="promo-text">Free shipping on orders over <span class="promo-highlight">€120</span></span></div>
+    <button class="promo-close" id="promo-close">&times;</button>
+  </div>
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a href="index.html" class="logo">ENITA</a>
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html#shop">Shop</a>
+        <a href="index.html#collections">Collections</a>
+        <a href="index.html#about-section">About</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-ghost" style="padding:8px 18px;font-size:10px;">&larr; Back to Shop</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <div class="container">
+
+      <!-- Success state (hidden by default) -->
+      <div class="checkout-success" id="checkout-success">
+        <div class="success-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Order Confirmed.</h2>
+        <p>Your order has been placed and is being prepared for dispatch. You'll receive a confirmation email shortly.</p>
+        <p style="font-size:12px;color:var(--amber);letter-spacing:.1em;">Order #ENT-2026-<span id="order-number"></span></p>
+        <a href="index.html" class="btn">Continue Shopping</a>
+      </div>
+
+      <!-- Checkout form -->
+      <div class="checkout-layout" id="checkout-body">
+        <!-- Left: Form -->
+        <div class="checkout-form-section">
+          <h2>Checkout</h2>
+
+          <form id="checkout-form" novalidate>
+            <!-- Contact -->
+            <div class="checkout-step">
+              <span class="step-label">01 — Contact</span>
+              <div class="form-grid full">
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="email" placeholder="your@email.com" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Shipping -->
+            <div class="checkout-step">
+              <span class="step-label">02 — Delivery Address</span>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" placeholder="First name" required />
+                </div>
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" placeholder="Last name" required />
+                </div>
+              </div>
+              <div class="form-grid full" style="margin-top:16px;">
+                <div class="form-group">
+                  <label>Street Address</label>
+                  <input type="text" placeholder="1 Calea Victoriei" required />
+                </div>
+              </div>
+              <div class="form-grid" style="margin-top:16px;">
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" placeholder="Bucharest" required />
+                </div>
+                <div class="form-group">
+                  <label>Postal Code</label>
+                  <input type="text" placeholder="010011" required />
+                </div>
+              </div>
+              <div class="form-grid full" style="margin-top:16px;">
+                <div class="form-group">
+                  <label>Country</label>
+                  <select>
+                    <option>Romania</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>United Kingdom</option>
+                    <option>Netherlands</option>
+                    <option>Italy</option>
+                    <option>Spain</option>
+                    <option>United States</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Shipping method -->
+            <div class="checkout-step">
+              <span class="step-label">03 — Shipping Method</span>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <label class="pay-method" style="cursor:pointer;justify-content:space-between;">
+                  <div style="display:flex;align-items:center;gap:10px;"><input type="radio" name="ship" value="standard" checked /> Standard (3–5 days)</div>
+                  <span id="ship-price">Free</span>
+                </label>
+                <label class="pay-method" style="cursor:pointer;justify-content:space-between;">
+                  <div style="display:flex;align-items:center;gap:10px;"><input type="radio" name="ship" value="express" /> Express (1–2 days)</div>
+                  <span>€9.90</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Payment -->
+            <div class="checkout-step">
+              <span class="step-label">04 — Payment</span>
+              <div class="payment-methods">
+                <label class="pay-method"><input type="radio" name="pay" value="card" checked /> Credit / Debit Card</label>
+                <label class="pay-method"><input type="radio" name="pay" value="paypal" /> PayPal</label>
+                <label class="pay-method"><input type="radio" name="pay" value="apple" /> Apple Pay</label>
+              </div>
+              <div class="card-fields" id="card-fields">
+                <div class="form-group" style="grid-column:span 2;">
+                  <label>Card Number</label>
+                  <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="card-num" />
+                </div>
+                <div class="form-group">
+                  <label>Expiry</label>
+                  <input type="text" placeholder="MM / YY" maxlength="7" id="card-exp" />
+                </div>
+                <div class="form-group">
+                  <label>CVC</label>
+                  <input type="text" placeholder="•••" maxlength="3" id="card-cvc" />
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-submit">
+              <button type="submit" class="btn" id="submit-btn">Place Order &rarr;</button>
+              <div class="checkout-secure">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Secured with 256-bit SSL encryption
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Order summary -->
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="order-items" id="order-items">
+            <div class="order-empty" id="order-empty">Your cart is empty.</div>
+          </div>
+          <div class="promo-input-row">
+            <input type="text" placeholder="Promo code" id="promo-code" />
+            <button type="button" id="promo-apply">Apply</button>
+          </div>
+          <div class="order-row muted"><span>Subtotal</span><span id="order-subtotal">€0</span></div>
+          <div class="order-row muted"><span>Shipping</span><span id="order-ship">Free</span></div>
+          <div class="order-row muted" id="discount-row" style="display:none;"><span>Discount (ENITA10)</span><span id="order-discount" style="color:var(--amber);">-€0</span></div>
+          <div class="order-row total"><span>Total</span><span id="order-total">€0</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" style="padding:28px 0;">
+    <div class="container footer-inner">
+      <div class="footer-bottom" style="border:none;padding:0;">
+        <span>&copy; 2026 ENITA. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    function fmtPrice(n) { return '€' + n.toFixed(2).replace('.00', ''); }
+    function showToast(msg) {
+      const t = $('toast'); t.textContent = msg; t.classList.add('show');
+      clearTimeout(t._tid); t._tid = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // Load cart
+    let cart = JSON.parse(localStorage.getItem('enita-cart') || '[]');
+    let shipCost = 0;
+    let discount = 0;
+
+    function getSubtotal() { return cart.reduce((acc,c) => acc + c.price * c.qty, 0); }
+
+    function renderOrderSummary() {
+      const itemsEl = $('order-items'), emptyEl = $('order-empty');
+      const subtotalEl = $('order-subtotal'), shipEl = $('order-ship'), totalEl = $('order-total');
+      if (cart.length === 0) {
+        emptyEl.style.display = 'block'; return;
+      }
+      emptyEl.style.display = 'none';
+      const sub = getSubtotal();
+      // free shipping over 120
+      if (document.querySelector('input[name="ship"]:checked').value === 'standard') {
+        shipCost = sub >= 120 ? 0 : 7.90;
+      } else {
+        shipCost = 9.90;
+      }
+      itemsEl.innerHTML = `<div class="order-empty" id="order-empty" style="display:none;"></div>` + cart.map(item => `
+        <div class="order-item">
+          <div style="position:relative;">
+            <img class="order-item-img" src="${item.img}" alt="${item.name}" />
+            <span class="order-item-qty-badge">${item.qty}</span>
+          </div>
+          <div class="order-item-info">
+            <div class="order-item-name">${item.name}</div>
+            <div class="order-item-meta">Size: ${item.size}</div>
+          </div>
+          <span class="order-item-price">${fmtPrice(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+      subtotalEl.textContent = fmtPrice(sub);
+      shipEl.textContent = shipCost === 0 ? 'Free' : fmtPrice(shipCost);
+      totalEl.textContent = fmtPrice(sub + shipCost - discount);
+    }
+
+    // Shipping change
+    document.querySelectorAll('input[name="ship"]').forEach(r => {
+      r.addEventListener('change', () => {
+        shipCost = r.value === 'express' ? 9.90 : (getSubtotal() >= 120 ? 0 : 7.90);
+        $('order-ship').textContent = shipCost === 0 ? 'Free' : fmtPrice(shipCost);
+        $('ship-price').textContent = shipCost === 0 ? 'Free' : fmtPrice(7.90);
+        $('order-total').textContent = fmtPrice(getSubtotal() + shipCost - discount);
+      });
+    });
+
+    // Promo code
+    $('promo-apply').addEventListener('click', () => {
+      const code = $('promo-code').value.trim().toUpperCase();
+      if (code === 'ENITA10') {
+        discount = Math.floor(getSubtotal() * 0.1);
+        $('discount-row').style.display = 'flex';
+        $('order-discount').textContent = `-${fmtPrice(discount)}`;
+        $('order-total').textContent = fmtPrice(getSubtotal() + shipCost - discount);
+        showToast('Promo code applied — 10% off!');
+      } else if (code) {
+        showToast('Invalid promo code.');
+      }
+    });
+
+    // Card number formatting
+    const cardNum = $('card-num');
+    if (cardNum) {
+      cardNum.addEventListener('input', () => {
+        let v = cardNum.value.replace(/\D/g, '').substring(0, 16);
+        cardNum.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+    }
+    const cardExp = $('card-exp');
+    if (cardExp) {
+      cardExp.addEventListener('input', () => {
+        let v = cardExp.value.replace(/\D/g, '').substring(0, 4);
+        if (v.length > 2) v = v.slice(0, 2) + ' / ' + v.slice(2);
+        cardExp.value = v;
+      });
+    }
+
+    // Payment method toggle
+    document.querySelectorAll('input[name="pay"]').forEach(r => {
+      r.addEventListener('change', () => {
+        $('card-fields').style.display = r.value === 'card' ? 'grid' : 'none';
+      });
+    });
+
+    // Form submit
+    $('checkout-form').addEventListener('submit', e => {
+      e.preventDefault();
+      if (cart.length === 0) { showToast('Your cart is empty.'); return; }
+      const btn = $('submit-btn');
+      btn.textContent = 'Processing\u2026'; btn.disabled = true;
+      setTimeout(() => {
+        // Clear cart
+        localStorage.removeItem('enita-cart');
+        // Show success
+        $('checkout-body').style.display = 'none';
+        const success = $('checkout-success');
+        $('order-number').textContent = Math.floor(1000 + Math.random() * 9000);
+        success.classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1800);
+    });
+
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      $('navbar').classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Nav toggle
+    const navToggle = $('nav-toggle'), navLinks = $('nav-links');
+    navToggle.addEventListener('click', () => { const o = navLinks.classList.toggle('open'); navToggle.classList.toggle('open', o); });
+
+    // Promo bar
+    const promoBar = $('promo-bar'), promoClose = $('promo-close');
+    if (sessionStorage.getItem('enita-promo')) promoBar.classList.add('hidden');
+    promoClose.addEventListener('click', () => { promoBar.classList.add('hidden'); sessionStorage.setItem('enita-promo', '1'); });
+
+    // Init
+    renderOrderSummary();
+  </script>
+</body>
+</html>

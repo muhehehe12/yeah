@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Velour — Contemporary Fashion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--blk:#0a0a0a;--wht:#f5f5f0;--acc:#c8a96e;--gray:#8a8a8a;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--wht);color:var(--blk);overflow-x:hidden;}
+    .fd{font-family:'Cormorant Garamond',Georgia,serif;}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+    .fu{animation:fadeUp .8s ease both;}
+    /* Nav */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:all .3s;padding:0 40px;}
+    #nav.sc{background:rgba(245,245,240,.97);backdrop-filter:blur(12px);border-bottom-color:rgba(0,0,0,.08);}
+    .ni{max-width:1280px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;}
+    .nlinks{display:flex;gap:36px;}
+    .nlinks a{text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.6);transition:color .2s;}
+    .nlinks a:hover,.nlinks a:focus{color:var(--blk);}
+    .cart-btn{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:var(--blk);color:var(--wht);border:none;cursor:pointer;padding:10px 20px;text-decoration:none;transition:background .2s;}
+    .cart-btn:hover{background:#333;}
+    /* Hero */
+    #hero{height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+    .hero-left{position:relative;background:var(--blk);display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px;}
+    .hero-left img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.65;}
+    .hero-left-content{position:relative;z-index:2;}
+    .hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:20px;}
+    .hero-h1{font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1;color:#fff;margin-bottom:28px;}
+    .hero-right{background:var(--wht);display:flex;flex-direction:column;justify-content:center;padding:80px 60px;}
+    .hero-r-tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:16px;}
+    .hero-r-h{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;color:var(--blk);line-height:1.3;margin-bottom:24px;}
+    .hero-r-p{font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:36px;max-width:340px;}
+    .btn-blk{display:inline-block;background:var(--blk);color:var(--wht);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:14px 36px;text-decoration:none;transition:background .2s;}
+    .btn-blk:hover{background:#333;}
+    .btn-out{display:inline-block;border:1px solid var(--blk);color:var(--blk);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:13px 32px;text-decoration:none;margin-left:14px;transition:all .2s;}
+    .btn-out:hover{background:var(--blk);color:var(--wht);}
+    /* Collections */
+    #collection{padding:96px 40px;background:var(--wht);}
+    .section-inner{max-width:1280px;margin:0 auto;}
+    .s-tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:14px;}
+    .s-h{font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--blk);margin-bottom:56px;line-height:1.1;}
+    .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+    .prod{cursor:pointer;}
+    .prod-img{position:relative;overflow:hidden;background:#eee;margin-bottom:16px;}
+    .prod-img img{width:100%;height:380px;object-fit:cover;transition:transform .5s;}
+    .prod:hover .prod-img img{transform:scale(1.06);}
+    .prod-overlay{position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:flex-end;padding:16px;opacity:0;transition:opacity .3s;}
+    .prod:hover .prod-overlay{opacity:1;}
+    .prod-quick{background:#fff;color:var(--blk);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;width:100%;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .prod-name{font-size:15px;color:var(--blk);margin-bottom:4px;}
+    .prod-cat{font-size:12px;color:var(--gray);margin-bottom:6px;letter-spacing:.05em;}
+    .prod-price{font-size:15px;font-weight:500;color:var(--blk);}
+    .prod-old{text-decoration:line-through;color:var(--gray);font-weight:300;margin-right:8px;}
+    .prod-sale{color:#c0392b;}
+    /* Features strip */
+    #features{padding:40px;background:var(--blk);}
+    .feat-strip{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+    .feat{text-align:center;padding:24px;}
+    .feat-icon{font-size:24px;margin-bottom:12px;}
+    .feat-title{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--wht);margin-bottom:4px;}
+    .feat-sub{font-size:12px;color:rgba(255,255,255,.4);}
+    /* Lookbook */
+    #lookbook{padding:96px 40px;background:#f0ede6;}
+    .look-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:4px;margin-top:56px;}
+    .look-item{overflow:hidden;}
+    .look-item.tall{grid-row:span 2;}
+    .look-item img{width:100%;height:100%;object-fit:cover;min-height:260px;transition:transform .5s;}
+    .look-item:hover img{transform:scale(1.04);}
+    /* Testimonials */
+    #reviews{padding:96px 40px;background:var(--wht);}
+    .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px;}
+    .rev-card{padding:32px;border:1px solid rgba(0,0,0,.08);}
+    .rev-stars{color:var(--acc);font-size:15px;margin-bottom:16px;}
+    .rev-text{font-size:15px;color:#444;line-height:1.7;font-style:italic;margin-bottom:20px;}
+    .rev-author{font-size:13px;font-weight:500;color:var(--blk);}
+    .rev-loc{font-size:12px;color:var(--gray);margin-top:2px;}
+    /* Newsletter */
+    #newsletter{padding:80px 40px;background:var(--blk);text-align:center;}
+    .nl-h{font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#fff;margin-bottom:16px;}
+    .nl-p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:36px;}
+    .nl-form{display:flex;gap:0;max-width:480px;margin:0 auto;}
+    .nl-input{flex:1;padding:14px 20px;background:transparent;border:1px solid rgba(255,255,255,.2);border-right:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;}
+    .nl-input::placeholder{color:rgba(255,255,255,.3);}
+    .nl-submit{background:var(--acc);border:1px solid var(--acc);color:var(--blk);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 24px;cursor:pointer;transition:background .2s;white-space:nowrap;}
+    .nl-submit:hover{background:#b8924a;}
+    footer{background:#050505;padding:40px;text-align:center;}
+    @media(max-width:1000px){.prod-grid{grid-template-columns:repeat(2,1fr) !important;}.look-grid,.feat-strip{grid-template-columns:repeat(2,1fr) !important;}.look-item.tall{grid-row:auto;}}
+    @media(max-width:720px){#hero{grid-template-columns:1fr !important;height:auto;}.hero-right{padding:48px 32px;}.hero-left{height:60vh;}.rev-grid{grid-template-columns:1fr !important;}.nl-form{flex-direction:column;}.nl-input{border-right:1px solid rgba(255,255,255,.2);border-bottom:none;}}
+  </style>
+</head>
+<body>
+
+<header id="nav">
+  <div class="ni">
+    <a href="#hero" class="fd" style="font-size:26px;font-weight:400;color:var(--blk);text-decoration:none;letter-spacing:.05em;">Velour</a>
+    <nav class="nlinks">
+      <a href="#collection">Collections</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#newsletter">Newsletter</a>
+    </nav>
+    <a href="#collection" class="cart-btn">Shop Now</a>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="hero-left">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&auto=format&fit=crop" alt="Fashion hero"/>
+    <div class="hero-left-content">
+      <p class="hero-eyebrow fu">Spring / Summer 2026</p>
+      <h1 class="fd hero-h1 fu" style="animation-delay:.1s;">Effortless<br><em>Elegance.</em></h1>
+      <a href="#collection" class="btn-blk fu" style="animation-delay:.25s;background:var(--acc);border-color:var(--acc);color:var(--blk);">Explore Collection</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-r-tag fu">New Arrivals</p>
+    <h2 class="fd hero-r-h fu" style="animation-delay:.1s;">Contemporary fashion for the modern woman</h2>
+    <p class="hero-r-p fu" style="animation-delay:.2s;">Meticulously crafted essentials that move with you — from sunrise to celebration. Sustainable fabrics, timeless silhouettes, made in Romania.</p>
+    <div class="fu" style="animation-delay:.3s;">
+      <a href="#collection" class="btn-blk">Shop Women</a>
+      <a href="#lookbook" class="btn-out">View Lookbook</a>
+    </div>
+    <div style="display:flex;gap:32px;margin-top:44px;padding-top:32px;border-top:1px solid rgba(0,0,0,.08);" class="fu" style="animation-delay:.4s;">
+      <div><div class="fd" style="font-size:1.8rem;color:var(--blk);">8 yrs</div><div style="font-size:12px;color:var(--gray);letter-spacing:.06em;">In Fashion</div></div>
+      <div><div class="fd" style="font-size:1.8rem;color:var(--blk);">6k+</div><div style="font-size:12px;color:var(--gray);letter-spacing:.06em;">Happy Clients</div></div>
+      <div><div class="fd" style="font-size:1.8rem;color:var(--blk);">100%</div><div style="font-size:12px;color:var(--gray);letter-spacing:.06em;">Sustainable</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="feat-strip">
+    <div class="feat"><div class="feat-icon">🌿</div><div class="feat-title">Eco Materials</div><div class="feat-sub">Organic cotton & recycled fibres</div></div>
+    <div class="feat"><div class="feat-icon">🚚</div><div class="feat-title">Free Shipping</div><div class="feat-sub">On orders over 300 RON</div></div>
+    <div class="feat"><div class="feat-icon">↩️</div><div class="feat-title">Easy Returns</div><div class="feat-sub">30-day hassle-free returns</div></div>
+    <div class="feat"><div class="feat-icon">🧵</div><div class="feat-title">Made in Romania</div><div class="feat-sub">Supporting local artisans</div></div>
+  </div>
+</section>
+
+<section id="collection">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="s-tag">SS26 Collection</div>
+      <h2 class="fd s-h">New <em>Arrivals</em></h2>
+    </div>
+    <div class="prod-grid">
+      <div class="prod reveal">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80&auto=format&fit=crop" alt="Linen Blazer"/><div class="prod-overlay"><button class="prod-quick">Quick Add</button></div></div>
+        <div class="prod-cat">Blazers</div><div class="prod-name">Linen Summer Blazer</div><div class="prod-price">420 RON</div>
+      </div>
+      <div class="prod reveal" style="transition-delay:.1s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80&auto=format&fit=crop" alt="Silk Dress"/><div class="prod-overlay"><button class="prod-quick">Quick Add</button></div></div>
+        <div class="prod-cat">Dresses</div><div class="prod-name">Silk Wrap Midi Dress</div><div class="prod-price"><span class="prod-old">590 RON</span><span class="prod-sale">390 RON</span></div>
+      </div>
+      <div class="prod reveal" style="transition-delay:.2s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80&auto=format&fit=crop" alt="Knit Top"/><div class="prod-overlay"><button class="prod-quick">Quick Add</button></div></div>
+        <div class="prod-cat">Tops</div><div class="prod-name">Organic Cotton Knit</div><div class="prod-price">280 RON</div>
+      </div>
+      <div class="prod reveal" style="transition-delay:.3s;">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80&auto=format&fit=crop" alt="Wide Trousers"/><div class="prod-overlay"><button class="prod-quick">Quick Add</button></div></div>
+        <div class="prod-cat">Bottoms</div><div class="prod-name">Wide Leg Trousers</div><div class="prod-price">360 RON</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="reveal"><a href="#collection" class="btn-blk" style="font-size:12px;">View All Products</a></div>
+  </div>
+</section>
+
+<section id="lookbook">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+      <div class="s-tag">Lookbook</div>
+      <h2 class="fd s-h" style="margin-bottom:0;">Spring Stories</h2>
+    </div>
+    <div class="look-grid">
+      <div class="look-item tall"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80&auto=format&fit=crop" alt="Look 1"/></div>
+      <div class="look-item"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80&auto=format&fit=crop" alt="Look 2"/></div>
+      <div class="look-item"><img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=500&q=80&auto=format&fit=crop" alt="Look 3"/></div>
+      <div class="look-item"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&q=80&auto=format&fit=crop" alt="Look 4"/></div>
+      <div class="look-item"><img src="https://images.unsplash.com/photo-1495385794356-15371f197f77?w=500&q=80&auto=format&fit=crop" alt="Look 5"/></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;"><div class="s-tag">Reviews</div><h2 class="fd s-h">What Our Clients Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"The linen blazer is stunning. The fabric, the cut — everything is perfect. I've worn it to three events already and received so many compliments."</p><div class="rev-author">Andreea M.</div><div class="rev-loc">Cluj-Napoca</div></div>
+      <div class="rev-card reveal" style="transition-delay:.1s;"><div class="rev-stars">★★★★★</div><p class="rev-text">"Finally a Romanian brand that understands quality. The silk dress arrived beautifully packaged and fits like a dream. Will be shopping again!"</p><div class="rev-author">Diana L.</div><div class="rev-loc">Bucharest</div></div>
+      <div class="rev-card reveal" style="transition-delay:.2s;"><div class="rev-stars">★★★★★</div><p class="rev-text">"Sustainable fashion that doesn't compromise on style. The wide leg trousers are my new wardrobe staples. Exceptional craftsmanship throughout."</p><div class="rev-author">Raluca T.</div><div class="rev-loc">Timișoara</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="fd nl-h">Stay in <em>Style</em></div>
+  <p class="nl-p">Join 12,000+ subscribers for exclusive access to new collections, early sales & style inspiration.</p>
+  <form class="nl-form" onsubmit="this.innerHTML='<p style=color:var(--acc);font-size:15px;>✓ You\'re subscribed!</p>';return false;">
+    <input class="nl-input" type="email" placeholder="Your email address" required/>
+    <button type="submit" class="nl-submit">Subscribe</button>
+  </form>
+</section>
+
+<footer><div class="fd" style="font-size:22px;color:#fff;margin-bottom:8px;">Velour</div><p style="font-size:13px;color:rgba(255,255,255,.3);">© 2026 Velour Fashion. All rights reserved. · Made in Romania.</p></footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',window.scrollY>40),{passive:true});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.prod-quick').forEach(btn=>btn.addEventListener('click',()=>{btn.textContent='Added ✓';btn.style.background='#2d7d2d';btn.style.color='#fff';setTimeout(()=>{btn.textContent='Quick Add';btn.style.background='#fff';btn.style.color='var(--blk)';},2000);}));
+</script>
+</body>
+</html>
