@@ -1,39 +1,77 @@
-// MAIN ROTATION SYSTEM
+// ---------- SETUP ----------
+const cylinder = document.getElementById("cylinder");
+const panels = document.querySelectorAll(".panel");
 
-const cylinder = document.querySelector('.cylinder');
-const panels = document.querySelectorAll('.panel');
+let current = 0;
+const total = panels.length;
 
-let currentIndex = 0;
-const totalPanels = panels.length;
-
-// rotate function
-function rotateTo(index) {
-  currentIndex = (index + totalPanels) % totalPanels;
-  const angle = currentIndex * -360 / totalPanels;
-
+// ---------- ROTATION ----------
+function rotate() {
+  const angle = current * -(360 / total);
   cylinder.style.transform = `rotateY(${angle}deg)`;
 
-  // optional: add active class
-  panels.forEach((p, i) => {
-    p.classList.toggle('active', i === currentIndex);
+  // visual effect (depth / blur)
+  panels.forEach((panel, i) => {
+    if (i === current) {
+      panel.style.opacity = "1";
+      panel.style.transform += " scale(1)";
+      panel.style.filter = "blur(0px)";
+    } else {
+      panel.style.opacity = "0.4";
+      panel.style.transform += " scale(0.9)";
+      panel.style.filter = "blur(2px)";
+    }
   });
 }
 
-// next / prev
-function nextPanel() {
-  rotateTo(currentIndex + 1);
+// ---------- NAVIGATION ----------
+function next() {
+  current = (current + 1) % total;
+  rotate();
 }
 
-function prevPanel() {
-  rotateTo(currentIndex - 1);
+function prev() {
+  current = (current - 1 + total) % total;
+  rotate();
 }
 
-// expose globally (used by touch.js)
-window.nextPanel = nextPanel;
-window.prevPanel = prevPanel;
+// ---------- SWIPE / DRAG ----------
+let startX = 0;
+let isDragging = false;
 
-// keyboard support (desktop)
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') nextPanel();
-  if (e.key === 'ArrowLeft') prevPanel();
+// mobile
+window.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
 });
+
+window.addEventListener("touchend", (e) => {
+  let endX = e.changedTouches[0].clientX;
+  handleSwipe(endX - startX);
+});
+
+// desktop drag
+window.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  startX = e.clientX;
+});
+
+window.addEventListener("mouseup", (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  handleSwipe(e.clientX - startX);
+});
+
+// swipe logic
+function handleSwipe(diff) {
+  if (diff < -40) next();
+  if (diff > 40) prev();
+}
+
+// ---------- KEYBOARD ----------
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") next();
+  if (e.key === "ArrowLeft") prev();
+});
+
+// ---------- INIT ----------
+rotate();
