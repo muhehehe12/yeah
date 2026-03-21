@@ -1,52 +1,79 @@
-/* Minimalist styling */
+/* --------------------------
+   General Body / Fonts
+-------------------------- */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Courier New', monospace; /* grunge / hacker vibe */
   margin: 0;
-  color: #111;
-  background: #fff;
+  color: #fff;
+  background: rgba(20, 20, 20, 0.85); /* semi-transparent dark grunge overlay */
   scroll-behavior: smooth;
 }
 
-/* Navbar */
+/* --------------------------
+   Navbar / Header
+-------------------------- */
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 40px;
   position: sticky;
   top: 0;
-  background: rgba(255,255,255,0.95);
+  background: rgba(0, 0, 0, 0.6); /* transparent, edgy */
   z-index: 1000;
+  backdrop-filter: blur(3px); /* frosted glass effect */
+  transform: translateY(-5px); /* intentional raw offset */
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #111;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
 }
 
 .nav-links li {
-  display: inline-block;
-  margin-left: 30px;
+  margin-left: 25px; /* slightly irregular spacing for grunge */
 }
 
 .nav-links a {
+  color: #fff;
   text-decoration: none;
-  color: #111;
-  transition: color 0.3s;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #007BFF;
+  color: #00ffea;
+  transform: translateY(-2px);
+  text-shadow: 0 0 5px #00ffea;
 }
 
-/* Hero Section */
+/* --------------------------
+   Hero Section
+-------------------------- */
 #hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background: url('../images/hero.jpg') center/cover no-repeat;
-  color: #fff;
+  align-items: center;
   text-align: center;
+  background: rgba(0,0,0,0.3);
+  filter: blur(0.5px); /* subtle grunge blur */
+  opacity: 0.8;
 }
 
 #hero h1 {
   font-size: 3rem;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #111;
 }
 
 #hero p {
@@ -55,45 +82,101 @@ body {
 }
 
 .btn {
-  padding: 10px 25px;
-  background: #007BFF;
-  color: #fff;
+  padding: 12px 28px;
+  background: rgba(0, 255, 234, 0.6);
+  color: #111;
   text-decoration: none;
   border-radius: 5px;
-  transition: background 0.3s;
+  font-weight: bold;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(2px);
 }
 
 .btn:hover {
-  background: #0056b3;
+  background: rgba(0, 255, 234, 1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 15px #00ffea;
 }
 
-/* Sections */
+/* --------------------------
+   Sections
+-------------------------- */
 section {
   padding: 100px 40px;
   min-height: 100vh;
+  opacity: 0.7; /* half-loaded feel */
+  transform: translateY(15px);
+  transition: all 1s ease-in-out;
 }
 
-/* Portfolio Grid */
+section.aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------
+   Portfolio / Demo Previews
+-------------------------- */
 .portfolio-grid {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-.portfolio-item img {
-  width: 100%;
+.preview {
+  position: relative;
+  overflow: hidden;
   border-radius: 8px;
-  transition: transform 0.3s;
+  cursor: pointer;
+  flex: 1 1 calc(50% - 20px);
 }
 
-.portfolio-item img:hover {
+.preview img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.5s ease;
+  opacity: 0.85; /* raw, half-loaded effect */
+}
+
+.preview:hover img {
   transform: scale(1.05);
+  opacity: 1;
 }
 
-/* Responsive */
+.panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: #00ffea;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.preview:hover .panel {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* --------------------------
+   Responsive
+-------------------------- */
 @media (max-width: 768px) {
-  #hero h1 { font-size: 2rem; }
-  .nav-links li { margin-left: 15px; }
-  section { padding: 60px 20px; }
-  .portfolio-grid { flex-direction: column; }
+  #hero h1 {
+    font-size: 2rem;
+  }
+  .nav-links li {
+    margin-left: 15px;
+  }
+  section {
+    padding: 60px 20px;
+  }
+  .portfolio-grid {
+    flex-direction: column;
+  }
 }
