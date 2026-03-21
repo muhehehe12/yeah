@@ -109,9 +109,22 @@ const form    = document.getElementById('contact-form');
 const success = document.getElementById('form-success');
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  const name  = form.name.value.trim();
-  const email = form.email.value.trim();
-  const msg   = form.message.value.trim();
+  
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const nameInput = form.querySelector('[name="name"]');
+  const emailInput = form.querySelector('[name="email"]');
+  const msgInput = form.querySelector('[name="message"]');
+  const companyInput = form.querySelector('[name="company"]');
+  const serviceInput = form.querySelector('[name="service"]');
+
+  const name  = nameInput ? nameInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const msg   = msgInput ? msgInput.value.trim() : '';
+  
   if (!name || !email || !msg) return;
 
   const btn = form.querySelector('button[type="submit"]');
@@ -126,8 +139,8 @@ form.addEventListener('submit', async e => {
       body: JSON.stringify({
         name:    name,
         email:   email,
-        company: form.company ? form.company.value.trim() : '',
-        service: form.service ? form.service.value : '',
+        company: companyInput ? companyInput.value.trim() : '',
+        service: serviceInput ? serviceInput.value : '',
         message: msg
       })
     });
