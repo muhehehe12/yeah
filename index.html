@@ -3,278 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Agency offering web development, SEO, email handling. Bold, minimalist websites with animations.">
-<meta name="keywords" content="web development, SEO, email marketing, demo sites, agency">
-<title>YourAgency | Web Development</title>
+<title>YourAgency | 3D Experience</title>
 
-<!-- Inline CSS for self-contained file -->
 <style>
-/* -------------------------- Body / Fonts / General -------------------------- */
+/* --------------------------
+   GLOBAL / GRUNGE STYLE
+-------------------------- */
 body {
+  margin: 0;
+  overflow: hidden;
   font-family: 'Courier New', monospace;
-  margin: 0;
-  color: #fff;
-  background: rgba(20, 20, 20, 0.85);
-  scroll-behavior: smooth;
+  background: radial-gradient(circle at center, #111, #000);
+  color: white;
 }
 
-/* -------------------------- Navbar -------------------------- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  position: sticky;
-  top: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 1000;
-  backdrop-filter: blur(3px);
-  flex-wrap: nowrap;
-}
-.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  text-shadow: 1px 1px 0 #111;
-}
-.nav-links {
-  display: flex;
-  gap: 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-.nav-links a:hover {
-  color: #00ffea;
-  transform: translateY(-2px);
-  text-shadow: 0 0 5px #00ffea;
+/* --------------------------
+   3D SCENE
+-------------------------- */
+.scene {
+  perspective: 1500px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-/* -------------------------- Hero -------------------------- */
-#hero {
-  min-height: 100vh;
+/* rotating container */
+.cylinder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* --------------------------
+   PANELS
+-------------------------- */
+.panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgba(0,0,0,0.3);
-  filter: blur(0.5px);
+  padding: 40px;
+  box-sizing: border-box;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  transition: all 0.8s ease;
+}
+
+/* Position panels in circle (5 panels = 72deg each) */
+.panel:nth-child(1) { transform: rotateY(0deg) translateZ(500px); }
+.panel:nth-child(2) { transform: rotateY(72deg) translateZ(500px); }
+.panel:nth-child(3) { transform: rotateY(144deg) translateZ(500px); }
+.panel:nth-child(4) { transform: rotateY(216deg) translateZ(500px); }
+.panel:nth-child(5) { transform: rotateY(288deg) translateZ(500px); }
+
+/* --------------------------
+   CONTENT STYLE
+-------------------------- */
+h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px black;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  max-width: 600px;
   opacity: 0.8;
 }
-#hero h1 {
-  font-size: 3rem;
-  margin: 0 0 10px;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 0 #111;
-}
-#hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
+
 .btn {
-  padding: 12px 28px;
-  background: rgba(0, 255, 234, 0.6);
-  color: #111;
-  text-decoration: none;
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: rgba(0,255,234,0.6);
   border-radius: 5px;
+  text-decoration: none;
+  color: black;
   font-weight: bold;
-  transition: all 0.4s ease;
-  backdrop-filter: blur(2px);
+  transition: 0.3s;
 }
+
 .btn:hover {
-  background: rgba(0, 255, 234, 1);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 15px #00ffea;
+  background: rgba(0,255,234,1);
+  box-shadow: 0 0 20px #00ffea;
 }
 
-/* -------------------------- Sections -------------------------- */
-section {
-  padding: 100px 40px;
-  min-height: 100vh;
-  opacity: 0.7;
-  transform: translateY(15px);
-  transition: all 1s ease-in-out;
-}
-section.aos-animate {
-  opacity: 1;
-  transform: translateY(0);
+/* --------------------------
+   NAV INDICATOR (optional)
+-------------------------- */
+.nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* -------------------------- Portfolio / Previews -------------------------- */
-.portfolio-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.preview {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
+.nav-dots div {
+  width: 10px;
+  height: 10px;
+  margin: 10px 0;
+  background: #555;
+  border-radius: 50%;
   cursor: pointer;
-  flex: 1 1 calc(50% - 20px);
-}
-.preview img {
-  width: 100%;
-  display: block;
-  transition: transform 0.4s ease, opacity 0.5s ease;
-  opacity: 0.85;
-}
-.preview:hover img {
-  transform: scale(1.05);
-  opacity: 1;
-}
-.panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.7);
-  color: #00ffea;
-  text-align: center;
-  padding: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-.preview:hover .panel {
-  opacity: 1;
-  transform: translateY(-5px);
 }
 
-/* -------------------------- Responsive -------------------------- */
+.nav-dots .active {
+  background: #00ffea;
+}
+
+/* --------------------------
+   MOBILE TWEAKS
+-------------------------- */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-links {
-    flex-direction: column;
-    gap: 15px;
-  }
-  #hero h1 { font-size: 2rem; }
-  section { padding: 60px 20px; }
-  .portfolio-grid { flex-direction: column; }
+  h1 { font-size: 2rem; }
+  .panel { padding: 20px; }
 }
 </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<header>
-  <nav class="navbar">
-    <div class="logo">YourAgency</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="scene">
+  <div class="cylinder">
 
-<!-- Hero Section -->
-<section id="hero">
-  <h1>We Build Bold, Minimalist Websites</h1>
-  <p>Web Development • SEO • Email Handling • Demo Sites</p>
-  <a href="#contact" class="btn">Get in Touch</a>
-</section>
+    <!-- HERO -->
+    <section class="panel">
+      <div>
+        <h1>We Build Insane Websites</h1>
+        <p>Swipe left → experience the next dimension</p>
+        <a class="btn" onclick="nextPanel()">Enter</a>
+      </div>
+    </section>
 
-<!-- About Section -->
-<section id="about">
-  <h2>About Us</h2>
-  <p>We are a creative digital agency crafting raw, bold, minimalist websites with cinematic grunge vibes. Using AI and custom workflows, we deliver polished demos that leave an impression.</p>
-</section>
+    <!-- ABOUT -->
+    <section class="panel">
+      <div>
+        <h2>About</h2>
+        <p>We create bold, cinematic, AI-powered websites with extreme animations and modern UX.</p>
+      </div>
+    </section>
 
-<!-- Portfolio / Demo Previews -->
-<section id="portfolio">
-  <h2>Portfolio</h2>
-  <div class="portfolio-grid">
-    <div class="preview">
-      <img src="images/demo1.gif" alt="Demo 1">
-      <div class="panel"><a href="demo1.html">View Full Site</a></div>
-    </div>
-    <div class="preview">
-      <img src="images/demo2.gif" alt="Demo 2">
-      <div class="panel"><a href="demo2.html">View Full Site</a></div>
-    </div>
-    <div class="preview">
-      <img src="images/demo3.gif" alt="Demo 3">
-      <div class="panel"><a href="demo3.html">View Full Site</a></div>
-    </div>
-    <div class="preview">
-      <img src="images/demo4.gif" alt="Demo 4">
-      <div class="panel"><a href="demo4.html">View Full Site</a></div>
-    </div>
+    <!-- PORTFOLIO -->
+    <section class="panel">
+      <div>
+        <h2>Portfolio</h2>
+        <p>Interactive demos. Hover. Click. Experience.</p>
+        <a class="btn" href="#">View Demos</a>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="panel">
+      <div>
+        <h2>Services</h2>
+        <p>Web Dev • SEO • Email Handling • Automation</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel">
+      <div>
+        <h2>Contact</h2>
+        <p>Email: youragency@example.com</p>
+        <p>Phone: +40 xxx xxx xxx</p>
+      </div>
+    </section>
+
   </div>
-</section>
+</div>
 
-<!-- Services Section -->
-<section id="services">
-  <h2>Services</h2>
-  <ul>
-    <li>Web Development (custom & AI-enhanced)</li>
-    <li>SEO Optimization</li>
-    <li>Email Setup & Management</li>
-    <li>Website Demos & Prototypes</li>
-  </ul>
-</section>
+<!-- NAV DOTS -->
+<div class="nav-dots">
+  <div onclick="rotateTo(0)"></div>
+  <div onclick="rotateTo(1)"></div>
+  <div onclick="rotateTo(2)"></div>
+  <div onclick="rotateTo(3)"></div>
+  <div onclick="rotateTo(4)"></div>
+</div>
 
-<!-- Work Section -->
-<section id="work">
-  <h2>Recent Work</h2>
-  <p>Check out live demos and client projects hosted on GitHub Pages. Each demo is fully interactive and showcases modern UI animations.</p>
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:youragency@example.com">youragency@example.com</a></p>
-  <p>Phone: +40 712 345 678</p>
-</section>
-
-<!-- Inline JS -->
-<script>
-// Smooth scroll for nav links
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(link.getAttribute('href'));
-    if(target){
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
-
-// Fade-in sections on scroll
-window.addEventListener('scroll', () => {
-  document.querySelectorAll('section').forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100){
-      section.classList.add('aos-animate');
-    }
-  });
-});
-
-// Demo preview click effect
-document.querySelectorAll('.panel a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const url = link.getAttribute('href');
-    document.body.style.transition = 'opacity 0.6s';
-    document.body.style.opacity = '0';
-    setTimeout(() => window.location.href = url, 600);
-  });
-});
-</script>
+<!-- JS -->
+<script src="scripts.js"></script>
+<script src="touch.js"></script>
+<script src="effects.js"></script>
 
 </body>
 </html>
