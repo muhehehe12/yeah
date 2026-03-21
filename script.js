@@ -1,92 +1,175 @@
 /* =============================================
-   HONOM — script.js
+   HONOM — script.js  v3
+   Canvas particles (hero only) + UX utilities
    ============================================= */
 
-// === NAVBAR SCROLL ===
+// ── Navbar scroll ──
 const navbar = document.getElementById('navbar');
-
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  navbar.classList.toggle('scrolled', window.scrollY > 16);
 }, { passive: true });
 
-
-// === MOBILE NAV TOGGLE ===
+// ── Mobile nav ──
 const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.getElementById('nav-links');
+const navLinks  = document.getElementById('nav-links');
 
 navToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  navToggle.classList.toggle('open', isOpen);
-  navToggle.setAttribute('aria-expanded', isOpen);
+  const open = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open', open);
+  navToggle.setAttribute('aria-expanded', open);
 });
 
-// Close mobile nav on link click
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
+navLinks.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     navToggle.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
+  })
+);
+
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Smooth scroll with navbar offset ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 12, behavior: 'smooth' });
   });
 });
 
+// ── Contact form ──
+const form    = document.getElementById('contact-form');
+const success = document.getElementById('form-success');
 
-// === SCROLL REVEAL ===
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -40px 0px'
-});
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-
-// === CONTACT FORM ===
-const form = document.getElementById('contact-form');
-const successMsg = document.getElementById('form-success');
-
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', e => {
   e.preventDefault();
+  const name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim();
+  if (!name || !email || !msg) return;
 
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const message = form.message.value.trim();
-
-  if (!name || !email || !message) return;
-
-  // Simulate submission (replace with a real endpoint or Formspree)
-  const submitBtn = form.querySelector('button[type="submit"]');
-  submitBtn.textContent = 'Sending…';
-  submitBtn.disabled = true;
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…'; btn.disabled = true;
 
   setTimeout(() => {
     form.reset();
-    submitBtn.textContent = 'Send Message';
-    submitBtn.disabled = false;
-    successMsg.classList.add('visible');
-
-    setTimeout(() => successMsg.classList.remove('visible'), 5000);
+    btn.textContent = 'Send Message'; btn.disabled = false;
+    success.classList.add('visible');
+    setTimeout(() => success.classList.remove('visible'), 5000);
   }, 900);
 });
 
+// ══════════════════════════════════════════
+// HERO CANVAS — floating particle network
+// Runs ONLY on the #hero section canvas.
+// No animation on any other section.
+// ══════════════════════════════════════════
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
 
-// === SMOOTH SCROLL OFFSET (for fixed navbar) ===
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
+  const ctx = canvas.getContext('2d');
+  let W, H, particles, animId;
 
-    const offset = navbar.offsetHeight + 16;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  // Palette references
+  const C_AMBER   = 'rgba(230,145,56,';    // amber lines
+  const C_CRIMSON = 'rgba(139,0,0,';       // crimson dots
+  const C_WHITE   = 'rgba(242,242,242,';   // white dots
 
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
-});
+  const COUNT     = 55;    // number of particles
+  const MAX_DIST  = 140;   // connection threshold
+  const SPEED     = 0.35;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticle() {
+    const roll = Math.random();
+    return {
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      vx: (Math.random() - 0.5) * SPEED,
+      vy: (Math.random() - 0.5) * SPEED,
+      r:  Math.random() * 1.4 + 0.6,
+      // 10% crimson, 20% amber, rest white-dim
+      color: roll < 0.10 ? C_CRIMSON : roll < 0.30 ? C_AMBER : C_WHITE,
+      alpha: Math.random() * 0.45 + 0.15,
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: COUNT }, createParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Update positions
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+    });
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const lineAlpha = (1 - dist / MAX_DIST) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = C_AMBER + lineAlpha + ')';
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw dots
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  // Pause when hero is off-screen (performance)
+  const heroSection = document.getElementById('hero');
+  const visObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      if (!animId) draw();
+    } else {
+      cancelAnimationFrame(animId);
+      animId = null;
+    }
+  }, { threshold: 0.01 });
+
+  visObs.observe(heroSection);
+
+  window.addEventListener('resize', () => {
+    resize();
+    // redistribute particles on resize
+    particles.forEach(p => { p.x = Math.min(p.x, W); p.y = Math.min(p.y, H); });
+  }, { passive: true });
+
+  init();
+  draw();
+})();

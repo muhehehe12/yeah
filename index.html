@@ -23,63 +23,109 @@
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#portfolio">Portfolio</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
       </nav>
     </div>
   </header>
 
   <main>
 
-    <!-- HERO -->
+    <!-- HERO — animated particle canvas background only here -->
     <section class="hero" id="hero">
+      <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      <div class="hero-overlay"></div>
       <div class="hero-inner">
         <p class="hero-eyebrow fade-up">Digital Services Agency &mdash; Romania</p>
         <h1 class="hero-headline fade-up delay-1">Simple Websites<br><em>That Bring You Clients</em></h1>
-        <p class="hero-sub fade-up delay-2">We help local businesses get online and grow with modern,<br class="br-desktop"> professional websites built for real results.</p>
-        <a href="#contact" class="btn fade-up delay-3">Get a Free Consultation</a>
+        <p class="hero-sub fade-up delay-2">We help local businesses grow online with professional websites built for real results.</p>
+        <a href="#contact" class="btn fade-up delay-3">Get in Touch</a>
       </div>
-      <div class="hero-rule"></div>
     </section>
 
     <!-- ABOUT -->
     <section class="about section-pad" id="about">
-      <div class="container about-grid">
-        <div class="about-label">
-          <span class="section-tag">About</span>
-        </div>
-        <div class="about-content reveal">
+      <!-- Background image: developer at work -->
+      <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1400&q=80&auto=format&fit=crop')"></div>
+      <div class="section-bg-overlay"></div>
+      <div class="container about-inner reveal">
+        <div class="about-text-col">
+          <span class="section-tag">About HONOM</span>
           <h2 class="section-title">We make the web work<br><em>for your business</em></h2>
-          <p class="body-text">At HONOM, we work with local Romanian businesses — restaurants, clinics, shops, and professionals — who need a strong online presence without the complexity. We focus on what matters: clarity, credibility, and results.</p>
-          <p class="body-text">Our approach is personal, transparent, and straightforward. You don't need to be technical — you just need to show up, and we'll handle the rest.</p>
+          <p class="body-text">At HONOM, we help local businesses establish a strong, professional online presence. Our mission is to provide high-quality websites, reliable email handling, and effective SEO strategies that generate real results for small and medium enterprises. We focus on clarity, trust, and modern design to ensure your business stands out online.</p>
+          <p class="body-text">We believe that a website should do more than look good — it should actively bring in clients, simplify communication, and reflect the credibility of your business.</p>
+        </div>
+        <div class="about-why-col">
+          <h3 class="why-title">Why Choose HONOM?</h3>
+          <ul class="why-list">
+            <li>
+              <span class="why-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <div>
+                <strong>Trust &amp; Professionalism</strong>
+                <p>Your website is often the first impression — we ensure it's a good one.</p>
+              </div>
+            </li>
+            <li>
+              <span class="why-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </span>
+              <div>
+                <strong>Efficiency &amp; Simplicity</strong>
+                <p>Minimalist designs that are easy to manage and update.</p>
+              </div>
+            </li>
+            <li>
+              <span class="why-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              </span>
+              <div>
+                <strong>Tailored Solutions</strong>
+                <p>Each service is customized for your business goals and local audience.</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section class="services section-pad" id="services">
+      <!-- Background image: code on screen -->
+      <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80&auto=format&fit=crop')"></div>
+      <div class="section-bg-overlay dark"></div>
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-tag">Services</span>
-          <h2 class="section-title">What we offer</h2>
+          <span class="section-tag">What We Offer</span>
+          <h2 class="section-title">Services</h2>
         </div>
         <div class="cards-grid">
           <article class="card reveal">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+            </div>
             <div class="card-number">01</div>
             <h3 class="card-title">Website Development</h3>
-            <p class="card-desc">Clean, fast, and mobile-ready websites designed to convert visitors into customers.</p>
+            <p class="card-desc">We create custom, responsive websites tailored to your business needs. Each site is designed to be minimalist, professional, and easy to navigate, ensuring a seamless experience across desktop and mobile.</p>
           </article>
           <article class="card reveal delay-1">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
             <div class="card-number">02</div>
             <h3 class="card-title">SEO Optimization</h3>
-            <p class="card-desc">Be found on Google by the people in your area who are already looking for you.</p>
+            <p class="card-desc">Our SEO services help your business appear in local search results, bringing more customers to your door. We focus on on-page SEO, meta-data optimization, and ranking where it matters most.</p>
           </article>
           <article class="card reveal delay-2">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
             <div class="card-number">03</div>
-            <h3 class="card-title">Email Setup &amp; Management</h3>
-            <p class="card-desc">Professional business email addresses and inbox management tailored to your workflow.</p>
+            <h3 class="card-title">Email Handling &amp; Management</h3>
+            <p class="card-desc">Professional email setup and management, giving your business a trustworthy communication channel. From domain-based email accounts to inbox organization — you'll never miss an important message.</p>
           </article>
         </div>
-        <p class="pricing-note reveal">Starting from affordable pricing. <a href="#contact">Contact us for a quote.</a></p>
+        <p class="pricing-note reveal">Starting from affordable pricing. <a href="#contact">Get in touch for a quote.</a></p>
       </div>
     </section>
 
@@ -92,9 +138,10 @@
         </div>
         <div class="portfolio-grid">
           <article class="portfolio-item reveal">
-            <div class="portfolio-img" style="background-color:#ede8e2;">
-              <div class="portfolio-placeholder">
-                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="30" rx="3" stroke="#b0a898" stroke-width="1.5"/><path d="M4 17h40" stroke="#b0a898" stroke-width="1.5"/><circle cx="10" cy="12.5" r="1.5" fill="#b0a898"/><circle cx="15.5" cy="12.5" r="1.5" fill="#b0a898"/><circle cx="21" cy="12.5" r="1.5" fill="#b0a898"/></svg>
+            <div class="portfolio-img">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80&auto=format&fit=crop" alt="Restaurant Website Concept" loading="lazy" />
+              <div class="portfolio-img-overlay">
+                <span>View Project</span>
               </div>
             </div>
             <div class="portfolio-info">
@@ -103,9 +150,10 @@
             </div>
           </article>
           <article class="portfolio-item reveal delay-1">
-            <div class="portfolio-img" style="background-color:#dde3e9;">
-              <div class="portfolio-placeholder">
-                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="30" rx="3" stroke="#96aabf" stroke-width="1.5"/><path d="M4 17h40" stroke="#96aabf" stroke-width="1.5"/><circle cx="10" cy="12.5" r="1.5" fill="#96aabf"/><circle cx="15.5" cy="12.5" r="1.5" fill="#96aabf"/><circle cx="21" cy="12.5" r="1.5" fill="#96aabf"/></svg>
+            <div class="portfolio-img">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&auto=format&fit=crop" alt="Medical Clinic Landing Page" loading="lazy" />
+              <div class="portfolio-img-overlay">
+                <span>View Project</span>
               </div>
             </div>
             <div class="portfolio-info">
@@ -114,9 +162,10 @@
             </div>
           </article>
           <article class="portfolio-item reveal delay-2">
-            <div class="portfolio-img" style="background-color:#e3e9de;">
-              <div class="portfolio-placeholder">
-                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="30" rx="3" stroke="#9ab09a" stroke-width="1.5"/><path d="M4 17h40" stroke="#9ab09a" stroke-width="1.5"/><circle cx="10" cy="12.5" r="1.5" fill="#9ab09a"/><circle cx="15.5" cy="12.5" r="1.5" fill="#9ab09a"/><circle cx="21" cy="12.5" r="1.5" fill="#9ab09a"/></svg>
+            <div class="portfolio-img">
+              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80&auto=format&fit=crop" alt="Boutique Shop Online Presence" loading="lazy" />
+              <div class="portfolio-img-overlay">
+                <span>View Project</span>
               </div>
             </div>
             <div class="portfolio-info">
@@ -125,9 +174,10 @@
             </div>
           </article>
           <article class="portfolio-item reveal delay-3">
-            <div class="portfolio-img" style="background-color:#e9e4dd;">
-              <div class="portfolio-placeholder">
-                <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="30" rx="3" stroke="#b0a48e" stroke-width="1.5"/><path d="M4 17h40" stroke="#b0a48e" stroke-width="1.5"/><circle cx="10" cy="12.5" r="1.5" fill="#b0a48e"/><circle cx="15.5" cy="12.5" r="1.5" fill="#b0a48e"/><circle cx="21" cy="12.5" r="1.5" fill="#b0a48e"/></svg>
+            <div class="portfolio-img">
+              <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" alt="Law Firm Professional Site" loading="lazy" />
+              <div class="portfolio-img-overlay">
+                <span>View Project</span>
               </div>
             </div>
             <div class="portfolio-info">
@@ -144,17 +194,17 @@
     <section class="contact section-pad" id="contact">
       <div class="container contact-grid">
         <div class="contact-info reveal">
-          <span class="section-tag">Contact</span>
+          <span class="section-tag">Get in Touch</span>
           <h2 class="section-title">Let's talk about<br><em>your project</em></h2>
-          <p class="body-text">We're easy to reach. No technical jargon &mdash; just a friendly conversation about what you need.</p>
+          <p class="body-text">We're easy to reach. No technical jargon — just a friendly conversation about what you need.</p>
           <div class="contact-details">
-            <a href="tel:+40700000000" class="contact-item">
+            <a href="tel:+40123456789" class="contact-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              +40 700 000 000
+              +40 123 456 789
             </a>
-            <a href="mailto:contact@honom.ro" class="contact-item">
+            <a href="mailto:s1nist3rshop1@gmail.com" class="contact-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              contact@honom.ro
+              s1nist3rshop1@gmail.com
             </a>
           </div>
         </div>
@@ -169,7 +219,7 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
           </div>
           <button type="submit" class="btn btn-full">Send Message</button>
           <p class="form-success" id="form-success">Thank you! We'll be in touch soon.</p>
@@ -182,13 +232,13 @@
       <div class="container">
         <div class="trust-inner reveal">
           <div class="trust-shield">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3 class="trust-title">Registered &amp; Operating in Romania</h3>
           <p class="trust-desc">HONOM is a legally registered business operating under Romanian law. We are transparent, accountable, and here for the long term.</p>
           <div class="fiscal-placeholder">
             <div class="fiscal-doc">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
               <span class="fiscal-label">Fiscal Registration Document</span>
               <small>ANAF &mdash; Ministerul Finan&#539;elor</small>
             </div>
@@ -219,8 +269,8 @@
           </a>
         </div>
         <div class="footer-contact-links">
-          <a href="mailto:contact@honom.ro">contact@honom.ro</a>
-          <a href="tel:+40700000000">+40 700 000 000</a>
+          <a href="mailto:s1nist3rshop1@gmail.com">s1nist3rshop1@gmail.com</a>
+          <a href="tel:+40123456789">+40 123 456 789</a>
         </div>
       </div>
     </div>
