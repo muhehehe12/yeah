@@ -1,31 +1,39 @@
-// Smooth scroll for nav links (single-page sections)
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(link.getAttribute('href'));
-    if(target){
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
+// MAIN ROTATION SYSTEM
 
-// Optional: fade-in effect for half-loaded sections
-window.addEventListener('scroll', () => {
-  document.querySelectorAll('section').forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100){
-      section.classList.add('aos-animate');
-    }
-  });
-});
+const cylinder = document.querySelector('.cylinder');
+const panels = document.querySelectorAll('.panel');
 
-// Demo preview click animation (fade-out then redirect)
-document.querySelectorAll('.panel a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const url = link.getAttribute('href');
-    document.body.style.transition = 'opacity 0.6s';
-    document.body.style.opacity = '0';
-    setTimeout(() => window.location.href = url, 600);
+let currentIndex = 0;
+const totalPanels = panels.length;
+
+// rotate function
+function rotateTo(index) {
+  currentIndex = (index + totalPanels) % totalPanels;
+  const angle = currentIndex * -360 / totalPanels;
+
+  cylinder.style.transform = `rotateY(${angle}deg)`;
+
+  // optional: add active class
+  panels.forEach((p, i) => {
+    p.classList.toggle('active', i === currentIndex);
   });
+}
+
+// next / prev
+function nextPanel() {
+  rotateTo(currentIndex + 1);
+}
+
+function prevPanel() {
+  rotateTo(currentIndex - 1);
+}
+
+// expose globally (used by touch.js)
+window.nextPanel = nextPanel;
+window.prevPanel = prevPanel;
+
+// keyboard support (desktop)
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextPanel();
+  if (e.key === 'ArrowLeft') prevPanel();
 });
