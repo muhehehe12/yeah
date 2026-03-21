@@ -3,43 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YourAgency | 3D Experience</title>
+<title>3D Site</title>
 
 <style>
-/* --------------------------
-   GLOBAL / GRUNGE STYLE
--------------------------- */
 body {
   margin: 0;
   overflow: hidden;
-  font-family: 'Courier New', monospace;
-  background: radial-gradient(circle at center, #111, #000);
-  color: white;
+  font-family: Arial;
+  background: #000;
+  color: #fff;
 }
 
-/* --------------------------
-   3D SCENE
--------------------------- */
+/* SCENE */
 .scene {
-  perspective: 1500px;
+  perspective: 1200px;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  position: relative;
 }
 
-/* rotating container */
+/* ROTATING OBJECT */
 .cylinder {
   width: 100%;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1s ease;
 }
 
-/* --------------------------
-   PANELS
--------------------------- */
+/* PANELS */
 .panel {
   position: absolute;
   width: 100%;
@@ -47,88 +38,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 40px;
-  box-sizing: border-box;
-
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
-
-  border: 1px solid rgba(255,255,255,0.05);
-
-  transition: all 0.8s ease;
-}
-
-/* Position panels in circle (5 panels = 72deg each) */
-.panel:nth-child(1) { transform: rotateY(0deg) translateZ(500px); }
-.panel:nth-child(2) { transform: rotateY(72deg) translateZ(500px); }
-.panel:nth-child(3) { transform: rotateY(144deg) translateZ(500px); }
-.panel:nth-child(4) { transform: rotateY(216deg) translateZ(500px); }
-.panel:nth-child(5) { transform: rotateY(288deg) translateZ(500px); }
-
-/* --------------------------
-   CONTENT STYLE
--------------------------- */
-h1 {
-  font-size: 3rem;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 10px black;
-}
-
-h2 {
   font-size: 2rem;
 }
 
-p {
-  max-width: 600px;
-  opacity: 0.8;
-}
+/* POSITIONING (IMPORTANT) */
+.panel:nth-child(1) { transform: rotateY(0deg) translateZ(300px); background: #111; }
+.panel:nth-child(2) { transform: rotateY(90deg) translateZ(300px); background: #222; }
+.panel:nth-child(3) { transform: rotateY(180deg) translateZ(300px); background: #333; }
+.panel:nth-child(4) { transform: rotateY(270deg) translateZ(300px); background: #444; }
 
-.btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  background: rgba(0,255,234,0.6);
-  border-radius: 5px;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: rgba(0,255,234,1);
-  box-shadow: 0 0 20px #00ffea;
-}
-
-/* --------------------------
-   NAV INDICATOR (optional)
--------------------------- */
-.nav-dots {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.nav-dots div {
-  width: 10px;
-  height: 10px;
-  margin: 10px 0;
-  background: #555;
-  border-radius: 50%;
+/* BUTTON */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-}
-
-.nav-dots .active {
-  background: #00ffea;
-}
-
-/* --------------------------
-   MOBILE TWEAKS
--------------------------- */
-@media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  .panel { padding: 20px; }
 }
 </style>
 </head>
@@ -136,67 +59,62 @@ p {
 <body>
 
 <div class="scene">
-  <div class="cylinder">
+  <div class="cylinder" id="cylinder">
 
-    <!-- HERO -->
-    <section class="panel">
-      <div>
-        <h1>We Build Insane Websites</h1>
-        <p>Swipe left → experience the next dimension</p>
-        <a class="btn" onclick="nextPanel()">Enter</a>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="panel">
-      <div>
-        <h2>About</h2>
-        <p>We create bold, cinematic, AI-powered websites with extreme animations and modern UX.</p>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section class="panel">
-      <div>
-        <h2>Portfolio</h2>
-        <p>Interactive demos. Hover. Click. Experience.</p>
-        <a class="btn" href="#">View Demos</a>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="panel">
-      <div>
-        <h2>Services</h2>
-        <p>Web Dev • SEO • Email Handling • Automation</p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="panel">
-      <div>
-        <h2>Contact</h2>
-        <p>Email: youragency@example.com</p>
-        <p>Phone: +40 xxx xxx xxx</p>
-      </div>
-    </section>
+    <div class="panel">HOME</div>
+    <div class="panel">ABOUT</div>
+    <div class="panel">WORK</div>
+    <div class="panel">CONTACT</div>
 
   </div>
 </div>
 
-<!-- NAV DOTS -->
-<div class="nav-dots">
-  <div onclick="rotateTo(0)"></div>
-  <div onclick="rotateTo(1)"></div>
-  <div onclick="rotateTo(2)"></div>
-  <div onclick="rotateTo(3)"></div>
-  <div onclick="rotateTo(4)"></div>
-</div>
+<script>
+// CORE LOGIC (WORKING)
 
-<!-- JS -->
-<script src="scripts.js"></script>
-<script src="touch.js"></script>
-<script src="effects.js"></script>
+let current = 0;
+const total = 4;
+const cylinder = document.getElementById("cylinder");
+
+// rotate function
+function rotate() {
+  const angle = current * -90;
+  cylinder.style.transform = "rotateY(" + angle + "deg)";
+}
+
+// swipe support
+let startX = 0;
+
+window.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+window.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (endX < startX - 50) {
+    current = (current + 1) % total;
+    rotate();
+  }
+
+  if (endX > startX + 50) {
+    current = (current - 1 + total) % total;
+    rotate();
+  }
+});
+
+// desktop keys
+window.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") {
+    current = (current + 1) % total;
+    rotate();
+  }
+  if (e.key === "ArrowLeft") {
+    current = (current - 1 + total) % total;
+    rotate();
+  }
+});
+</script>
 
 </body>
 </html>
