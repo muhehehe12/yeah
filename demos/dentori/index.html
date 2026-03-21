@@ -29,15 +29,28 @@
     /* Navbar */
     #navbar{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .3s;padding:0 24px;}
     #navbar.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 2px 24px rgba(15,39,68,.1);}
-    .nav-inner{max-width:1140px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;}
-    .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+    .nav-inner{max-width:1140px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
     .nav-logo-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:700;}
     .nav-logo-text{font-size:22px;font-weight:700;letter-spacing:-.02em;transition:color .2s;}
-    .nav-links-d{display:flex;align-items:center;gap:32px;}
+    .nav-links-d{display:flex;align-items:center;gap:28px;}
     .nav-links-d a{text-decoration:none;font-size:14px;color:rgba(255,255,255,.88);transition:color .2s;}
     #navbar.scrolled .nav-links-d a{color:var(--text);}
     #navbar.scrolled .nav-logo-text{color:var(--navy) !important;}
     .nav-links-d a:hover{color:var(--sky);}
+    /* Lang selector */
+    .dlang-wrap{position:relative;flex-shrink:0;}
+    .dlang-btn{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);font-family:inherit;font-size:12px;font-weight:500;padding:5px 11px;border-radius:8px;cursor:pointer;transition:background .2s,border-color .2s;}
+    .dlang-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4);}
+    #navbar.scrolled .dlang-btn{background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.25);color:var(--navy);}
+    .dlang-chev{transition:transform .22s;}
+    .dlang-btn.open .dlang-chev{transform:rotate(180deg);}
+    .dlang-drop{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;min-width:140px;box-shadow:0 8px 28px rgba(15,39,68,.15);list-style:none;z-index:200;}
+    .dlang-drop.open{display:block;animation:fadeUp .18s ease;}
+    .dlang-drop li{padding:9px 14px;font-size:13px;color:var(--muted);cursor:pointer;transition:background .15s,color .15s;display:flex;gap:8px;align-items:center;}
+    .dlang-drop li:hover{background:#eff6ff;color:var(--navy);}
+    /* Tilt */
+    .tilt-card{transform-style:preserve-3d;transition:transform .15s ease,box-shadow .15s ease;will-change:transform;}
     /* Hero */
     #hero{min-height:100vh;position:relative;display:flex;align-items:center;background:linear-gradient(150deg,var(--navy) 0%,var(--navy2) 40%,#1e4d7b 70%,#0e3460 100%);overflow:hidden;padding-top:68px;}
     .hero-grid{max-width:1140px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
@@ -109,12 +122,25 @@
       <span class="nav-logo-text font-d" style="color:#fff">Dentori</span>
     </a>
     <nav class="nav-links-d">
-      <a href="#services">Services</a>
-      <a href="#doctors">Our Team</a>
-      <a href="#testimonials">Reviews</a>
-      <a href="#faq">FAQ</a>
-      <a href="#booking" class="btn-p" style="font-size:13px;padding:10px 22px;">Book Appointment</a>
+      <a href="#services" data-i18n="nav-services">Services</a>
+      <a href="#doctors" data-i18n="nav-team">Our Team</a>
+      <a href="#testimonials" data-i18n="nav-reviews">Reviews</a>
+      <a href="#faq" data-i18n="nav-faq">FAQ</a>
+      <a href="#booking" class="btn-p" style="font-size:13px;padding:10px 22px;" data-i18n="nav-book">Book Appointment</a>
     </nav>
+    <div class="dlang-wrap" id="dlang-wrap">
+      <button class="dlang-btn" id="dlang-btn" aria-haspopup="listbox" aria-expanded="false">
+        <span id="dlang-flag">🇬🇧</span>
+        <span id="dlang-cur">EN</span>
+        <svg class="dlang-chev" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="dlang-drop" id="dlang-drop" role="listbox">
+        <li data-lang="en" data-flag="🇬🇧">English</li>
+        <li data-lang="ro" data-flag="🇷🇴">Română</li>
+        <li data-lang="de" data-flag="🇩🇪">Deutsch</li>
+        <li data-lang="fr" data-flag="🇫🇷">Français</li>
+      </ul>
+    </div>
   </div>
 </header>
 
@@ -363,15 +389,15 @@
 </footer>
 
 <script>
-// Navbar scroll
+// ── Navbar scroll ──
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
 
-// Reveal
+// ── Reveal ──
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} }), {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Counter
+// ── Counter ──
 function animateCount(el) {
   const target = parseInt(el.dataset.target);
   let cur = 0; const step = Math.ceil(target/60);
@@ -380,7 +406,7 @@ function animateCount(el) {
 const cObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){animateCount(e.target);cObs.unobserve(e.target);} }), {threshold:.4});
 document.querySelectorAll('.cnt').forEach(el => cObs.observe(el));
 
-// FAQ
+// ── FAQ ──
 const faqs = [
   {q:"How often should I visit the dentist?",a:"We recommend a check-up and professional cleaning every 6 months."},
   {q:"Do you offer payment plans?",a:"Yes. We partner with multiple financing providers to offer flexible 0% interest payment plans."},
@@ -405,11 +431,117 @@ faqs.forEach((f,i) => {
   obs.observe(div);
 });
 
-// Form
+// ── Booking form ──
 document.getElementById('bookingForm').addEventListener('submit', e => {
   e.preventDefault();
   document.getElementById('bookingForm').style.display = 'none';
   document.getElementById('bookSuccess').style.display = 'block';
+});
+
+// ── 3D Card Tilt ──
+document.querySelectorAll('.svc-card,.doc-card,.testi-card').forEach(card => {
+  card.classList.add('tilt-card');
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.03)`;
+    card.style.boxShadow = `${-x*14}px ${-y*14}px 36px rgba(14,165,233,.2)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+
+// ── Language Switcher ──
+const LANG = {
+  en: {
+    'nav-services':'Services','nav-team':'Our Team','nav-reviews':'Reviews','nav-faq':'FAQ','nav-book':'Book Appointment',
+    '[data-i18n="hero-badge"]':'Now Accepting New Patients',
+    '[data-i18n="hero-h1"]':'Your Smile.<br><em style="color:#7dd3fc;">Our Passion.</em><br>Redefined.',
+    '[data-i18n="hero-p"]':'At Dentori, we combine clinical excellence with a warm, anxiety-free experience. Your perfect smile is one appointment away.',
+    '[data-i18n="hero-cta1"]':'Book Free Consultation →',
+    '[data-i18n="hero-cta2"]':'Explore Services',
+    '[data-i18n="svc-h2"]':'Comprehensive Dental Care<br><em style="color:var(--sky);">Tailored to You</em>',
+    '[data-i18n="book-h2"]':'Book Your<br><em style="color:var(--sky);">Free Consultation</em>',
+  },
+  ro: {
+    'nav-services':'Servicii','nav-team':'Echipa','nav-reviews':'Recenzii','nav-faq':'Întrebări','nav-book':'Programare',
+    '[data-i18n="hero-badge"]':'Acceptăm pacienți noi',
+    '[data-i18n="hero-h1"]':'Zâmbetul tău.<br><em style="color:#7dd3fc;">Pasiunea noastră.</em><br>Redefinit.',
+    '[data-i18n="hero-p"]':'La Dentori, combinăm excelența clinică cu o experiență caldă, fără anxietate. Zâmbetul perfect este la o programare distanță.',
+    '[data-i18n="hero-cta1"]':'Consultație gratuită →',
+    '[data-i18n="hero-cta2"]':'Vezi serviciile',
+    '[data-i18n="svc-h2"]':'Îngrijire stomatologică completă<br><em style="color:var(--sky);">Personalizată pentru tine</em>',
+    '[data-i18n="book-h2"]':'Programează-te<br><em style="color:var(--sky);">Consultație gratuită</em>',
+  },
+  de: {
+    'nav-services':'Leistungen','nav-team':'Unser Team','nav-reviews':'Bewertungen','nav-faq':'FAQ','nav-book':'Termin buchen',
+    '[data-i18n="hero-badge"]':'Wir nehmen neue Patienten auf',
+    '[data-i18n="hero-h1"]':'Ihr Lächeln.<br><em style="color:#7dd3fc;">Unsere Leidenschaft.</em><br>Neu definiert.',
+    '[data-i18n="hero-p"]':'Bei Dentori verbinden wir klinische Exzellenz mit einer warmen, angstfreien Erfahrung. Ihr perfektes Lächeln ist nur einen Termin entfernt.',
+    '[data-i18n="hero-cta1"]':'Kostenlose Beratung →',
+    '[data-i18n="hero-cta2"]':'Leistungen entdecken',
+    '[data-i18n="svc-h2"]':'Umfassende Zahnpflege<br><em style="color:var(--sky);">Auf Sie zugeschnitten</em>',
+    '[data-i18n="book-h2"]':'Buchen Sie Ihre<br><em style="color:var(--sky);">Kostenlose Beratung</em>',
+  },
+  fr: {
+    'nav-services':'Services','nav-team':'Notre équipe','nav-reviews':'Avis','nav-faq':'FAQ','nav-book':'Prendre RDV',
+    '[data-i18n="hero-badge"]':'Nous acceptons de nouveaux patients',
+    '[data-i18n="hero-h1"]':'Votre sourire.<br><em style="color:#7dd3fc;">Notre passion.</em><br>Redéfini.',
+    '[data-i18n="hero-p"]':'Chez Dentori, nous allions excellence clinique et expérience chaleureuse sans anxiété. Votre sourire parfait est à un rendez-vous.',
+    '[data-i18n="hero-cta1"]':'Consultation gratuite →',
+    '[data-i18n="hero-cta2"]':'Explorer nos services',
+    '[data-i18n="svc-h2"]':'Soins dentaires complets<br><em style="color:var(--sky);">Adaptés à vous</em>',
+    '[data-i18n="book-h2"]':'Prenez votre<br><em style="color:var(--sky);">Consultation gratuite</em>',
+  }
+};
+
+function applyLang(code) {
+  const dict = LANG[code] || LANG.en;
+  // nav links
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key]) { el.innerHTML = dict[key]; }
+  });
+  // nav <a> via text key
+  ['nav-services','nav-team','nav-reviews','nav-faq','nav-book'].forEach(k => {
+    document.querySelectorAll(`[data-i18n="${k}"]`).forEach(el => {
+      if (dict[k]) el.textContent = dict[k];
+    });
+  });
+  // selector-based
+  Object.keys(dict).forEach(sel => {
+    if (!sel.startsWith('[')) return;
+    const el = document.querySelector(sel);
+    if (el) el.innerHTML = dict[sel];
+  });
+}
+
+const dlangBtn  = document.getElementById('dlang-btn');
+const dlangDrop = document.getElementById('dlang-drop');
+const dlangFlag = document.getElementById('dlang-flag');
+const dlangCur  = document.getElementById('dlang-cur');
+
+dlangBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const open = dlangDrop.classList.toggle('open');
+  dlangBtn.classList.toggle('open', open);
+});
+dlangDrop.querySelectorAll('li').forEach(li => {
+  li.addEventListener('click', () => {
+    dlangFlag.textContent = li.dataset.flag;
+    dlangCur.textContent  = li.dataset.lang.toUpperCase();
+    dlangDrop.classList.remove('open');
+    dlangBtn.classList.remove('open');
+    applyLang(li.dataset.lang);
+  });
+});
+document.addEventListener('click', e => {
+  if (!dlangBtn.contains(e.target) && !dlangDrop.contains(e.target)) {
+    dlangDrop.classList.remove('open'); dlangBtn.classList.remove('open');
+  }
 });
 </script>
 </body>

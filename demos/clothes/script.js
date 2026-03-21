@@ -280,7 +280,7 @@ function renderProducts() {
   if (loadBtn) loadBtn.style.display = visibleCount >= all.length ? 'none' : 'inline-block';
 
   grid.innerHTML = toShow.map(p => `
-    <div class="product-card" data-id="${p.id}" data-slug="${p.slug}">
+    <div class="product-card glass-card tilt-card" data-id="${p.id}" data-slug="${p.slug}">
       <div class="product-img-wrap" onclick="goToProduct('${p.slug}')">
         <img src="${p.img}" alt="${p.name}" loading="lazy" />
         ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge.toUpperCase()}</span>` : ''}
@@ -320,10 +320,20 @@ function renderProducts() {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     setTimeout(() => {
-      card.style.transition = 'opacity .5s ease, transform .5s ease';
+      card.style.transition = 'opacity .5s ease, transform .5s ease, box-shadow .15s ease';
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
     }, i * 50);
+    
+    // 3D Tilt
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+      card.style.boxShadow = `${-x * 12}px ${-y * 12}px 24px rgba(230,145,56,.15)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; card.style.boxShadow = ''; });
   });
 }
 
@@ -605,6 +615,42 @@ if (newsletterForm) {
     const btn = newsletterForm.querySelector('button');
     btn.textContent = 'Done ✓'; btn.disabled = true;
     setTimeout(() => { btn.textContent = 'Subscribe'; btn.disabled = false; newsletterForm.reset(); showToast('You\'re in the circle.'); }, 900);
+  });
+}
+
+// ── Language Switcher ─────────────────────────
+const CLANG = {
+  en: {'nav-shop':'Shop','nav-collections':'Collections','nav-about':'About','nav-lookbook':'Lookbook'},
+  ro: {'nav-shop':'Magazin','nav-collections':'Colecții','nav-about':'Despre','nav-lookbook':'Lookbook'},
+  de: {'nav-shop':'Geschäft','nav-collections':'Kollektionen','nav-about':'Über uns','nav-lookbook':'Lookbook'},
+  fr: {'nav-shop':'Boutique','nav-collections':'Collections','nav-about':'À propos','nav-lookbook':'Lookbook'}
+};
+const clangBtn = $('clang-btn');
+const clangDrop = $('clang-drop');
+if (clangBtn) {
+  clangBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const o = clangDrop.classList.toggle('open');
+    clangBtn.classList.toggle('open', o);
+  });
+  clangDrop.querySelectorAll('li').forEach(li => {
+    li.addEventListener('click', () => {
+      $('clang-flag').innerHTML = li.dataset.flag;
+      $('clang-cur').textContent = li.dataset.lang.toUpperCase();
+      clangDrop.classList.remove('open');
+      clangBtn.classList.remove('open');
+      const d = CLANG[li.dataset.lang] || CLANG.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.dataset.i18n;
+        if (d[k]) el.textContent = d[k];
+      });
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!clangBtn.contains(e.target) && !clangDrop.contains(e.target)) {
+      clangDrop.classList.remove('open');
+      clangBtn.classList.remove('open');
+    }
   });
 }
 

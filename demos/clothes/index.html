@@ -32,10 +32,25 @@
       </button>
       <a href="index.html" class="logo">ENITA</a>
       <nav class="nav-links" id="nav-links">
-        <a href="#shop">Shop</a>
-        <a href="#collections">Collections</a>
-        <a href="#about-section">About</a>
-        <a href="#lookbook">Lookbook</a>
+        <a href="#shop" data-i18n="nav-shop">Shop</a>
+        <a href="#collections" data-i18n="nav-collections">Collections</a>
+        <a href="#about-section" data-i18n="nav-about">About</a>
+        <a href="#lookbook" data-i18n="nav-lookbook">Lookbook</a>
+        
+        <!-- Lang Switcher -->
+        <div class="clang-wrap" id="clang-wrap" style="position:relative;margin-left:16px;">
+          <button class="clang-btn" id="clang-btn" style="background:none;border:none;color:var(--white-mid);font-family:var(--fb);font-size:11px;letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <span id="clang-flag">&#127468;&#127463;</span>
+            <span id="clang-cur">EN</span>
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="clang-drop" id="clang-drop" style="display:none;position:absolute;top:calc(100% + 10px);right:0;background:var(--obs-card);border:1px solid var(--border-s);list-style:none;min-width:120px;z-index:300;">
+            <li data-lang="en" data-flag="&#127468;&#127463;" style="padding:10px 16px;font-size:11px;color:var(--white-mid);cursor:pointer;">EN English</li>
+            <li data-lang="ro" data-flag="&#127479;&#127476;" style="padding:10px 16px;font-size:11px;color:var(--white-mid);cursor:pointer;">RO Română</li>
+            <li data-lang="de" data-flag="&#127465;&#127466;" style="padding:10px 16px;font-size:11px;color:var(--white-mid);cursor:pointer;">DE Deutsch</li>
+            <li data-lang="fr" data-flag="&#127467;&#127479;" style="padding:10px 16px;font-size:11px;color:var(--white-mid);cursor:pointer;">FR Français</li>
+          </ul>
+        </div>
       </nav>
       <div class="nav-actions">
         <button class="nav-icon-btn" id="search-btn" aria-label="Search">

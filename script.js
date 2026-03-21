@@ -104,22 +104,50 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Contact form ──
+// ── Contact form — Formspree ──
 const form    = document.getElementById('contact-form');
 const success = document.getElementById('form-success');
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
   e.preventDefault();
-  const name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim();
+  const name  = form.name.value.trim();
+  const email = form.email.value.trim();
+  const msg   = form.message.value.trim();
   if (!name || !email || !msg) return;
+
   const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…'; btn.disabled = true;
-  setTimeout(() => {
-    form.reset();
-    btn.textContent = 'Send Message →'; btn.disabled = false;
-    success.classList.add('visible');
-    setTimeout(() => success.classList.remove('visible'), 6000);
-  }, 900);
+  const origText = btn.textContent;
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xnjgybje', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:    name,
+        email:   email,
+        company: form.company ? form.company.value.trim() : '',
+        service: form.service ? form.service.value : '',
+        message: msg
+      })
+    });
+    if (res.ok) {
+      form.reset();
+      success.classList.add('visible');
+      setTimeout(() => success.classList.remove('visible'), 7000);
+    } else {
+      const data = await res.json().catch(() => ({}));
+      const errMsg = (data.errors || []).map(x => x.message).join(', ') || 'Something went wrong. Try emailing directly.';
+      alert('⚠️ ' + errMsg);
+    }
+  } catch (err) {
+    alert('⚠️ Network error — please email s1nist3rshop1@gmail.com directly.');
+  } finally {
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
 });
+
 
 // ══════════════════════════════════════════
 // HERO CANVAS — particle network

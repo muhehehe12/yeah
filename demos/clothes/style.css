@@ -603,3 +603,15 @@ button { font-family: var(--fb); }
   .lookbook-grid { grid-template-columns: 1fr; }
   .lb-col { grid-column: span 1; }
 }
+
+/* ════════════════════════════
+   LANG & EFFECTS
+════════════════════════════ */
+.clang-btn:hover { color: var(--white) !important; }
+.clang-btn .clang-chev { transition: transform .2s; }
+.clang-btn.open .clang-chev { transform: rotate(180deg); }
+.clang-drop.open { display: block !important; }
+.clang-drop li:hover { background: var(--amber-g); color: var(--amber) !important; }
+
+.glass-card { background: rgba(255,255,255,0.02) !important; backdrop-filter: blur(16px); border: 1px solid var(--border-s); }
+.tilt-card { transform-style: preserve-3d; transition: transform 0.1s ease, box-shadow 0.1s ease; will-change: transform; }

@@ -48,6 +48,21 @@
     .btn-primary{font-size:13px;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--purple),var(--purple2));padding:9px 22px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
     .btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px);}
 
+    /* Lang */
+    .vlang-wrap{position:relative;flex-shrink:0;}
+    .vlang-btn{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--white);font-family:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;transition:all .2s;}
+    .vlang-btn:hover{background:rgba(124,58,237,.15);border-color:var(--purple);}
+    .vlang-chev{transition:transform .2s;}
+    .vlang-btn.open .vlang-chev{transform:rotate(180deg);}
+    .vlang-drop{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:140px;box-shadow:0 8px 32px rgba(0,0,0,.8);list-style:none;z-index:300;}
+    .vlang-drop.open{display:block;}
+    .vlang-drop li{padding:10px 16px;font-size:13px;color:var(--muted);cursor:pointer;transition:all .15s;display:flex;gap:8px;align-items:center;}
+    .vlang-drop li:hover{background:rgba(124,58,237,.12);color:#fff;}
+
+    /* Glass + tilt */
+    .glass-card{background:rgba(255,255,255,.02);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--border);}
+    .tilt-card{transform-style:preserve-3d;transition:transform .15s ease,box-shadow .15s ease;will-change:transform;}
+
     /* TICKER */
     .ticker{background:rgba(13,20,39,.8);border-bottom:1px solid var(--border);overflow:hidden;height:36px;display:flex;align-items:center;}
     .ticker-inner{display:flex;gap:0;animation:tickerMove 30s linear infinite;white-space:nowrap;}
@@ -199,14 +214,27 @@
       <span class="logo-name">velour</span>
     </a>
     <nav class="nlinks">
-      <a href="#markets">Markets</a>
-      <a href="#features">Features</a>
-      <a href="#stats">About</a>
-      <a href="#testi">Reviews</a>
+      <a href="#markets" data-i18n="nav-markets">Markets</a>
+      <a href="#features" data-i18n="nav-earn">Earn</a>
+      <a href="#stats" data-i18n="nav-institutions">Institutions</a>
+      <a href="#cta" data-i18n="nav-about">About</a>
     </nav>
     <div class="nav-actions">
-      <a href="#cta" class="btn-ghost-nav">Log In</a>
-      <a href="#cta" class="btn-primary">Get Started →</a>
+      <div class="vlang-wrap" id="vlang-wrap">
+        <button class="vlang-btn" id="vlang-btn">
+          <span id="vlang-flag">&#127468;&#127463;</span>
+          <span id="vlang-cur">EN</span>
+          <svg class="vlang-chev" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="vlang-drop" id="vlang-drop">
+          <li data-lang="en" data-flag="&#127468;&#127463;">English</li>
+          <li data-lang="ro" data-flag="&#127479;&#127476;">Romana</li>
+          <li data-lang="de" data-flag="&#127465;&#127466;">Deutsch</li>
+          <li data-lang="fr" data-flag="&#127467;&#127479;">Francais</li>
+        </ul>
+      </div>
+      <a href="#cta" class="btn-ghost-nav" data-i18n="nav-login">Log In</a>
+      <a href="#cta" class="btn-primary" data-i18n="nav-wallet">Connect Wallet</a>
     </div>
   </div>
 </header>
@@ -314,7 +342,7 @@
       <p class="s-sub" style="margin:0 auto;">Every feature was designed around one goal: giving traders a decisive edge.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat-card reveal"><div class="feat-icon fi-p">⚡</div><h3 class="feat-title">Sub-Second Swaps</h3><p class="feat-desc">Our intelligent routing engine finds the best price across 200+ liquidity sources in milliseconds. No waiting, no slippage surprises.</p></div>
+      <div class="feat-card glass-card tilt-card reveal"><div class="feat-icon fi-p">⚡</div><h3 class="feat-title">Sub-Second Swaps</h3><p class="feat-desc">Our intelligent routing engine finds the best price across 200+ liquidity sources in milliseconds. No waiting, no slippage surprises.</p></div>
       <div class="feat-card reveal" style="transition-delay:.1s;"><div class="feat-icon fi-c">🔒</div><h3 class="feat-title">Non-Custodial by Design</h3><p class="feat-desc">Your private keys never touch our servers. Smart contract escrow and multi-sig security mean only you control your funds, always.</p></div>
       <div class="feat-card reveal" style="transition-delay:.2s;"><div class="feat-icon fi-g">💸</div><h3 class="feat-title">0.05% Trading Fee</h3><p class="feat-desc">The industry's lowest fees — 10× cheaper than CEXs. Stake VLR tokens to reduce fees further and share in protocol revenue.</p></div>
       <div class="feat-card reveal" style="transition-delay:.1s;"><div class="feat-icon fi-y">📊</div><h3 class="feat-title">Pro Trading Tools</h3><p class="feat-desc">Advanced charting, limit & stop-loss orders, portfolio analytics, price alerts — the full toolkit that professionals demand.</p></div>
@@ -474,6 +502,41 @@ setInterval(()=>{
   const el=document.getElementById('btc-price');
   if(el)el.textContent=`$${btcBase.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 },2000);
+
+/* ── 3D Tilt ── */
+document.querySelectorAll('.feat-card,.testi-card,.tilt-card').forEach(card=>{
+  card.classList.add('tilt-card');
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(800px) rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;
+    card.style.boxShadow=`${-x*16}px ${-y*16}px 32px rgba(124,58,237,.15)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform='';card.style.boxShadow='';});
+});
+
+/* ── Language Switcher ── */
+const VLANG={
+  en:{'nav-markets':'Markets','nav-earn':'Earn','nav-institutions':'Institutions','nav-about':'About','nav-login':'Log In','nav-wallet':'Connect Wallet'},
+  ro:{'nav-markets':'Piețe','nav-earn':'Câștiguri','nav-institutions':'Instituții','nav-about':'Despre','nav-login':'Autentificare','nav-wallet':'Conectează Portofel'},
+  de:{'nav-markets':'Märkte','nav-earn':'Verdienen','nav-institutions':'Institutionen','nav-about':'Über uns','nav-login':'Anmelden','nav-wallet':'Wallet verbinden'},
+  fr:{'nav-markets':'Marchés','nav-earn':'Gagner','nav-institutions':'Institutions','nav-about':'À propos','nav-login':'Connexion','nav-wallet':'Connecter Portefeuille'}
+};
+const vlangBtn=document.getElementById('vlang-btn'),vlangDrop=document.getElementById('vlang-drop');
+vlangBtn.addEventListener('click',e=>{e.stopPropagation();const o=vlangDrop.classList.toggle('open');vlangBtn.classList.toggle('open',o);});
+vlangDrop.querySelectorAll('li').forEach(li=>{
+  li.addEventListener('click',()=>{
+    document.getElementById('vlang-flag').innerHTML=li.dataset.flag;
+    document.getElementById('vlang-cur').textContent=li.dataset.lang.toUpperCase();
+    vlangDrop.classList.remove('open');vlangBtn.classList.remove('open');
+    const d=VLANG[li.dataset.lang]||VLANG.en;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k])el.textContent=d[k];});
+  });
+});
+document.addEventListener('click',e=>{
+  if(!vlangBtn.contains(e.target)&&!vlangDrop.contains(e.target)){vlangDrop.classList.remove('open');vlangBtn.classList.remove('open');}
+});
 </script>
 </body>
 </html>

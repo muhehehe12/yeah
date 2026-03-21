@@ -22,15 +22,28 @@
     /* Nav */
     #nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;transition:all .3s;}
     #nav.sc{background:rgba(10,10,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,94,0,.2);}
-    .ni{max-width:1240px;margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between;}
-    .logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .ni{max-width:1240px;margin:0 auto;height:70px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+    .logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
     .logo-icon{width:38px;height:38px;background:var(--org);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
     .logo-text{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:#fff;}
-    .nlinks{display:flex;align-items:center;gap:32px;}
+    .nlinks{display:flex;align-items:center;gap:28px;}
     .nlinks a{text-decoration:none;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:color .2s;}
     .nlinks a:hover{color:var(--org);}
     .btn-fire{background:linear-gradient(135deg,var(--org),var(--org2));color:#fff;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:11px 26px;border:none;cursor:pointer;text-decoration:none;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:filter .2s;}
     .btn-fire:hover{filter:brightness(1.15);}
+    /* Lang */
+    .flang-wrap{position:relative;flex-shrink:0;}
+    .flang-btn{display:flex;align-items:center;gap:5px;background:rgba(245,94,0,.1);border:1px solid rgba(245,94,0,.3);color:rgba(255,255,255,.7);font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.08em;padding:5px 11px;border-radius:4px;cursor:pointer;transition:background .2s;}
+    .flang-btn:hover{background:rgba(245,94,0,.22);}
+    .flang-chev{transition:transform .2s;}
+    .flang-btn.open .flang-chev{transform:rotate(180deg);}
+    .flang-drop{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(245,94,0,.3);border-radius:6px;overflow:hidden;min-width:136px;box-shadow:0 8px 28px rgba(0,0,0,.6);list-style:none;z-index:300;}
+    .flang-drop.open{display:block;}
+    .flang-drop li{padding:9px 14px;font-size:12px;color:rgba(255,255,255,.65);cursor:pointer;transition:background .15s,color .15s;display:flex;gap:8px;align-items:center;}
+    .flang-drop li:hover{background:rgba(245,94,0,.12);color:#fff;}
+    /* Glass + tilt */
+    .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(14px);}
+    .tilt-card{transform-style:preserve-3d;transition:transform .15s ease,box-shadow .15s ease;will-change:transform;}
     /* Hero */
     #hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:70px;}
     .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1800&q=85&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.35);}
@@ -143,12 +156,25 @@
       <span class="logo-text">Croitoru Fight Academy</span>
     </a>
     <nav class="nlinks">
-      <a href="#classes">Classes</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#coaches">Coaches</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#cta" class="btn-fire">Free Trial</a>
+      <a href="#classes" data-i18n="nav-classes">Classes</a>
+      <a href="#schedule" data-i18n="nav-schedule">Schedule</a>
+      <a href="#coaches" data-i18n="nav-coaches">Coaches</a>
+      <a href="#pricing" data-i18n="nav-pricing">Pricing</a>
+      <a href="#cta" class="btn-fire" data-i18n="nav-trial">Free Trial</a>
     </nav>
+    <div class="flang-wrap" id="flang-wrap">
+      <button class="flang-btn" id="flang-btn">
+        <span id="flang-flag">&#127468;&#127463;</span>
+        <span id="flang-cur">EN</span>
+        <svg class="flang-chev" width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="flang-drop" id="flang-drop">
+        <li data-lang="en" data-flag="&#127468;&#127463;">English</li>
+        <li data-lang="ro" data-flag="&#127479;&#127476;">Romana</li>
+        <li data-lang="de" data-flag="&#127465;&#127466;">Deutsch</li>
+        <li data-lang="fr" data-flag="&#127467;&#127479;">Francais</li>
+      </ul>
+    </div>
   </div>
 </header>
 
@@ -172,7 +198,7 @@
         <div class="hs"><div class="n">6</div><div class="l">Disciplines</div></div>
       </div>
     </div>
-    <div class="hero-card fu" style="animation-delay:.25s;">
+    <div class="hero-card glass-card tilt-card fu" style="animation-delay:.25s;">
       <h3>Claim Your Free Trial Class</h3>
       <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">No experience necessary</div></div>
       <div class="trial-feature"><div class="tf-dot"></div><div class="tf-text">All equipment provided</div></div>
@@ -370,6 +396,41 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('sc',window.scrollY>40),{passive:true});
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.07});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// 3D Tilt
+document.querySelectorAll('.testi-card,.plan,.tilt-card').forEach(card=>{
+  card.classList.add('tilt-card');
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg) scale(1.03)`;
+    card.style.boxShadow=`${-x*12}px ${-y*12}px 30px rgba(245,94,0,.2)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform='';card.style.boxShadow='';});
+});
+
+// Language
+const FLANG={
+  en:{'nav-classes':'Classes','nav-schedule':'Schedule','nav-coaches':'Coaches','nav-pricing':'Pricing','nav-trial':'Free Trial'},
+  ro:{'nav-classes':'Clase','nav-schedule':'Program','nav-coaches':'Antrenori','nav-pricing':'Abonamente','nav-trial':'Trial Gratuit'},
+  de:{'nav-classes':'Kurse','nav-schedule':'Stundenplan','nav-coaches':'Trainer','nav-pricing':'Mitgliedschaft','nav-trial':'Probetraining'},
+  fr:{'nav-classes':'Cours','nav-schedule':'Horaires','nav-coaches':'Coachs','nav-pricing':'Tarifs','nav-trial':'Essai gratuit'}
+};
+const flangBtn=document.getElementById('flang-btn'),flangDrop=document.getElementById('flang-drop');
+flangBtn.addEventListener('click',e=>{e.stopPropagation();const o=flangDrop.classList.toggle('open');flangBtn.classList.toggle('open',o);});
+flangDrop.querySelectorAll('li').forEach(li=>{
+  li.addEventListener('click',()=>{
+    document.getElementById('flang-flag').textContent=li.dataset.flag;
+    document.getElementById('flang-cur').textContent=li.dataset.lang.toUpperCase();
+    flangDrop.classList.remove('open');flangBtn.classList.remove('open');
+    const d=FLANG[li.dataset.lang]||FLANG.en;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k])el.textContent=d[k];});
+  });
+});
+document.addEventListener('click',e=>{
+  if(!flangBtn.contains(e.target)&&!flangDrop.contains(e.target)){flangDrop.classList.remove('open');flangBtn.classList.remove('open');}
+});
 </script>
 </body>
 </html>

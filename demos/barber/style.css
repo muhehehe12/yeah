@@ -486,7 +486,9 @@ select option { background: var(--black-mid); }
   gap: 1.5rem;
 }
 .service-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: 2.2rem 1.8rem;
   display: flex;
@@ -494,8 +496,10 @@ select option { background: var(--black-mid); }
   gap: 0.8rem;
   position: relative;
   overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition);
-  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 .service-card::before {
   content: '';
@@ -524,24 +528,24 @@ select option { background: var(--black-mid); }
   font-family: var(--font-display);
   font-size: 1.4rem;
   letter-spacing: 0.05em;
-  color: var(--black);
+  color: var(--white);
 }
-.service-desc { font-size: 0.88rem; color: #555; line-height: 1.7; flex: 1; }
+.service-desc { font-size: 0.88rem; color: rgba(242,242,242,.7); line-height: 1.7; flex: 1; }
 .service-price {
   font-family: var(--font-display);
   font-size: 1.3rem;
   letter-spacing: 0.06em;
-  color: var(--red);
+  color: var(--amber);
 }
 .service-link {
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--white);
   transition: color var(--transition);
 }
-.service-link:hover { color: var(--red); }
+.service-link:hover { color: var(--amber); }
 
 /* ==================
    GALLERY
@@ -609,11 +613,15 @@ select option { background: var(--black-mid); }
   gap: 2rem;
 }
 .team-card {
-  background: var(--black-mid);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color var(--transition);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 .team-card:hover {
   transform: translateY(-6px);
@@ -767,11 +775,15 @@ select option { background: var(--black-mid); }
   text-align: left;
 }
 .review-card {
-  background: var(--black);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: 2rem;
   border: 1px solid var(--border);
-  transition: border-color var(--transition), transform var(--transition);
+  transition: border-color var(--transition), transform 0.15s ease, box-shadow 0.15s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 .review-card:hover {
   border-color: var(--amber);

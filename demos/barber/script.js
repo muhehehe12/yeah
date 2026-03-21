@@ -462,3 +462,20 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.35 });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+/* ==================
+   3D TILT EFFECT
+   ================== */
+document.querySelectorAll('.service-card, .team-card, .review-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+    card.style.boxShadow = `${-x * 16}px ${-y * 16}px 32px rgba(230,145,56,.15)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});

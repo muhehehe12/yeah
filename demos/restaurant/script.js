@@ -115,6 +115,24 @@ const srObs = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
 
+/* ==================
+   3D TILT EFFECT
+   ================== */
+document.querySelectorAll('.dish-card, .tc').forEach(card => {
+  card.classList.add('glass-card', 'tilt-card');
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+    card.style.boxShadow = `${-x * 16}px ${-y * 16}px 32px rgba(255,165,0,.15)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+
 /* ── Reservation form ── */
 const resForm  = document.getElementById('res-form');
 const formOk   = document.getElementById('form-ok');
