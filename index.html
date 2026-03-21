@@ -8,7 +8,7 @@
   <title>YourAgency | Web Development</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <!-- AOS animations -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
@@ -30,26 +30,37 @@
 
 <!-- Hero Section -->
 <section id="hero" data-aos="fade-up">
-  <div class="hero-content">
-    <h1>We Build Bold, Minimalist Websites</h1>
-    <p>Web Development • SEO • Email Handling • Demo Sites</p>
-    <a href="#contact" class="btn">Get in Touch</a>
-  </div>
+  <h1>We Build Bold, Minimalist Websites</h1>
+  <p>Web Development • SEO • Email Handling • Demo Sites</p>
+  <a href="#contact" class="btn">Get in Touch</a>
 </section>
 
 <!-- About Section -->
 <section id="about" data-aos="fade-right">
   <h2>About Us</h2>
-  <p>We are a modern digital agency creating bold, functional websites using AI and professional workflows to deliver high-quality results.</p>
+  <p>We are a creative digital agency crafting raw, bold, minimalist websites with cinematic grunge vibes. Using AI and custom workflows, we deliver polished demos that leave an impression.</p>
 </section>
 
-<!-- Portfolio Section -->
+<!-- Portfolio / Demo Previews -->
 <section id="portfolio" data-aos="fade-left">
   <h2>Portfolio</h2>
   <div class="portfolio-grid">
-    <div class="portfolio-item"><img src="images/portfolio1.jpg" alt="Portfolio 1"></div>
-    <div class="portfolio-item"><img src="images/portfolio1.jpg" alt="Portfolio 2"></div>
-    <div class="portfolio-item"><img src="images/portfolio1.jpg" alt="Portfolio 3"></div>
+    <div class="preview">
+      <img src="images/demo1.gif" alt="Demo 1">
+      <div class="panel"><a href="demo1.html">View Full Site</a></div>
+    </div>
+    <div class="preview">
+      <img src="images/demo2.gif" alt="Demo 2">
+      <div class="panel"><a href="demo2.html">View Full Site</a></div>
+    </div>
+    <div class="preview">
+      <img src="images/demo3.gif" alt="Demo 3">
+      <div class="panel"><a href="demo3.html">View Full Site</a></div>
+    </div>
+    <div class="preview">
+      <img src="images/demo4.gif" alt="Demo 4">
+      <div class="panel"><a href="demo4.html">View Full Site</a></div>
+    </div>
   </div>
 </section>
 
@@ -67,7 +78,7 @@
 <!-- Work Section -->
 <section id="work" data-aos="fade-up">
   <h2>Recent Work</h2>
-  <p>Check out live demos and client projects hosted on GitHub Pages.</p>
+  <p>Check out live demos and client projects hosted on GitHub Pages. Each demo is fully interactive and showcases modern UI animations.</p>
 </section>
 
 <!-- Contact Section -->
@@ -79,7 +90,7 @@
 
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="js/scripts.js"></script>
+<script src="scripts.js"></script>
 <script>
   AOS.init({duration: 1000});
 </script>
