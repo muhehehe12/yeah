@@ -133,7 +133,7 @@ form.addEventListener('submit', async e => {
   btn.disabled = true;
 
   try {
-    const res = await fetch('https://formspree.io/f/xnjgybje', {
+    const res = await fetch('https://formspree.io/f/mkoqaavq', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -154,7 +154,7 @@ form.addEventListener('submit', async e => {
       alert('⚠️ ' + errMsg);
     }
   } catch (err) {
-    alert('⚠️ Network error — please email s1nist3rshop1@gmail.com directly.');
+    alert('⚠️ Network error — please email honom.website@gmail.com directly.');
   } finally {
     btn.textContent = origText;
     btn.disabled = false;
