@@ -7,7 +7,7 @@
   <meta name="description" content="HONOM helps local businesses grow online with professional websites, SEO, email management, and AI integration. Based in Romania." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -58,7 +58,6 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <canvas class="hero-canvas" id="hero-canvas"></canvas>
-      <div class="hero-overlay"></div>
       <div class="hero-inner">
         <p class="hero-eyebrow fade-up">Digital Services Agency &mdash; Romania</p>
         <h1 class="hero-headline fade-up delay-1">We've worked with<br><em>34 agencies —</em><br>every one recommended us.</h1>
@@ -86,7 +85,7 @@
           <div class="about-left reveal">
             <span class="section-tag">About HONOM</span>
             <h2 class="section-title">Obsessed with quality.<br><em>Loyal to results.</em></h2>
-            <p class="body-text">We don't build websites — we build revenue machines. Every pixel, every headline, every interaction is designed with one goal: to make your business more money. HONOM was founded on the belief that most agencies deliver work. We deliver outcomes.</p>
+            <p class="body-text">With 3 years of experience, we don't build websites — we build revenue machines. Every pixel, every headline, every interaction is designed with one goal: to make your business more money. HONOM was founded on the belief that most agencies deliver work. We deliver outcomes.</p>
             <p class="body-text">Our team handles everything end-to-end: website development, search engine optimisation, professional email management, and AI-powered automation. You focus on running your business. We make sure the world finds it.</p>
             <p class="body-text">We work with a select number of clients at a time — not because we can't handle more, but because every project deserves our full obsession. We don't do average. Neither should you.</p>
             <a href="#contact" class="btn" style="margin-top:8px;">Start a Project</a>
@@ -150,8 +149,8 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
             </div>
             <div class="card-number">01</div>
-            <h3 class="card-title">Website Development</h3>
-            <p class="card-desc">Custom, responsive, performance-optimised websites built to convert. Mobile-first, minimalist, and crafted to make your brand the obvious choice.</p>
+            <h3 class="card-title">Website, Graphic &amp; App Development</h3>
+            <p class="card-desc">Custom, responsive, performance-optimised websites, striking graphics, and dynamic apps built to convert. Crafted to make your brand the obvious choice.</p>
           </article>
           <article class="card reveal delay-1">
             <div class="card-icon">
@@ -305,6 +304,28 @@
           border: none; pointer-events: none;
           transition: filter .3s;
         }
+        
+        /* Preview iframe inside phone widget */
+        .pf-phone-wrap { 
+          position: relative; overflow: hidden; height: 340px; width: 170px; 
+          background: #000; border-radius: 24px; border: 6px solid #222;
+          margin: 0 auto 1.5rem auto;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .pf-phone-wrap::before {
+          content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+          width: 50px; height: 16px; background: #222;
+          border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 5;
+        }
+        .pf-phone-iframe {
+          position: absolute; top: 0; left: 0;
+          width: 250%; height: 250%;
+          transform: scale(0.4); transform-origin: top left;
+          border: none; pointer-events: none;
+          transition: filter .3s; background: #fff;
+        }
+        .portfolio-item:hover .pf-phone-iframe { filter: brightness(.5); }
+
         .pf-preview-shield { position: absolute; inset: 0; z-index: 1; cursor: pointer; }
         .portfolio-item:hover .pf-preview-iframe { filter: brightness(.5); }
         .portfolio-overlay { z-index: 2; }
@@ -315,6 +336,70 @@
           .portfolio-grid { grid-template-columns: repeat(3, 1fr) !important; }
         }
       </style>
+    </section>
+
+    <!-- APP DEMOS -->
+    <section class="app-demos section-pad" id="app-demos">
+      <style>
+        .app-demos, .app-demos * {
+          font-family: 'Nunito', sans-serif !important;
+        }
+        .app-demos .section-title {
+          font-weight: 800;
+          letter-spacing: -1px;
+        }
+        .app-demos-grid {
+          display: flex;
+          gap: 2rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 3rem;
+        }
+        .app-demos .portfolio-item {
+          width: 300px;
+        }
+      </style>
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">App Demos</span>
+          <h2 class="section-title">Mobile &amp; Web Apps</h2>
+          <p class="section-sub">Explore our fully interactive mobile and web application demos, featuring modern UI/UX and seamless performance.</p>
+        </div>
+
+        <div class="app-demos-grid">
+          <!-- Crave Food Delivery (Phone App) -->
+          <article class="portfolio-item reveal" data-url="demos/food-shop/index.html">
+            <div class="pf-phone-wrap">
+              <iframe class="pf-phone-iframe" src="demos/food-shop/index.html" title="Crave Food Delivery app preview" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+              <div class="pf-preview-shield"></div>
+              <div class="portfolio-overlay">
+                <a href="demos/food-shop/index.html" target="_blank" class="portfolio-cta">Open App ↗</a>
+              </div>
+            </div>
+            <div class="portfolio-info" style="text-align: center;">
+              <h3>Crave — Food Delivery</h3>
+              <p>Premium dark-mode food ordering app with an interactive cart and vibrant imagery.</p>
+              <span class="portfolio-tag">App Design &middot; E-Commerce</span>
+            </div>
+          </article>
+
+          <!-- EduPortal School Catalogue (Phone App) -->
+          <article class="portfolio-item reveal delay-1" data-url="demos/school-catalogue/index.html">
+            <div class="pf-phone-wrap">
+              <iframe class="pf-phone-iframe" src="demos/school-catalogue/index.html" title="EduPortal app preview" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+              <div class="pf-preview-shield"></div>
+              <div class="portfolio-overlay">
+                <a href="demos/school-catalogue/index.html" target="_blank" class="portfolio-cta">Open App ↗</a>
+              </div>
+            </div>
+            <div class="portfolio-info" style="text-align: center;">
+              <h3>EduPortal — System</h3>
+              <p>Modern dashboard app for schools with dynamic tab navigation for grades, teachers, and students.</p>
+              <span class="portfolio-tag">App Design &middot; Education</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
 
