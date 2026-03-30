@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #DDA651;
+  --bg-dark: #0D0D0D;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Custom Typography */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFF 0%, #DDA651 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom Components */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.btn-gold {
+  background-color: var(--gold);
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn-gold:hover {
+  background-color: #c99342;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px rgba(221, 166, 81, 0.5);
+}
+.btn-gold:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-outline-gold {
+  background-color: transparent;
+  border: 1px solid rgba(221, 166, 81, 0.3);
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn-outline-gold:hover {
+  border-color: var(--gold);
+  background-color: rgba(221, 166, 81, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(221, 166, 81, 0.3);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-dark {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: border-color 0.2s ease;
+}
+.input-dark:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Masonry Fallback for Gallery */
+.masonry {
+  column-count: 2;
+  column-gap: 0.75rem;
+}
+@media (min-width: 640px) { .masonry { column-count: 3; } }
+@media (min-width: 1024px) { .masonry { column-count: 4; } }
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+}
+.reveal.active {
+  animation: fadeIn 0.6s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+/* Booking Modal */
+#booking-modal {
+  display: none;
+}
+#booking-modal.active {
+  display: flex;
+}
+
+/* AI Chatbot */
+#chatbot-btn {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#chatbot-btn:hover {
+  transform: scale(1.1);
+}
+#chatbot-window {
+  transform-origin: bottom right;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#chatbot-window.hidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  pointer-events: none;
+}
+.chat-bubble {
+  max-width: 85%;
+  animation: popIn 0.3s ease-out forwards;
+}
+.chat-bubble.bot {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: 4px;
+}
+.chat-bubble.user {
+  background: var(--gold);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.typing-indicator span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out both;
+}
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}

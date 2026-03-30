@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #DDA651;
+  --gold-light: #E8BE7A;
+  --gold-dark: #B8862E;
+  --dark: #0D0D0D;
+  --dark-card: #151515;
+  --dark-surface: #1C1C1C;
+  --dark-border: #2A2A2A;
+  --forest: #1A2E1A;
+  --forest-light: #243824;
+  --cream: #FAF6F0;
+  --text-muted: #9A9A9A;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--dark);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 3px;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #DDA651, #F0C878, #DDA651);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glass-dark {
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Button styles */
+.btn-gold {
+  background: linear-gradient(135deg, #DDA651, #C8922A);
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(221,166,81,0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #E8BE7A, #DDA651);
+  box-shadow: 0 8px 32px rgba(221,166,81,0.4);
+  transform: translateY(-1px);
+}
+
+.btn-outline-gold {
+  border: 1px solid #DDA651;
+  color: #DDA651;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+  background: #DDA651;
+  color: #ffffff;
+}
+
+/* Section padding */
+.section-padding {
+  padding: 96px 0;
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* Divider */
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #DDA651, transparent);
+}
+
+/* Input styles */
+.input-dark {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: #DDA651;
+  box-shadow: 0 0 0 3px rgba(221,166,81,0.1);
+}
+
+.input-dark::placeholder {
+  color: #6B6B6B;
+}
+
+/* Swiper customization */
+.swiper-pagination-bullet {
+  background: rgba(255,255,255,0.5) !important;
+}
+.swiper-pagination-bullet-active {
+  background: #DDA651 !important;
+}
+.swiper-button-next, .swiper-button-prev {
+  color: #DDA651 !important;
+}

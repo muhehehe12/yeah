@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanul Bucovinei - Hotel în inima Bucovinei</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-[#0D0D0D] text-white antialiased">
+    
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="#hero" class="flex flex-col leading-none group">
+                <span class="text-xs tracking-[0.25em] text-[#DDA651] uppercase font-medium">Hanul</span>
+                <span class="font-playfair text-xl font-bold tracking-wide text-white group-hover:text-[#DDA651] transition-colors">Bucovinei</span>
+            </a>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#hero" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Acasă</a>
+                <a href="#rooms" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Camere</a>
+                <a href="#facilities" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Facilități</a>
+                <a href="#gallery" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Galerie</a>
+                <a href="#reviews" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Recenzii</a>
+                <a href="#contact" class="text-sm text-white/70 hover:text-[#DDA651] transition-colors tracking-wide">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="tel:+40740000000" class="flex items-center gap-2 text-sm text-white/60 hover:text-[#DDA651] transition-colors">
+                    <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                    +40 740 000 000
+                </a>
+                <button onclick="openBookingWizard()" class="btn-gold px-5 py-2.5 rounded-lg text-sm">Rezervă Acum</button>
+            </div>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-white p-2">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col pt-24 px-6 hidden transform transition-transform duration-300 translate-x-full">
+        <nav class="flex flex-col gap-6">
+            <a href="#hero" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Acasă</a>
+            <a href="#rooms" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Camere</a>
+            <a href="#facilities" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Facilități</a>
+            <a href="#gallery" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Galerie</a>
+            <a href="#reviews" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Recenzii</a>
+            <a href="#contact" class="mobile-link text-2xl font-semibold text-white/80 hover:text-[#DDA651] text-left transition-colors font-playfair">Contact</a>
+        </nav>
+        <div class="mt-auto pb-12">
+            <button onclick="openBookingWizard()" class="btn-gold w-full py-4 rounded-xl text-base font-semibold">Rezervă Acum</button>
+            <a href="tel:+40740000000" class="flex items-center justify-center gap-2 mt-4 text-white/50 text-sm">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                +40 740 000 000
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero -->
+        <section id="hero" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80')"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+            
+            <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                <div class="reveal active">
+                    <p class="text-[#DDA651] text-xs sm:text-sm tracking-[0.4em] uppercase font-medium mb-4">Un loc ideal pentru relaxare</p>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight font-playfair">
+                        Locația perfectă <span class="italic text-[#DDA651]">în inima</span><br/>Bucovinei
+                    </h1>
+                    <p class="text-white/70 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">De trei generații, povestea noastră este cusută din dorința de a contopi trecutul și prezentul, oferind o experiență de vis în ținutul Bucovinei.</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal active delay-1">
+                    <button onclick="openBookingWizard()" class="btn-gold px-8 py-4 rounded-xl text-base font-semibold w-full sm:w-auto">Rezervă o cameră</button>
+                    <a href="#rooms" class="btn-outline-gold px-8 py-4 rounded-xl text-base font-semibold w-full sm:w-auto text-center block">Descoperă camerele</a>
+                </div>
+
+                <div class="flex items-center justify-center gap-6 mt-10 reveal active delay-2">
+                    <div class="flex items-center gap-1.5 text-white/60 text-xs"><span>⭐</span><span>4.9 Rating Google</span></div>
+                    <div class="flex items-center gap-1.5 text-white/60 text-xs"><span>🏆</span><span>Top 3 Bucovina</span></div>
+                    <div class="flex items-center gap-1.5 text-white/60 text-xs"><span>✅</span><span>Anulare Gratuită</span></div>
+                </div>
+            </div>
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+                <i data-lucide="chevron-down" class="text-white/40 w-7 h-7"></i>
+            </div>
+        </section>
+
+        <!-- Rooms -->
+        <section id="rooms" class="section-padding bg-[#0D0D0D]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <p class="text-[#DDA651] text-xs tracking-[0.35em] uppercase font-medium mb-3">Camerele noastre</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 font-playfair">Bucură-te de o ședere memorabilă</h2>
+                    <p class="text-white/50 max-w-xl mx-auto">Camerele de hotel de recepție, amplasate într-o pădure din inima Bucovinei. Fiecare cameră spune o poveste unică.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" id="rooms-grid">
+                    <!-- Injected by script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities -->
+        <section id="facilities" class="section-padding" style="background: linear-gradient(180deg, #0D0D0D 0%, #111a11 50%, #0D0D0D 100%)">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <p class="text-[#DDA651] text-xs tracking-[0.35em] uppercase font-medium mb-3">Servicii & Facilități</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 font-playfair">Tot ce ai nevoie,<br/><span class="text-[#DDA651] italic">într-un singur loc</span></h2>
+                    <p class="text-white/50 max-w-xl mx-auto">Oferim o gamă completă de facilități pentru a face sejurul tău perfect.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" id="facilities-grid">
+                    <!-- Injected by script.js -->
+                </div>
+
+                <div class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 reveal">
+                    <div class="flex items-start gap-3 p-4 glass rounded-xl"><span class="text-2xl shrink-0">🛡️</span><div><p class="text-white text-sm font-semibold leading-tight">Anulare Gratuită</p><p class="text-white/40 text-xs mt-0.5">Până la 7 zile înainte</p></div></div>
+                    <div class="flex items-start gap-3 p-4 glass rounded-xl"><span class="text-2xl shrink-0">💳</span><div><p class="text-white text-sm font-semibold leading-tight">Rezervați & Plătiți Mai Târziu</p><p class="text-white/40 text-xs mt-0.5">Flexibilitate maximă</p></div></div>
+                    <div class="flex items-start gap-3 p-4 glass rounded-xl"><span class="text-2xl shrink-0">🗺️</span><div><p class="text-white text-sm font-semibold leading-tight">Stațiune Turistică</p><p class="text-white/40 text-xs mt-0.5">Descoperă frumuseța Carpaților</p></div></div>
+                    <div class="flex items-start gap-3 p-4 glass rounded-xl"><span class="text-2xl shrink-0">🤝</span><div><p class="text-white text-sm font-semibold leading-tight">Servicii Ospitaliere</p><p class="text-white/40 text-xs mt-0.5">Personal dedicat 24/7</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="section-padding bg-[#0D0D0D]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <p class="text-[#DDA651] text-xs tracking-[0.35em] uppercase font-medium mb-3">Galerie Foto</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white font-playfair">Imagini din paradisul nostru</h2>
+                </div>
+                <div class="masonry reveal" id="gallery-grid">
+                    <!-- Injected by script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="reviews" class="section-padding" style="background: linear-gradient(180deg, #0D0D0D 0%, #0a1a0a 100%)">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-16 reveal">
+                    <p class="text-[#DDA651] text-xs tracking-[0.35em] uppercase font-medium mb-3">Recenzii Oaspeți</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 font-playfair">Ce spun oaspeții noștri</h2>
+                    <div class="flex items-center justify-center gap-3 mt-4">
+                        <div class="flex gap-1 text-[#DDA651] text-lg">★★★★★</div>
+                        <span class="text-white font-bold text-xl">4.9</span>
+                        <span class="text-white/40 text-sm">bazat pe 300+ recenzii</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="testimonials-grid">
+                    <!-- Injected by script.js -->
+                </div>
+                <div class="text-center mt-10 reveal">
+                   <a href="#" class="inline-flex items-center gap-2 text-white/50 hover:text-[#DDA651] text-sm transition-colors border border-white/10 hover:border-[#DDA651]/30 px-5 py-2.5 rounded-xl">
+                        <span>⭐</span> Lasă o recenzie pe Google
+                   </a>
+                </div>
+             </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section-padding bg-[#0D0D0D]">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal">
+                    <p class="text-[#DDA651] text-xs tracking-[0.35em] uppercase font-medium mb-3">Întrebări Frecvente</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white font-playfair">Ai întrebări? Avem răspunsuri.</h2>
+                </div>
+                <div class="space-y-3" id="faq-list">
+                    <!-- Injected by script.js -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black border-t border-white/5">
+        <div class="w-full h-64 bg-[#1a1a1a] relative overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d87067.84!2d25.5!3d47.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ8OibXB1bHVuZyBNb2xkb3ZlbmVzYw!5e0!3m2!1sro!2sro!4v1" width="100%" height="100%" style="border: 0; filter: invert(90%) hue-rotate(180deg) brightness(0.8)" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-sm">
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                 <div>
+                    <div class="mb-4">
+                        <span class="text-xs tracking-[0.25em] text-[#DDA651] uppercase font-medium">Hanul</span>
+                        <h2 class="text-2xl font-bold text-white font-playfair">Bucovinei</h2>
+                    </div>
+                    <p class="text-white/50 leading-relaxed mb-6">Un loc ideal pentru relaxare în inima Bucovinei. De trei generații, oferim ospitalitate autentică și experiențe de neuitat.</p>
+                 </div>
+                 
+                 <div>
+                     <h3 class="font-semibold text-white tracking-widest uppercase mb-5">Navigare</h3>
+                     <ul class="space-y-3">
+                         <li><a href="#rooms" class="text-white/50 hover:text-[#DDA651] transition-colors">Camere & Tarife</a></li>
+                         <li><a href="#facilities" class="text-white/50 hover:text-[#DDA651] transition-colors">Facilități</a></li>
+                         <li><a href="#gallery" class="text-white/50 hover:text-[#DDA651] transition-colors">Galerie Foto</a></li>
+                         <li><a href="#reviews" class="text-white/50 hover:text-[#DDA651] transition-colors">Recenzii Oaspeți</a></li>
+                         <li><a href="#faq" class="text-white/50 hover:text-[#DDA651] transition-colors">FAQ</a></li>
+                     </ul>
+                 </div>
+
+                 <div>
+                     <h3 class="font-semibold text-white tracking-widest uppercase mb-5">Contact</h3>
+                     <ul class="space-y-4">
+                         <li class="flex items-start gap-3 text-white/50"><i data-lucide="map-pin" class="text-[#DDA651] w-4 h-4 shrink-0 mt-0.5"></i> Câmpulung Moldovenesc, Bucovina, România</li>
+                         <li class="flex items-center gap-3"><i data-lucide="phone" class="text-[#DDA651] w-4 h-4 shrink-0"></i><a href="tel:+40740000000" class="text-white/50 hover:text-white transition-colors">+40 740 000 000</a></li>
+                         <li class="flex items-center gap-3"><i data-lucide="mail" class="text-[#DDA651] w-4 h-4 shrink-0"></i><a href="mailto:contact@hanul-bucovinei.ro" class="text-white/50 hover:text-white transition-colors">contact@hanul-bucovinei.ro</a></li>
+                     </ul>
+                 </div>
+
+                 <div>
+                     <h3 class="font-semibold text-white tracking-widest uppercase mb-5">Program Recepție</h3>
+                     <ul class="space-y-2 mb-6 text-white/50">
+                         <li class="flex justify-between"><span>Check-in</span><span class="text-white">15:00</span></li>
+                         <li class="flex justify-between"><span>Check-out</span><span class="text-white">12:00</span></li>
+                         <li class="flex justify-between"><span>Recepție</span><span class="text-white">24/7</span></li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+                 <p class="text-white/30">© 2026 Hanul Bucovinei. Toate drepturile rezervate.</p>
+             </div>
+        </div>
+    </footer>
+
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-[200] bg-black/95 items-center justify-center p-4 hidden">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/60 hover:text-white p-2 z-[201]"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <div class="relative max-w-4xl max-h-[85vh] w-full text-center">
+            <img id="lightbox-img" src="" class="object-contain max-h-[85vh] mx-auto rounded-xl" />
+        </div>
+    </div>
+
+
+    <!-- BOOKING WIZARD MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm items-center justify-center p-4 hidden">
+        <div class="bg-[#111] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative flex flex-col shadow-2xl">
+            <!-- Header -->
+            <div class="sticky top-0 bg-[#111] border-b border-white/10 px-6 py-4 z-10 flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-white font-playfair" id="bw-title">Rezervare Cameră</h2>
+                        <p class="text-white/50 text-xs mt-0.5" id="bw-subtitle">Pasul 1 din 3</p>
+                    </div>
+                    <button onclick="closeBookingWizard()" class="text-white/40 hover:text-white transition-colors p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+                <!-- Stepper -->
+                <div class="flex items-center gap-2" id="bw-stepper">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 flex-1 text-sm bg-[#111]">
+                
+                <!-- STEP 1: Dates -->
+                <div id="bw-step-1" class="space-y-6">
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Selectați datele sejurului</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-xs text-white/50 block mb-1.5">Check-in</label>
+                                <input type="date" id="bw-checkin" class="input-dark w-full px-3 py-3 rounded-lg text-sm color-scheme-dark" />
+                            </div>
+                            <div>
+                                <label class="text-xs text-white/50 block mb-1.5">Check-out</label>
+                                <input type="date" id="bw-checkout" class="input-dark w-full px-3 py-3 rounded-lg text-sm color-scheme-dark" />
+                            </div>
+                        </div>
+                        <p id="bw-date-error" class="hidden text-red-400 text-xs mt-2">Selectați datele corect.</p>
+                        <div id="bw-date-summary" class="hidden mt-2 p-3 bg-[#DDA651]/10 border border-[#DDA651]/20 rounded-lg">
+                            <p class="text-[#DDA651] text-sm text-center font-medium" id="bw-date-summary-text"></p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Oaspeți</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                                <span class="text-white/70">Adulți</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateGuests('adults', -1)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#DDA651] text-white flex items-center justify-center font-bold">−</button>
+                                    <span id="bw-adults" class="text-white w-4 text-center font-semibold">2</span>
+                                    <button onclick="updateGuests('adults', 1)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#DDA651] text-white flex items-center justify-center font-bold">+</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                                <span class="text-white/70">Copii (0-12 ani)</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="updateGuests('children', -1)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#DDA651] text-white flex items-center justify-center font-bold">−</button>
+                                    <span id="bw-children" class="text-white w-4 text-center font-semibold">0</span>
+                                    <button onclick="updateGuests('children', 1)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#DDA651] text-white flex items-center justify-center font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Rooms -->
+                <div id="bw-step-2" class="space-y-4 hidden">
+                    <p class="text-white/50 text-sm" id="bw-rooms-subtitle">Selectați o cameră</p>
+                    <p id="bw-room-error" class="hidden text-red-400 text-xs">Alegeți o cameră.</p>
+                    <div id="bw-rooms-list" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- STEP 3: Details -->
+                <div id="bw-step-3" class="space-y-6 hidden">
+                    <div class="bg-[#DDA651]/10 border border-[#DDA651]/20 rounded-xl p-4">
+                        <p class="text-[#DDA651] text-xs font-semibold mb-2">Sumar rezervare</p>
+                        <div class="flex justify-between text-sm mb-1"><span class="text-white/70" id="bw-sum-room">Cameră</span><span class="text-white font-bold" id="bw-sum-total">0 RON</span></div>
+                        <div class="flex justify-between text-xs text-white/40"><span id="bw-sum-nights"></span><span id="bw-sum-dates"></span></div>
+                    </div>
+                    <form id="bw-form" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="text-xs text-white/50 block mb-1">Prenume *</label><input type="text" id="bw-fn" class="input-dark w-full px-3 py-2.5 rounded-lg" required></div>
+                            <div><label class="text-xs text-white/50 block mb-1">Nume *</label><input type="text" id="bw-ln" class="input-dark w-full px-3 py-2.5 rounded-lg" required></div>
+                        </div>
+                        <div><label class="text-xs text-white/50 block mb-1">Email *</label><input type="email" id="bw-email" class="input-dark w-full px-3 py-2.5 rounded-lg" required></div>
+                        <div><label class="text-xs text-white/50 block mb-1">Telefon *</label><input type="tel" id="bw-phone" class="input-dark w-full px-3 py-2.5 rounded-lg" required></div>
+                        <div class="flex items-start gap-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                            <i data-lucide="check" class="text-green-400 mt-0.5 w-4 h-4 shrink-0"></i>
+                            <p class="text-green-300 text-xs">Anulare gratuită până la 7 zile înainte · Plata la recepție</p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- STEP 4: Success -->
+                <div id="bw-step-4" class="text-center py-4 hidden">
+                    <div class="w-16 h-16 bg-[#DDA651]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="check" class="text-[#DDA651] w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1 font-playfair">Rezervare confirmată!</h3>
+                    <p class="text-white/50 text-sm mb-2">Cod rezervare: <span class="text-[#DDA651] font-mono font-bold" id="bw-ref"></span></p>
+                    <p class="text-white/40 text-xs mb-6">Un email de confirmare a fost trimis spre dvs.</p>
+                    <button onclick="closeBookingWizard()" class="btn-gold px-8 py-3 rounded-xl font-semibold w-full">Închide și revin pe site</button>
+                </div>
+
+            </div>
+
+            <!-- Footer / Navigation -->
+            <div id="bw-footer" class="sticky bottom-0 bg-[#111] border-t border-white/10 px-6 py-4 flex items-center justify-between">
+                <button onclick="bwPrev()" id="bw-btn-back" class="text-white/50 hover:text-white text-sm transition-colors flex items-center gap-1">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i> <span id="bw-btn-back-text">Anulează</span>
+                </button>
+                <button onclick="bwNext()" id="bw-btn-next" class="btn-gold px-6 py-2.5 rounded-lg text-sm items-center gap-2 flex">
+                    <span id="bw-btn-next-text">Continuă</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- AI CHATBOT WIDGET -->
+    <div class="fixed bottom-6 right-6 z-[150] flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chatbot-window" class="hidden w-80 sm:w-96 bg-[#111] border border-white/10 rounded-2xl shadow-2xl mb-4 flex flex-col overflow-hidden h-[450px]">
+            <!-- Header -->
+            <div class="bg-black/50 border-b border-white/10 p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-[#DDA651]/20 flex items-center justify-center">
+                        <i data-lucide="bot" class="text-[#DDA651] w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-semibold text-sm">Bucovina AI</h3>
+                        <p class="text-white/40 text-xs flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Online</p>
+                    </div>
+                </div>
+                <button onclick="toggleChatbot()" class="text-white/40 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <!-- Messages -->
+            <div id="chatbot-msgs" class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 text-sm">
+                <!-- Initial bot message -->
+                <div class="chat-bubble bot p-3 rounded-t-xl rounded-br-xl text-white/80">
+                    Salut! Sunt asistentul virtual Hanul Bucovinei. Cu ce vă pot ajuta astăzi? 😊
+                </div>
+            </div>
+            <!-- Input -->
+            <div class="p-3 border-t border-white/10 bg-black/30">
+                <form id="chatbot-form" class="flex gap-2" onsubmit="handleChatSubmit(event)">
+                    <input type="text" id="chatbot-input" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#DDA651]" placeholder="Scrie un mesaj..." autocomplete="off">
+                    <button type="submit" class="w-10 h-10 rounded-lg bg-[#DDA651]/20 text-[#DDA651] flex items-center justify-center hover:bg-[#DDA651] hover:text-white transition-colors">
+                        <i data-lucide="send" class="w-4 h-4 ml-0.5"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Trigger Button -->
+        <button id="chatbot-btn" onclick="toggleChatbot()" class="w-14 h-14 rounded-full bg-[#DDA651] text-white flex items-center justify-center shadow-lg hover:shadow-xl">
+            <i data-lucide="message-square" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <!-- Data payload and script logic -->
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

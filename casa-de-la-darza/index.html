@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa de la Dârza - Vilă Evenimente Lângă București</title>
+    <!-- Tailwind CSS (CDN for standalone usage, perfect for GitHub Pages) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-2 group">
+                <span class="logo-text text-white font-playfair text-2xl font-bold tracking-tight transition-colors">
+                    Casa de la Dârza
+                </span>
+            </a>
+            
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#about" class="nav-text text-white/90 hover:text-gold text-sm font-medium transition-colors">Despre</a>
+                <a href="#facilities" class="nav-text text-white/90 hover:text-gold text-sm font-medium transition-colors">Facilități</a>
+                <a href="#gallery" class="nav-text text-white/90 hover:text-gold text-sm font-medium transition-colors">Galerie Foto</a>
+                <a href="#reviews" class="nav-text text-white/90 hover:text-gold text-sm font-medium transition-colors">Recenzii</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="https://wa.me/40785501643?text=Salut! Vreau să rezerv Casa de la Dârza" target="_blank" class="btn-primary px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Rezervă Acum
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden nav-text text-white p-2 z-50">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-md flex flex-col pt-32 px-6 transform transition-transform duration-300 translate-x-full">
+        <nav class="flex flex-col gap-6">
+            <a href="#hero" class="mobile-link text-3xl font-bold text-nature font-playfair">Acasă</a>
+            <a href="#about" class="mobile-link text-3xl font-bold text-gray-800 font-playfair hover:text-nature">Despre</a>
+            <a href="#facilities" class="mobile-link text-3xl font-bold text-gray-800 font-playfair hover:text-nature">Facilități</a>
+            <a href="#gallery" class="mobile-link text-3xl font-bold text-gray-800 font-playfair hover:text-nature">Galerie Foto</a>
+            <a href="#reviews" class="mobile-link text-3xl font-bold text-gray-800 font-playfair hover:text-nature">Recenzii</a>
+        </nav>
+        <div class="mt-auto pb-12">
+            <a href="https://wa.me/40785501643?text=Salut! Vreau să rezerv Casa de la Dârza" target="_blank" class="w-full btn-primary py-4 rounded-xl text-lg font-bold flex justify-center items-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                Rezervă pe WhatsApp
+            </a>
+            <a href="tel:+40785501643" class="flex flex-col items-center justify-center gap-1 mt-6 text-gray-500 text-sm">
+                <span>Sau sună-ne direct:</span>
+                <span class="font-bold text-nature">+40 785 501 643</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative h-[95vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transform origin-center" style="background-image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=2000'); animation: slowZoom 20s infinite alternate;"></div>
+            
+            <!-- Dark/Green overlay for legibility -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-green-900/30 to-black/70"></div>
+            
+            <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+                <div class="reveal">
+                    <p class="text-gold text-xs sm:text-sm tracking-[0.3em] uppercase font-bold mb-6 drop-shadow-md">
+                        Evadarea perfectă lângă București
+                    </p>
+                    <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 leading-tight font-playfair drop-shadow-xl">
+                        Casa de la Dârza
+                    </h1>
+                    <p class="text-white/90 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-light drop-shadow-md">
+                        Vilă de lux disponibilă pentru închiriere. Spațiu generos, piscină privată, foișor încălzit și natură, ideale pentru evenimente private și teambuilding-uri.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal delay-1">
+                    <a href="https://wa.me/40785501643?text=Salut! Vreau să rezerv Casa de la Dârza" target="_blank" class="btn-primary hover:scale-105 active:scale-95 px-8 py-4 rounded-full text-base font-bold w-full sm:w-auto shadow-2xl flex items-center justify-center gap-2">
+                        Verifică Disponibilitatea <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <div class="flex items-center justify-center gap-8 mt-16 reveal delay-2">
+                    <div class="flex items-center gap-2 text-white/80 text-sm font-medium"><i data-lucide="map-pin" class="w-4 h-4 text-gold"></i> Dârza, Crevedia</div>
+                    <div class="flex items-center gap-2 text-white/80 text-sm font-medium"><i data-lucide="users" class="w-4 h-4 text-gold"></i> Evenimente & Relaxare</div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                <i data-lucide="chevron-down" class="text-white w-8 h-8 opacity-70 hover:opacity-100 transition-opacity"></i>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section-padding bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative reveal">
+                        <!-- Image Composition -->
+                        <div class="relative h-[500px] sm:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=800" alt="Villa Exterior" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-8 -right-8 w-64 h-64 border-[12px] border-white rounded-2xl overflow-hidden shadow-xl hidden sm:block">
+                            <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?auto=format&fit=crop&q=80&w=500" alt="Piscina" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-8 -left-8 bg-white p-4 rounded-xl shadow-xl hidden sm:flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
+                                <i data-lucide="star" class="text-gold w-6 h-6 fill-current"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold">Experiență Premium</p>
+                                <div class="flex text-gold text-xs leading-none">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Text Content -->
+                    <div class="reveal delay-1">
+                        <span class="text-nature font-bold text-sm tracking-widest uppercase mb-4 block">Casa de la Dârza</span>
+                        <h2 class="text-4xl sm:text-5xl font-bold font-playfair text-gray-900 mb-6 leading-tight">
+                            Atmosferă privată, <br/>
+                            <span class="italic text-gray-500">aproape de oraș.</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                            Oferim o vilă exclusivistă de închiriat, amplasată ideal în Dârza, Crevedia. Un refugiu vast cu curte imensă, creat special pentru cei care își doresc intimitate și lux la un pas de agitația Bucureștiului.
+                        </p>
+                        
+                        <div class="bg-gray-50 border border-gray-100 p-6 rounded-2xl mb-8">
+                            <h3 class="font-bold text-gray-900 mb-3">Locația perfectă pentru:</h3>
+                            <ul class="grid grid-cols-2 gap-3 text-sm text-gray-600 font-medium">
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-gold"></i> Botezuri & Majorate</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-gold"></i> Petreceri Private</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-gold"></i> Teambuilding-uri</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-gold"></i> Evadări de weekend</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="flex-1 bg-green-50 p-4 rounded-xl border border-green-100">
+                                <p class="text-3xl font-playfair font-bold text-nature mb-1">20+</p>
+                                <p class="text-xs font-bold text-green-800 uppercase tracking-wide">Persoane Capacitate</p>
+                            </div>
+                            <div class="flex-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                <p class="text-3xl font-playfair font-bold text-gray-900 mb-1">365</p>
+                                <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Zile Deschise pe an</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FACILITIES -->
+        <section id="facilities" class="section-padding bg-gray-50 border-y border-gray-100">
+             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-16 reveal">
+                    <p class="text-nature font-bold text-sm tracking-widest uppercase mb-3 block">Facilități</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold font-playfair text-gray-900 mb-4">Tot ce ai nevoie <span class="italic text-gray-500">la superlativ</span></h2>
+                 </div>
+
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                     <!-- Facility 1 -->
+                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover reveal hover:border-nature/30 transition-colors">
+                         <div class="w-14 h-14 rounded-xl bg-green-50 flex items-center justify-center mb-6 text-nature">
+                             <i data-lucide="waves" class="w-7 h-7"></i>
+                         </div>
+                         <h3 class="text-lg font-bold text-gray-900 mb-2">Piscină Spațioasă</h3>
+                         <p class="text-sm text-gray-500 leading-relaxed">Perfectă pentru zilele de vară, înconjurată de șezlonguri confortabile pentru un bronz perfect.</p>
+                     </div>
+                     <!-- Facility 2 -->
+                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover reveal delay-1 hover:border-nature/30 transition-colors">
+                         <div class="w-14 h-14 rounded-xl bg-orange-50 flex items-center justify-center mb-6 text-orange-600">
+                             <i data-lucide="flame" class="w-7 h-7"></i>
+                         </div>
+                         <h3 class="text-lg font-bold text-gray-900 mb-2">Foișor Încălzit</h3>
+                         <p class="text-sm text-gray-500 leading-relaxed">Folosibil pe tot parcursul anului, inclusiv iarna. Spațiu perfect pentru mese și discuții.</p>
+                     </div>
+                     <!-- Facility 3 -->
+                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover reveal delay-2 hover:border-nature/30 transition-colors">
+                         <div class="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 text-red-600">
+                             <i data-lucide="utensils" class="w-7 h-7"></i>
+                         </div>
+                         <h3 class="text-lg font-bold text-gray-900 mb-2">Zonă BBQ & Bucătărie</h3>
+                         <p class="text-sm text-gray-500 leading-relaxed">Grătar profesional și bucătărie complet utilată cu absolut toate dotările necesare.</p>
+                     </div>
+                     <!-- Facility 4 -->
+                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover reveal delay-3 hover:border-nature/30 transition-colors">
+                         <div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 text-blue-600">
+                             <i data-lucide="speaker" class="w-7 h-7"></i>
+                         </div>
+                         <h3 class="text-lg font-bold text-gray-900 mb-2">Sistem Audio & Parcare</h3>
+                         <p class="text-sm text-gray-500 leading-relaxed">Sunet premium pentru evenimentul tău și parcare spațioasă și sigură pentru toți invitații.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="section-padding bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-12 reveal">
+                    <div>
+                        <p class="text-nature font-bold text-sm tracking-widest uppercase mb-3 block">Galerie Foto</p>
+                        <h2 class="text-4xl sm:text-5xl font-bold font-playfair text-gray-900">Explorează locația</h2>
+                    </div>
+                </div>
+
+                <!-- Masonry Gallery Data Container -->
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="photo-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews" class="section-padding bg-nature text-white relative overflow-hidden">
+            <!-- Background texture -->
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl mx-auto text-center mb-16 reveal">
+                    <p class="text-gold font-bold text-sm tracking-widest uppercase mb-3 block">Recenzii Reale</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold font-playfair text-white mb-6">Ce spun invitații noștri</h2>
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="flex text-gold text-lg">★★★★★</div>
+                        <span class="font-bold">4.9/5</span> experiențe perfecte
+                    </div>
+                </div>
+
+                <!-- Slider -->
+                <div class="slider-container reveal delay-1" id="reviews-slider">
+                    <!-- Cards injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BANNER -->
+        <section class="py-24 bg-white text-center rounded-b-3xl relative z-20 shadow-[0_10px_40px_rgba(0,0,0,0.05)]">
+            <div class="max-w-3xl mx-auto px-6 reveal">
+                <h2 class="text-4xl sm:text-5xl font-bold font-playfair text-gray-900 mb-6">Pregătit pentru evenimentul tău?</h2>
+                <p class="text-lg text-gray-500 mb-10">Contactează-ne acum pentru a verifica datele disponibile și oferta personalizată. Răspundem cel mai rapid pe WhatsApp.</p>
+                <a href="https://wa.me/40785501643?text=Salut! Vreau să rezerv Casa de la Dârza" target="_blank" class="inline-flex btn-primary px-10 py-5 rounded-full text-lg font-bold items-center gap-3 shadow-2xl hover:scale-105 active:scale-95">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i> Trimite mesaj pe WhatsApp
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-50 pt-16 pb-8 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                <div>
+                    <span class="font-playfair text-2xl font-bold text-gray-900">Casa de la Dârza</span>
+                    <p class="text-gray-500 text-sm mt-2">Evadarea perfectă lângă București.</p>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-nature hover:border-nature transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-nature hover:border-nature transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pb-12 border-b border-gray-200">
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 tracking-widest text-xs uppercase text-gray-400">Locație</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-nature"></i>
+                        Strada Agricultorilor I, 137182<br/>Dârza, Crevedia, România
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 tracking-widest text-xs uppercase text-gray-400">Contact</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed flex items-center gap-2 mb-2">
+                        <i data-lucide="phone" class="w-4 h-4 text-nature"></i>
+                        <a href="tel:+40785501643" class="hover:text-nature transition-colors">+40 785 501 643</a>
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4 text-nature"></i>
+                        Disponibil pe WhatsApp
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 tracking-widest text-xs uppercase text-gray-400">Linkuri Utile</h4>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li><a href="#about" class="hover:text-nature transition-colors">Despre Vilă</a></li>
+                        <li><a href="#gallery" class="hover:text-nature transition-colors">Galerie Foto</a></li>
+                        <li><a href="https://wa.me/40785501643" target="_blank" class="hover:text-nature transition-colors font-medium text-nature">Rezervare</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-gray-400 text-sm font-medium">
+                &copy; <script>document.write(new Date().getFullYear())</script> Casa de la Dârza. Toate drepturile rezervate.
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-[200] bg-black/95 items-center justify-center p-4 hidden">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white p-2 z-[201]"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <div class="relative max-w-5xl max-h-[90vh] w-full text-center">
+            <img id="lightbox-img" src="" class="object-contain max-h-[90vh] mx-auto rounded-xl shadow-2xl" />
+        </div>
+    </div>
+
+
+    <!-- AI CHATBOT WIDGET -->
+    <div class="fixed bottom-6 right-6 z-[150] flex flex-col items-end pointer-events-none">
+        <!-- Chat Window -->
+        <div id="chatbot-window" class="hidden w-80 sm:w-96 bg-white border border-gray-100 rounded-2xl shadow-2xl mb-4 flex flex-col overflow-hidden h-[450px] pointer-events-auto">
+            <!-- Header -->
+            <div class="bg-nature text-white p-4 flex items-center justify-between shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                        <i data-lucide="bot" class="text-white w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm tracking-wide">Dârza Virtual Assistant</h3>
+                        <p class="text-white/80 text-xs flex items-center gap-1.5 mt-0.5">
+                            <span class="w-2 h-2 rounded-full bg-green-400 inline-block shadow-[0_0_5px_#4ade80]"></span> Online Acum
+                        </p>
+                    </div>
+                </div>
+                <button onclick="toggleChatbot()" class="text-white/70 hover:text-white transition-colors p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <!-- Messages -->
+            <div id="chatbot-msgs" class="flex-1 p-4 overflow-y-auto flex flex-col gap-4 text-sm bg-gray-50">
+                <!-- Initial bot message -->
+                <div class="chat-bubble bot p-3 shadow-sm border border-gray-100">
+                    Salut! 👋 Eu sunt asistentul virtual al Casei de la Dârza.<br><br>Vrei să verifici disponibilitatea sau ai alte întrebări despre vilă?
+                </div>
+            </div>
+            <!-- Input -->
+            <div class="p-3 border-t border-gray-100 bg-white shadow-[0_-5px_15px_rgba(0,0,0,0.02)]">
+                <form id="chatbot-form" class="flex gap-2" onsubmit="handleChatSubmit(event)">
+                    <input type="text" id="chatbot-input" class="flex-1 bg-gray-100 border-none rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-nature/20" placeholder="Scrie un mesaj..." autocomplete="off">
+                    <button type="submit" class="w-11 h-11 rounded-xl bg-nature text-white flex items-center justify-center hover:bg-green-800 transition-colors shadow-sm">
+                        <i data-lucide="send" class="w-4 h-4 ml-0.5"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Trigger Button -->
+        <button id="chatbot-btn" onclick="toggleChatbot()" class="pointer-events-auto w-16 h-16 rounded-full bg-nature text-white flex items-center justify-center shadow-xl hover:shadow-2xl hover:-translate-y-1 group">
+            <i data-lucide="message-square" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
+            <!-- Chat Badge -->
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
